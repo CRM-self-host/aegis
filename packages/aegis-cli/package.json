@@ -1,0 +1,10 @@
+{
+  "name": "aegis-cli",
+  "version": "0.3.1",
+  "description": "[DEPRECATED] Use aegis-sdk instead: https://www.npmjs.com/package/aegis-sdk",
+  "scripts": {
+    "build": "echo 'use npx nx build'",
+    "start": "echo 'deprecated'"
+  },
+  "license": "AGPL-3.0"
+}

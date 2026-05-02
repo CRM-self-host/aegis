@@ -1,0 +1,5 @@
+Contact: https://github.com/u84u/aegis/issues/new
+Contact: security@aegis.com
+Preferred-Languages: en
+Canonical: https://aegis.com/.well-known/security.txt
+Policy: https://github.com/u84u/aegis/security/policy

@@ -20,7 +20,7 @@ jobs:
     with:
       files: |
         package.json
-        packages/twenty-docs/**
+        packages/aegis-docs/**
 
   docs-lint:
     needs: changed-files-check
@@ -42,5 +42,5 @@ jobs:
         uses: ./.github/actions/yarn-install
 
       - name: Docs / Lint
-        run: npx nx lint twenty-docs
+        run: npx nx lint aegis-docs
 

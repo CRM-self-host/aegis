@@ -28,15 +28,15 @@ jobs:
           script: |
             const workflowName = context.payload.workflow_run.name;
             if (workflowName === 'CI Front') {
-              core.setOutput('project', 'twenty-front');
+              core.setOutput('project', 'aegis-front');
               core.setOutput('artifact_name', 'storybook-static');
-              core.setOutput('tarball_name', 'storybook-twenty-front-tarball');
-              core.setOutput('tarball_file', 'storybook-twenty-front.tar.gz');
+              core.setOutput('tarball_name', 'storybook-aegis-front-tarball');
+              core.setOutput('tarball_file', 'storybook-aegis-front.tar.gz');
             } else if (workflowName === 'CI UI') {
-              core.setOutput('project', 'twenty-ui');
-              core.setOutput('artifact_name', 'storybook-twenty-ui');
-              core.setOutput('tarball_name', 'storybook-twenty-ui-tarball');
-              core.setOutput('tarball_file', 'storybook-twenty-ui.tar.gz');
+              core.setOutput('project', 'aegis-ui');
+              core.setOutput('artifact_name', 'storybook-aegis-ui');
+              core.setOutput('tarball_name', 'storybook-aegis-ui-tarball');
+              core.setOutput('tarball_file', 'storybook-aegis-ui.tar.gz');
             } else {
               core.setFailed(`Unexpected workflow: ${workflowName}`);
             }
@@ -131,7 +131,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.CI_PRIVILEGED_DISPATCH_TOKEN }}
-          repository: twentyhq/ci-privileged
+          repository: u84u/ci-privileged
           event-type: visual-regression
           client-payload: >-
             {

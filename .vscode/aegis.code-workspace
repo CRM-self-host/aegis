@@ -1,0 +1,114 @@
+{
+  "folders": [
+    {
+      "name": "ROOT",
+      "path": "../"
+    },
+    {
+      "name": "packages/aegis-docker",
+      "path": "../packages/aegis-docker"
+    },
+    {
+      "name": "packages/aegis-front",
+      "path": "../packages/aegis-front"
+    },
+    {
+      "name": "packages/aegis-ui",
+      "path": "../packages/aegis-ui"
+    },
+    {
+      "name": "packages/aegis-emails",
+      "path": "../packages/aegis-emails"
+    },
+    {
+      "name": "packages/aegis-shared",
+      "path": "../packages/aegis-shared"
+    },
+    {
+      "name": "packages/aegis-server",
+      "path": "../packages/aegis-server"
+    },
+    {
+      "name": "packages/aegis-utils",
+      "path": "../packages/aegis-utils"
+    },
+    {
+      "name": "packages/aegis-zapier",
+      "path": "../packages/aegis-zapier"
+    },
+    {
+      "name": "packages/aegis-oxlint-rules",
+      "path": "../packages/aegis-oxlint-rules"
+    },
+    {
+      "name": "packages/aegis-e2e-testing",
+      "path": "../packages/aegis-e2e-testing"
+    }
+  ],
+  "settings": {
+    "editor.formatOnSave": false,
+    "files.eol": "auto",
+    "[typescript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "[javascript]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "[typescriptreact]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "[json]": {
+      "editor.formatOnSave": true
+    },
+    "javascript.format.enable": false,
+    "typescript.format.enable": false,
+    "cSpell.enableFiletypes": [
+      "!javascript",
+      "!json",
+      "!typescript",
+      "!typescriptreact",
+      "md",
+      "mdx"
+    ],
+    "cSpell.words": [
+      "u84u"
+    ],
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "[javascript][typescript][typescriptreact]": {
+      "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "explicit",
+        "source.addMissingImports": "always"
+      }
+    },
+    "search.exclude": {
+      "**/.yarn": true,
+    },
+    "files.exclude": {
+      "packages/": true
+    },
+    "oxc.lint.enable": true,
+    "jest.runMode": "on-demand",
+    "jest.disabledWorkspaceFolders": [
+      "ROOT",
+      "packages/aegis-zapier",
+      "packages/aegis-docker",
+      "packages/aegis-utils",
+      "packages/aegis-postgres"
+    ]
+  }
+}

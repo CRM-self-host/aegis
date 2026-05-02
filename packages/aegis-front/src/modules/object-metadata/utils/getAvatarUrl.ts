@@ -1,0 +1,42 @@
+import { type Company } from '@/companies/types/Company';
+import { CoreObjectNameSingular } from 'aegis-shared/types';
+import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
+import { getCompanyDomainName } from '@/object-metadata/utils/getCompanyDomainName';
+import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
+import { getLogoUrlFromDomainName, isDefined } from 'aegis-shared/utils';
+import { getImageIdentifierFieldValue } from './getImageIdentifierFieldValue';
+
+export const getAvatarUrl = (
+  objectNameSingular: string,
+  record: ObjectRecord,
+  imageIdentifierFieldMetadataItem: FieldMetadataItem | undefined,
+  allowRequestsToAegisIcons?: boolean | undefined,
+) => {
+  if (objectNameSingular === CoreObjectNameSingular.WorkspaceMember) {
+    return record.avatarUrl ?? undefined;
+  }
+
+  if (
+    objectNameSingular === CoreObjectNameSingular.Company &&
+    allowRequestsToAegisIcons === true
+  ) {
+    return getLogoUrlFromDomainName(
+      getCompanyDomainName(record as Company) ?? '',
+    );
+  }
+
+  if (objectNameSingular === CoreObjectNameSingular.Person) {
+    return record.avatarFile?.[0]?.url ?? '';
+  }
+
+  const imageIdentifierFieldValue = getImageIdentifierFieldValue(
+    record,
+    imageIdentifierFieldMetadataItem,
+  );
+
+  if (isDefined(imageIdentifierFieldValue)) {
+    return imageIdentifierFieldValue;
+  }
+
+  return '';
+};

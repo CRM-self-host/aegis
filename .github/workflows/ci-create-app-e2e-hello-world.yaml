@@ -21,14 +21,14 @@ jobs:
     uses: ./.github/workflows/changed-files.yaml
     with:
       files: |
-        packages/create-twenty-app/**
-        packages/twenty-sdk/**
-        packages/twenty-client-sdk/**
-        packages/twenty-shared/**
-        !packages/create-twenty-app/package.json
-        !packages/twenty-sdk/package.json
-        !packages/twenty-client-sdk/package.json
-        !packages/twenty-shared/package.json
+        packages/create-aegis-app/**
+        packages/aegis-sdk/**
+        packages/aegis-client-sdk/**
+        packages/aegis-shared/**
+        !packages/create-aegis-app/package.json
+        !packages/aegis-sdk/package.json
+        !packages/aegis-client-sdk/package.json
+        !packages/aegis-shared/package.json
   create-app-e2e-hello-world:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -52,9 +52,9 @@ jobs:
         ports:
           - 6379:6379
     env:
-      PUBLISHABLE_PACKAGES: twenty-client-sdk twenty-sdk create-twenty-app
-      TWENTY_API_URL: http://localhost:3000
-      TWENTY_API_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDIwMjAyMC1lNmI1LTQ2ODAtOGEzMi1iODIwOTczNzE1NmIiLCJ1c2VySWQiOiIyMDIwMjAyMC1lNmI1LTQ2ODAtOGEzMi1iODIwOTczNzE1NmIiLCJ3b3Jrc3BhY2VJZCI6IjIwMjAyMDIwLTFjMjUtNGQwMi1iZjI1LTZhZWNjZjdlYTQxOSIsIndvcmtzcGFjZU1lbWJlcklkIjoiMjAyMDIwMjAtNDYzZi00MzViLTgyOGMtMTA3ZTAwN2EyNzExIiwidXNlcldvcmtzcGFjZUlkIjoiMjAyMDIwMjAtMWU3Yy00M2Q5LWE1ZGItNjg1YjUwNjlkODE2IiwidHlwZSI6IkFDQ0VTUyIsImF1dGhQcm92aWRlciI6InBhc3N3b3JkIiwiaWF0IjoxNzUxMjgxNzA0LCJleHAiOjIwNjY4NTc3MDR9.HMGqCsVlOAPVUBhKSGlD1X86VoHKt4LIUtET3CGIdik
+      PUBLISHABLE_PACKAGES: aegis-client-sdk aegis-sdk create-aegis-app
+      AEGIS_API_URL: http://localhost:3000
+      AEGIS_API_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDIwMjAyMC1lNmI1LTQ2ODAtOGEzMi1iODIwOTczNzE1NmIiLCJ1c2VySWQiOiIyMDIwMjAyMC1lNmI1LTQ2ODAtOGEzMi1iODIwOTczNzE1NmIiLCJ3b3Jrc3BhY2VJZCI6IjIwMjAyMDIwLTFjMjUtNGQwMi1iZjI1LTZhZWNjZjdlYTQxOSIsIndvcmtzcGFjZU1lbWJlcklkIjoiMjAyMDIwMjAtNDYzZi00MzViLTgyOGMtMTA3ZTAwN2EyNzExIiwidXNlcldvcmtzcGFjZUlkIjoiMjAyMDIwMjAtMWU3Yy00M2Q5LWE1ZGItNjg1YjUwNjlkODE2IiwidHlwZSI6IkFDQ0VTUyIsImF1dGhQcm92aWRlciI6InBhc3N3b3JkIiwiaWF0IjoxNzUxMjgxNzA0LCJleHAiOjIwNjY4NTc3MDR9.HMGqCsVlOAPVUBhKSGlD1X86VoHKt4LIUtET3CGIdik
     steps:
       - name: Fetch custom Github Actions and base branch history
         uses: actions/checkout@v4
@@ -103,13 +103,13 @@ jobs:
             cd ../..
           done
 
-      - name: Scaffold app using published create-twenty-app
+      - name: Scaffold app using published create-aegis-app
         run: |
-          npm install -g create-twenty-app@$CI_VERSION --registry http://localhost:4873
-          create-twenty-app --version
+          npm install -g create-aegis-app@$CI_VERSION --registry http://localhost:4873
+          create-aegis-app --version
           mkdir -p /tmp/e2e-test-workspace
           cd /tmp/e2e-test-workspace
-          create-twenty-app test-app --example hello-world --display-name "Test hello-world app" --description "E2E test hello-world app" --skip-local-instance
+          create-aegis-app test-app --example hello-world --display-name "Test hello-world app" --description "E2E test hello-world app" --skip-local-instance
 
       - name: Install scaffolded app dependencies
         run: |
@@ -118,7 +118,7 @@ jobs:
           echo 'unsafeHttpWhitelist: ["localhost"]' >> .yarnrc.yml
           YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install --no-immutable
           echo "--- Installing last SDK versions ---"
-          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn add twenty-sdk twenty-client-sdk
+          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn add aegis-sdk aegis-client-sdk
 
       - name: Verify installed app versions
         run: |
@@ -126,9 +126,9 @@ jobs:
           echo "--- Checking package.json references correct SDK version ---"
           node -e "
             const pkg = require('./package.json');
-            const sdkVersion = pkg.dependencies['twenty-sdk'];
+            const sdkVersion = pkg.dependencies['aegis-sdk'];
             if (!sdkVersion.startsWith('0.0.0-ci.')) {
-              console.error('Expected twenty-sdk version to start with 0.0.0-ci., got:', sdkVersion);
+              console.error('Expected aegis-sdk version to start with 0.0.0-ci., got:', sdkVersion);
               process.exit(1);
             }
             console.log('SDK version in scaffolded app:', sdkVersion);
@@ -137,10 +137,10 @@ jobs:
       - name: Verify SDK CLI is available
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          npx --no-install twenty --version
+          npx --no-install aegis --version
 
       - name: Setup server environment
-        run: npx nx reset:env:e2e-testing-server twenty-server
+        run: npx nx reset:env:e2e-testing-server aegis-server
 
       - name: Create databases
         run: |
@@ -148,40 +148,40 @@ jobs:
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
 
       - name: Setup database
-        run: npx nx run twenty-server:database:reset
+        run: npx nx run aegis-server:database:reset
 
       - name: Start server
-        run: nohup npx nx start:ci twenty-server &
+        run: nohup npx nx start:ci aegis-server &
 
       - name: Wait for server to be ready
         run: npx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
 
-      - name: Authenticate with twenty-server
+      - name: Authenticate with aegis-server
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          npx --no-install twenty remote add --api-key ${{ env.TWENTY_API_KEY }} --api-url ${{ env.TWENTY_API_URL }}
+          npx --no-install aegis remote add --api-key ${{ env.AEGIS_API_KEY }} --api-url ${{ env.AEGIS_API_URL }}
 
       - name: Deploy scaffolded app
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          npx --no-install twenty deploy
+          npx --no-install aegis deploy
 
       - name: Install scaffolded app
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          npx --no-install twenty install
+          npx --no-install aegis install
 
       - name: Execute hello-world logic function
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          EXEC_OUTPUT=$(npx --no-install twenty exec --functionName hello-world-logic-function)
+          EXEC_OUTPUT=$(npx --no-install aegis exec --functionName hello-world-logic-function)
           echo "$EXEC_OUTPUT"
           echo "$EXEC_OUTPUT" | grep -q "Hello, World!"
 
       - name: Execute create-hello-world-company logic function
         run: |
           cd /tmp/e2e-test-workspace/test-app
-          EXEC_OUTPUT=$(npx --no-install twenty exec --functionName create-hello-world-company)
+          EXEC_OUTPUT=$(npx --no-install aegis exec --functionName create-hello-world-company)
           echo "$EXEC_OUTPUT"
           echo "$EXEC_OUTPUT" | grep -q 'Created company.*Hello World.*with id'
 

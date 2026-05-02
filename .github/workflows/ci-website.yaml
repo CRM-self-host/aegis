@@ -18,7 +18,7 @@ jobs:
     with:
       files: |
         package.json
-        packages/twenty-website/**
+        packages/aegis-website/**
   website-build:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -49,11 +49,11 @@ jobs:
         run: PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
 
       - name: Website / Run migrations
-        run: npx nx database:migrate twenty-website
+        run: npx nx database:migrate aegis-website
         env:
           DATABASE_PG_URL: postgres://postgres:postgres@localhost:5432/default
       - name: Website / Build Website
-        run: npx nx build twenty-website
+        run: npx nx build aegis-website
         env:
           DATABASE_PG_URL: postgres://postgres:postgres@localhost:5432/default
           KEYSTATIC_GITHUB_CLIENT_ID: xxx

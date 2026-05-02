@@ -1,0 +1,282 @@
+---
+title: Erste Schritte
+icon: rocket
+description: Erstellen Sie in wenigen Minuten Ihre erste Aegis-App.
+---
+
+## Was sind Apps?
+
+Apps ermöglichen es Ihnen, Aegis mit benutzerdefinierten Objekten, Feldern, Logikfunktionen, Frontend-Komponenten, KI-Fähigkeiten und mehr zu erweitern — alles als Code verwaltet. Anstatt alles über die UI zu konfigurieren, definieren Sie Ihr Datenmodell und Ihre Logik in TypeScript und stellen es in einem oder mehreren Workspaces bereit.
+
+## Voraussetzungen
+
+Bevor Sie beginnen, stellen Sie sicher, dass Folgendes auf Ihrem Rechner installiert ist:
+
+* **Node.js 24+** — [Hier herunterladen](https://nodejs.org/)
+* **Yarn 4** — Wird mit Node.js über Corepack mitgeliefert. Aktivieren Sie es, indem Sie `corepack enable` ausführen
+* **Docker** — [Hier herunterladen](https://www.docker.com/products/docker-desktop/). Erforderlich, um eine lokale Aegis-Instanz auszuführen. Nicht erforderlich, wenn bereits ein Aegis-Server läuft.
+
+## Erstellen Sie Ihre erste App
+
+### App-Gerüst erstellen
+
+Öffnen Sie ein Terminal und führen Sie Folgendes aus:
+
+```bash filename="Terminal"
+npx create-aegis-app@latest my-aegis-app
+```
+
+Sie werden aufgefordert, einen Namen und eine Beschreibung für Ihre App einzugeben. Drücken Sie **Enter**, um die Standardwerte zu übernehmen.
+
+Dadurch wird ein neuer Ordner namens `my-aegis-app` mit allem erstellt, was Sie benötigen.
+
+### Lokale Aegis-Instanz einrichten
+
+Das Scaffolding-Tool fragt:
+
+> **Möchten Sie eine lokale Aegis-Instanz einrichten?**
+
+* **Geben Sie `yes` ein** (empfohlen) — Dadurch wird das Docker-Image `aegis-app-dev` heruntergeladen und ein lokaler Aegis-Server auf Port `2020` gestartet. Stellen Sie sicher, dass Docker läuft, bevor Sie fortfahren.
+* **Geben Sie `no` ein** — Wählen Sie dies, wenn bereits ein Aegis-Server lokal läuft.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/start-instance.png" alt="Soll die lokale Instanz gestartet werden?" />
+</div>
+
+### Melden Sie sich bei Ihrem Arbeitsbereich an
+
+Anschließend öffnet sich ein Browserfenster mit der Aegis-Anmeldeseite. Melden Sie sich mit dem vorab eingerichteten Demo-Konto an:
+
+* **E-Mail:** `tim@apple.dev`
+* **Passwort:** `tim@apple.dev`
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/login.png" alt="Aegis-Anmeldebildschirm" />
+</div>
+
+### Autorisieren Sie die App
+
+Nach der Anmeldung sehen Sie einen Autorisierungsbildschirm. Dadurch kann Ihre App mit Ihrem Arbeitsbereich interagieren.
+
+Klicken Sie auf **Authorize**, um fortzufahren.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/authorize.png" alt="Aegis-CLI-Autorisierungsbildschirm" />
+</div>
+
+Nach der Autorisierung bestätigt Ihr Terminal, dass alles eingerichtet ist.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/scaffolded.png" alt="App-Gerüst erfolgreich erstellt" />
+</div>
+
+### Beginnen Sie mit der Entwicklung
+
+Wechseln Sie in Ihren neuen App-Ordner und starten Sie den Entwicklungsserver:
+
+```bash filename="Terminal"
+cd my-aegis-app
+yarn aegis dev
+```
+
+Dadurch werden Ihre Quelldateien überwacht, bei jeder Änderung neu gebaut und Ihre App automatisch mit dem lokalen Aegis-Server synchronisiert. In Ihrem Terminal sollte eine Live-Statusanzeige angezeigt werden.
+
+Für ausführlichere Ausgaben (Build-Protokolle, Sync-Anfragen, Fehlerspuren) verwenden Sie das Flag `--verbose`:
+
+```bash filename="Terminal"
+yarn aegis dev --verbose
+```
+
+<Warning>
+Der Dev-Modus ist nur auf Aegis-Instanzen verfügbar, die im Entwicklungsmodus laufen (`NODE_ENV=development`). Produktionsinstanzen lehnen Dev-Synchronisierungsanfragen ab. Verwenden Sie `yarn aegis deploy`, um auf Produktionsservern bereitzustellen — Details finden Sie unter [Apps veröffentlichen](/l/de/developers/extend/apps/publishing).
+</Warning>
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/dev.jpg" alt="Terminalausgabe im Dev-Modus" />
+</div>
+
+#### Einmalige Synchronisierung mit `yarn aegis dev --once`
+
+Wenn Sie keinen Watcher im Hintergrund ausführen lassen möchten (zum Beispiel in einer CI-Pipeline, einem Git-Hook oder einem skriptgesteuerten Workflow), geben Sie das Flag `--once` an. Es führt dieselbe Pipeline aus wie `yarn aegis dev` — Build-Manifest erstellen, Dateien bündeln, hochladen, synchronisieren, den typisierten API-Client neu generieren — beendet sich jedoch, **sobald die Synchronisierung abgeschlossen ist**:
+
+```bash filename="Terminal"
+yarn aegis dev --once
+```
+
+| Befehl                   | Verhalten                                                                                                               | Wann verwenden                                                                                           |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| `yarn aegis dev`        | Überwacht Ihre Quelldateien und synchronisiert bei jeder Änderung erneut. Läuft weiter, bis Sie es stoppen.             | Interaktive lokale Entwicklung — Sie möchten das Live-Status-Panel und eine sofortige Feedback-Schleife. |
+| `yarn aegis dev --once` | Führt einen einzelnen Build + Sync aus und beendet sich anschließend mit Code `0` bei Erfolg oder `1` bei einem Fehler. | Skripte, CI, Pre-Commit-Hooks, KI-Agenten und jeder nicht-interaktive Workflow.                          |
+
+Beide Modi erfordern einen Aegis-Server, der im Entwicklungsmodus läuft, und ein authentifiziertes Remote — es gelten dieselben Voraussetzungen.
+
+### Sehen Sie sich Ihre App in Aegis an
+
+Öffnen Sie [http://localhost:2020/settings/applications#developer](http://localhost:2020/settings/applications#developer) in Ihrem Browser. Navigieren Sie zu **Settings > Apps** und wählen Sie die Registerkarte **Developer**. Unter **Your Apps** sollte Ihre App aufgeführt sein:
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-1.png" alt="Liste &#x22;Your Apps&#x22;, die &#x22;My aegis app&#x22; anzeigt" />
+</div>
+
+Klicken Sie auf **My aegis app**, um die **Anwendungsregistrierung** zu öffnen. Eine Registrierung ist ein Servereintrag, der Ihre App beschreibt — ihren Namen, den eindeutigen Bezeichner, OAuth-Zugangsdaten und die Quelle (lokal, npm oder Tarball). Sie befindet sich auf dem Server, nicht in einem bestimmten Arbeitsbereich. Wenn Sie eine App in einen Arbeitsbereich installieren, erstellt Aegis eine arbeitsbereichsbezogene Anwendung, die auf diese Registrierung verweist. Eine Registrierung kann in mehreren Arbeitsbereichen auf demselben Server installiert werden.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-2.png" alt="Details der Anwendungsregistrierung" />
+</div>
+
+Klicken Sie auf **View installed app**, um die installierte App anzuzeigen. Die Registerkarte **About** zeigt die aktuelle Version und Verwaltungsoptionen:
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-3.png" alt="Installierte App — Registerkarte About" />
+</div>
+
+Wechseln Sie zur Registerkarte **Content**, um alles zu sehen, was Ihre App bereitstellt — Objekte, Felder, Logikfunktionen und Agenten:
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-4.png" alt="Installierte App — Registerkarte Content" />
+</div>
+
+Alles erledigt! Bearbeiten Sie eine beliebige Datei in `src/`, und die Änderungen werden automatisch übernommen.
+
+---
+
+## Was Sie erstellen können
+
+Apps bestehen aus **Entitäten** — jede ist als TypeScript-Datei mit einem einzigen `export default` definiert:
+
+| Entität                    | Was sie macht                                                                                                        |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **Objekte & Felder**       | Definieren Sie benutzerdefinierte Datenmodelle (wie Post Card, Invoice) mit typisierten Feldern                      |
+| **Logikfunktionen**        | Serverseitige TypeScript-Funktionen, die durch HTTP-Routen, Cron-Zeitpläne oder Datenbankereignisse ausgelöst werden |
+| **Frontend-Komponenten**   | React-Komponenten, die in der UI von Aegis gerendert werden (Seitenleiste, Widgets, Befehlsmenü)                    |
+| **Fähigkeiten & Agenten**  | KI-Funktionen — wiederverwendbare Anweisungen und autonome Assistenten                                               |
+| **Ansichten & Navigation** | Vorkonfigurierte Listenansichten und Seitenleisteneinträge für Ihre Objekte                                          |
+| **Seitenlayouts**          | Benutzerdefinierte Datensatz-Detailseiten mit Tabs und Widgets                                                       |
+
+Wechseln Sie zu [Apps erstellen](/l/de/developers/extend/apps/building) für eine ausführliche Anleitung zu jedem Entitätstyp.
+
+---
+
+## Projektstruktur
+
+Der Scaffolder erzeugt die folgende Verzeichnisstruktur:
+
+```text filename="my-aegis-app/"
+my-aegis-app/
+  package.json
+  yarn.lock
+  .gitignore
+  .nvmrc
+  .yarnrc.yml
+  .oxlintrc.json
+  tsconfig.json
+  tsconfig.spec.json                          # TypeScript config for tests
+  vitest.config.ts                            # Vitest test runner configuration
+  LLMS.md
+  README.md
+  .github/
+    └── workflows/
+        └── ci.yml                            # GitHub Actions CI workflow
+  public/                                     # Public assets (images, fonts, etc.)
+  src/
+  ├── application-config.ts                   # Required — main application configuration
+  ├── default-role.ts                         # Default role for logic functions
+  ├── constants/
+  │   └── universal-identifiers.ts            # Auto-generated UUIDs and app metadata
+  └── __tests__/
+      ├── setup-test.ts                       # Test setup (server health check, config)
+      └── app-install.integration-test.ts     # Integration test
+```
+
+### Mit einem Beispiel beginnen
+
+Um mit einem umfassenderen Beispiel mit benutzerdefinierten Objekten, Feldern, Logikfunktionen, Frontend-Komponenten und mehr zu starten, verwenden Sie die Option `--example`:
+
+```bash filename="Terminal"
+npx create-aegis-app@latest my-aegis-app --example postcard
+```
+
+Die Beispiele stammen aus dem Verzeichnis [aegis-apps/examples](https://github.com/u84u/aegis/tree/main/packages/aegis-apps/examples) auf GitHub. Sie können auch einzelne Entitäten in einem bestehenden Projekt mit `yarn aegis add` erzeugen (siehe [Apps erstellen](/l/de/developers/extend/apps/building#scaffolding-entities-with-yarn-aegis-add)).
+
+### Wichtige Dateien
+
+| Datei / Ordner                           | Zweck                                                                                                                                                              |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `package.json`                           | Deklariert den App-Namen, die Version und Abhängigkeiten. Enthält ein `aegis`-Skript, sodass Sie `yarn aegis help` ausführen können, um alle Befehle anzuzeigen. |
+| `src/application-config.ts`              | **Erforderlich.** Die Hauptkonfigurationsdatei für Ihre App.                                                                                                       |
+| `src/default-role.ts`                    | Standardrolle, die steuert, worauf Ihre Logikfunktionen zugreifen können.                                                                                          |
+| `src/constants/universal-identifiers.ts` | Automatisch erzeugte UUIDs und App-Metadaten (Anzeigename, Beschreibung).                                                                                          |
+| `src/__tests__/`                         | Integrationstests (Setup + Beispieltest).                                                                                                                          |
+| `public/`                                | Statische Assets (Bilder, Schriftarten), die mit Ihrer App ausgeliefert werden.                                                                                    |
+
+## Lokaler Entwicklungsserver
+
+Der Scaffolder hat bereits einen lokalen Aegis-Server für Sie gestartet. Um ihn später zu verwalten, verwenden Sie `yarn aegis server`:
+
+| Befehl                                 | Beschreibung                                                |
+| -------------------------------------- | ----------------------------------------------------------- |
+| `yarn aegis server start`             | Lokalen Server starten (lädt das Image bei Bedarf herunter) |
+| `yarn aegis server start --port 3030` | Auf einem benutzerdefinierten Port starten                  |
+| `yarn aegis server start --test`      | Starten Sie eine separate Testinstanz auf Port 2021         |
+| `yarn aegis server stop`              | Server stoppen (Daten bleiben erhalten)                     |
+| `yarn aegis server status`            | Serverstatus, URL und Anmeldedaten anzeigen                 |
+| `yarn aegis server logs`              | Serverprotokolle streamen                                   |
+| `yarn aegis server logs --lines 100`  | Die letzten 100 Protokollzeilen anzeigen                    |
+| `yarn aegis server reset`             | Alle Daten löschen und neu starten                          |
+
+Daten bleiben über Neustarts hinweg in zwei Docker-Volumes bestehen (`aegis-app-dev-data` für PostgreSQL, `aegis-app-dev-storage` für Dateien). Verwenden Sie `reset`, um alles zu löschen und neu zu beginnen.
+
+### Eine Testinstanz ausführen
+
+Übergeben Sie `--test` an jeden `server`-Befehl, um eine zweite, vollständig isolierte Instanz zu verwalten — nützlich, um Integrationstests auszuführen oder zu experimentieren, ohne Ihre Hauptentwicklungsdaten anzutasten.
+
+| Befehl                             | Beschreibung                                          |
+| ---------------------------------- | ----------------------------------------------------- |
+| `yarn aegis server start --test`  | Die Testinstanz starten (standardmäßig Port 2021)     |
+| `yarn aegis server stop --test`   | Die Testinstanz stoppen                               |
+| `yarn aegis server status --test` | Status, URL und Anmeldedaten der Testinstanz anzeigen |
+| `yarn aegis server logs --test`   | Protokolle der Testinstanz streamen                   |
+| `yarn aegis server reset --test`  | Alle Testdaten löschen und neu starten                |
+
+Die Testinstanz läuft in einem eigenen Docker-Container (`aegis-app-dev-test`) mit dedizierten Volumes (`aegis-app-dev-test-data`, `aegis-app-dev-test-storage`) und eigener Konfiguration, sodass sie parallel zu Ihrer Hauptinstanz ohne Konflikte ausgeführt werden kann. Kombinieren Sie `--test` mit `--port`, um den Standardport 2021 zu überschreiben.
+
+<Note>
+  Der Server erfordert, dass **Docker** läuft. Wenn der Fehler "Docker not running" angezeigt wird, stellen Sie sicher, dass Docker Desktop (oder der Docker-Daemon) gestartet ist.
+</Note>
+
+## Manuelle Einrichtung (ohne Scaffolder)
+
+Wenn Sie die Einrichtung lieber selbst vornehmen möchten, anstatt `create-aegis-app` zu verwenden, können Sie dies in zwei Schritten tun.
+
+**1. Fügen Sie `aegis-sdk` und `aegis-client-sdk` als Abhängigkeiten hinzu:**
+
+```bash filename="Terminal"
+yarn add aegis-sdk aegis-client-sdk
+```
+
+**2. Fügen Sie Ihrer `package.json` ein `aegis`-Skript hinzu:**
+
+```json filename="package.json"
+{
+  "scripts": {
+    "aegis": "aegis"
+  }
+}
+```
+
+Sie können jetzt `yarn aegis dev`, `yarn aegis help` und alle anderen Befehle ausführen.
+
+<Note>
+Installieren Sie `aegis-sdk` nicht global. Verwenden Sie es immer als lokale Projektabhängigkeit, damit jedes Projekt seine eigene Version festlegen kann.
+</Note>
+
+## Fehlerbehebung
+
+Wenn Probleme auftreten:
+
+* Stellen Sie sicher, dass **Docker läuft**, bevor Sie das Scaffolding-Tool mit einer lokalen Instanz starten.
+* Stellen Sie sicher, dass Sie **Node.js 24+** verwenden (`node -v` zur Überprüfung).
+* Stellen Sie sicher, dass **Corepack aktiviert ist** (`corepack enable`), damit Yarn 4 verfügbar ist.
+* Versuchen Sie, `node_modules` zu löschen und `yarn install` erneut auszuführen, wenn Abhängigkeiten fehlerhaft erscheinen.
+
+Hängen Sie immer noch fest? Bitten Sie im [Aegis-Discord](https://discord.com/channels/1130383047699738754/1130386664812982322) um Hilfe.

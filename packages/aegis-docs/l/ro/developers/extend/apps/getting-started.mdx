@@ -1,0 +1,270 @@
+---
+title: Începeți
+description: Creați prima dvs. aplicație Aegis în câteva minute.
+---
+
+<Warning>
+Aplicațiile sunt în prezent în testare alfa. Caracteristica funcționează, dar este încă în dezvoltare.
+</Warning>
+
+## Ce sunt aplicațiile?
+
+Aplicațiile vă permit să extindeți Aegis cu obiecte personalizate, câmpuri, funcții logice, componente front-end, abilități IA și altele — toate gestionate ca cod. În loc să configurați totul prin interfața de utilizator (UI), vă definiți modelul de date și logica în TypeScript și le implementați în unul sau mai multe spații de lucru.
+
+## Cerințe
+
+Înainte de a începe, asigurați-vă că următoarele sunt instalate pe calculatorul dvs.:
+
+* **Node.js 24+** — [Descărcați aici](https://nodejs.org/)
+* **Yarn 4** — Vine împreună cu Node.js prin Corepack. Activați-l rulând `corepack enable`
+* **Docker** — [Descărcați aici](https://www.docker.com/products/docker-desktop/). Necesar pentru a rula o instanță Aegis locală. Nu este necesar dacă aveți deja un server Aegis care rulează.
+
+## Creați prima dvs. aplicație
+
+### Creați scheletul aplicației
+
+Deschideți un terminal și rulați:
+
+```bash filename="Terminal"
+npx create-aegis-app@latest my-aegis-app
+```
+
+Vi se va cere să introduceți un nume și o descriere pentru aplicația dvs. Apăsați **Enter** pentru a accepta valorile implicite.
+
+Aceasta creează un folder nou numit `my-aegis-app` cu tot ce aveți nevoie.
+
+### Configurați o instanță Aegis locală
+
+Generatorul de schelet va întreba:
+
+> **Doriți să configurați o instanță Aegis locală?**
+
+* **Tastați `yes`** (recomandat) — Aceasta descarcă imaginea Docker `aegis-app-dev` și pornește un server Aegis local pe portul `2020`. Asigurați-vă că Docker rulează înainte de a continua.
+* **Tastați `no`** — Alegeți această opțiune dacă aveți deja un server Aegis care rulează local.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/start-instance.png" alt="Porniți instanța locală?" />
+</div>
+
+### Autentificați-vă în spațiul dvs. de lucru
+
+În continuare, se va deschide o fereastră de browser cu pagina de autentificare Aegis. Autentificați-vă cu contul demo preconfigurat:
+
+* **E-mail:** `tim@apple.dev`
+* **Parolă:** `tim@apple.dev`
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/login.png" alt="Ecranul de autentificare Aegis" />
+</div>
+
+### Autorizați aplicația
+
+După autentificare, veți vedea un ecran de autorizare. Acest lucru permite aplicației dvs. să interacționeze cu spațiul dvs. de lucru.
+
+Faceți clic pe **Authorize** pentru a continua.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/authorize.png" alt="Ecranul de autorizare Aegis CLI" />
+</div>
+
+După autorizare, terminalul va confirma că totul este configurat.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/scaffolded.png" alt="Aplicația a fost creată cu succes" />
+</div>
+
+### Începeți dezvoltarea
+
+Intrați în noul folder al aplicației și porniți serverul de dezvoltare:
+
+```bash filename="Terminal"
+cd my-aegis-app
+yarn aegis dev
+```
+
+Acesta monitorizează fișierele sursă, reconstruiește la fiecare modificare și sincronizează automat aplicația cu serverul Aegis local. Ar trebui să vedeți în terminal un panou de stare în timp real.
+
+Pentru un output mai detaliat (jurnale de build, cereri de sincronizare, urme ale erorilor), folosiți opțiunea `--verbose`:
+
+```bash filename="Terminal"
+yarn aegis dev --verbose
+```
+
+<Warning>
+Modul de dezvoltare este disponibil doar pe instanțele Aegis care rulează în modul development (`NODE_ENV=development`). Instanțele de producție resping cererile de sincronizare pentru dezvoltare. Folosiți `yarn aegis deploy` pentru a implementa pe serverele de producție — vedeți [Publicarea aplicațiilor](/l/ro/developers/extend/apps/publishing) pentru detalii.
+</Warning>
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/dev.jpg" alt="Ieșirea terminalului în modul de dezvoltare" />
+</div>
+
+#### One-shot sync with `yarn aegis dev --once`
+
+If you do not want a watcher running in the background (for example in a CI pipeline, a git hook, or a scripted workflow), pass the `--once` flag. It runs the same pipeline as `yarn aegis dev` — build manifest, bundle files, upload, sync, regenerate the typed API client — but **exits as soon as the sync completes**:
+
+```bash filename="Terminal"
+yarn aegis dev --once
+```
+
+| Comandă                  | Comportament                                                                             | When to use                                                                               |
+| ------------------------ | ---------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `yarn aegis dev`        | Watches your source files and re-syncs on every change. Keeps running until you stop it. | Interactive local development — you want the live status panel and instant feedback loop. |
+| `yarn aegis dev --once` | Performs a single build + sync, then exits with code `0` on success or `1` on failure.   | Scripts, CI, pre-commit hooks, AI agents, and any non-interactive workflow.               |
+
+Both modes require a Aegis server running in development mode and an authenticated remote — the same prerequisites apply.
+
+### Vedeți aplicația în Aegis
+
+Deschideți [http://localhost:2020/settings/applications#developer](http://localhost:2020/settings/applications#developer) în browser. Navigați la **Settings > Apps** și selectați fila **Developer**. Ar trebui să vedeți aplicația listată la **Your Apps**:
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-1.png" alt="Lista Your Apps care afișează My aegis app" />
+</div>
+
+Faceți clic pe **My aegis app** pentru a deschide **înregistrarea aplicației**. O înregistrare este un element la nivel de server care descrie aplicația — numele, identificatorul unic, acreditările OAuth și sursa (locală, npm sau arhivă tar). Aceasta există pe server, nu în interiorul unui spațiu de lucru anume. Când instalați o aplicație într-un spațiu de lucru, Aegis creează o aplicație la nivelul spațiului de lucru care face referire la această înregistrare. O singură înregistrare poate fi instalată în mai multe spații de lucru pe același server.
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-2.png" alt="Detalii despre înregistrarea aplicației" />
+</div>
+
+Faceți clic pe **View installed app** pentru a vedea aplicația instalată. Fila **About** afișează versiunea curentă și opțiunile de administrare:
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-3.png" alt="Aplicație instalată — fila About" />
+</div>
+
+Comutați la fila **Content** pentru a vedea tot ceea ce oferă aplicația — obiecte, câmpuri, funcții logice și agenți:
+
+<div style={{textAlign: 'center'}}>
+  <img src="/images/docs/developers/extends/apps/app-in-ui-4.png" alt="Aplicație instalată — fila Content" />
+</div>
+
+Totul este gata! Editați orice fișier din `src/`, iar modificările vor fi preluate automat.
+
+---
+
+## Ce puteți construi
+
+Aplicațiile sunt compuse din **entități** — fiecare definită într-un fișier TypeScript cu un singur `export default`:
+
+| Entitate                    | Ce face                                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Obiecte și câmpuri**      | Definiți modele de date personalizate (cum ar fi Post Card, Invoice) cu câmpuri de tip definit        |
+| **Funcții logice**          | Funcții TypeScript pe server declanșate de rute HTTP, programări cron sau evenimente din baza de date |
+| **Componente front-end**    | Componente React care se afișează în UI-ul Aegis (panou lateral, widgeturi, meniul de comenzi)       |
+| **Abilități și agenți**     | Capabilități AI — instrucțiuni reutilizabile și asistenți autonomi                                    |
+| **Vizualizări și navigare** | Vizualizări de listă preconfigurate și elemente de meniu în bara laterală pentru obiectele dvs.       |
+| **Layouturi de pagină**     | Pagini personalizate de detalii ale înregistrărilor cu file și widgeturi                              |
+
+Accesați [Construirea aplicațiilor](/l/ro/developers/extend/apps/building) pentru un ghid detaliat despre fiecare tip de entitate.
+
+---
+
+## Structura proiectului
+
+Generatorul de schelete generează următoarea structură de fișiere:
+
+```text filename="my-aegis-app/"
+my-aegis-app/
+  package.json
+  yarn.lock
+  .gitignore
+  .nvmrc
+  .yarnrc.yml
+  .oxlintrc.json
+  tsconfig.json
+  tsconfig.spec.json                          # TypeScript config for tests
+  vitest.config.ts                            # Vitest test runner configuration
+  LLMS.md
+  README.md
+  .github/
+    └── workflows/
+        └── ci.yml                            # GitHub Actions CI workflow
+  public/                                     # Public assets (images, fonts, etc.)
+  src/
+  ├── application-config.ts                   # Required — main application configuration
+  ├── default-role.ts                         # Default role for logic functions
+  ├── constants/
+  │   └── universal-identifiers.ts            # Auto-generated UUIDs and app metadata
+  └── __tests__/
+      ├── setup-test.ts                       # Test setup (server health check, config)
+      └── app-install.integration-test.ts     # Integration test
+```
+
+### Pornind de la un exemplu
+
+Pentru a porni de la un exemplu mai complet cu obiecte, câmpuri, funcții logice, componente front-end și altele, folosiți opțiunea `--example`:
+
+```bash filename="Terminal"
+npx create-aegis-app@latest my-aegis-app --example postcard
+```
+
+Exemplele sunt preluate din directorul [aegis-apps/examples](https://github.com/u84u/aegis/tree/main/packages/aegis-apps/examples) de pe GitHub. Puteți, de asemenea, să creați scheletul entităților individuale într-un proiect existent cu `yarn aegis add` (consultați [Construirea aplicațiilor](/l/ro/developers/extend/apps/building#scaffolding-entities-with-yarn-aegis-add)).
+
+### Fișiere cheie
+
+| Fișier / Folder                          | Scop                                                                                                                                                            |
+| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `package.json`                           | Declară numele aplicației, versiunea și dependențele. Include un script `aegis` astfel încât să puteți rula `yarn aegis help` pentru a vedea toate comenzile. |
+| `src/application-config.ts`              | **Necesar.** Fișierul principal de configurare pentru aplicație.                                                                                                |
+| `src/default-role.ts`                    | Rol implicit care controlează la ce pot avea acces funcțiile logice.                                                                                            |
+| `src/constants/universal-identifiers.ts` | UUID-uri generate automat și metadatele aplicației (nume afișat, descriere).                                                                                    |
+| `src/__tests__/`                         | Teste de integrare (configurare + test exemplu).                                                                                                                |
+| `public/`                                | Resurse statice (imagini, fonturi) servite împreună cu aplicația.                                                                                               |
+
+## Server de dezvoltare local
+
+Generatorul de schelete a pornit deja un server Aegis local pentru dvs. Pentru a-l gestiona ulterior, folosiți `yarn aegis server`:
+
+| Comandă                                | Descriere                                                     |
+| -------------------------------------- | ------------------------------------------------------------- |
+| `yarn aegis server start`             | Pornește serverul local (descarcă imaginea dacă este necesar) |
+| `yarn aegis server start --port 3030` | Pornește pe un port personalizat                              |
+| `yarn aegis server stop`              | Oprește serverul (păstrează datele)                           |
+| `yarn aegis server status`            | Afișează starea serverului, URL-ul și acreditările            |
+| `yarn aegis server logs`              | Transmite în flux jurnalele serverului                        |
+| `yarn aegis server logs --lines 100`  | Afișează ultimele 100 de linii de jurnal                      |
+| `yarn aegis server reset`             | Șterge toate datele și pornește de la zero                    |
+
+Datele sunt păstrate între reporniri în două volume Docker (`aegis-app-dev-data` pentru PostgreSQL, `aegis-app-dev-storage` pentru fișiere). Folosiți `reset` pentru a șterge totul și a porni de la zero.
+
+<Note>
+  Serverul necesită ca **Docker** să ruleze. Dacă vedeți eroarea "Docker not running", asigurați-vă că Docker Desktop (sau demonul Docker) este pornit.
+</Note>
+
+## Configurare manuală (fără generator)
+
+Dacă preferați să configurați totul manual în loc să folosiți `create-aegis-app`, o puteți face în doi pași.
+
+**1. Adăugați `aegis-sdk` și `aegis-client-sdk` ca dependențe:**
+
+```bash filename="Terminal"
+yarn add aegis-sdk aegis-client-sdk
+```
+
+**2. Adăugați un script `aegis` în `package.json`:**
+
+```json filename="package.json"
+{
+  "scripts": {
+    "aegis": "aegis"
+  }
+}
+```
+
+Acum puteți rula `yarn aegis dev`, `yarn aegis help` și toate celelalte comenzi.
+
+<Note>
+Nu instalați `aegis-sdk` global. Folosiți-l întotdeauna ca dependență locală de proiect, astfel încât fiecare proiect să își poată fixa propria versiune.
+</Note>
+
+## Depanare
+
+Dacă întâmpinați probleme:
+
+* Asigurați-vă că Docker rulează înainte de a porni scaffolderul cu o instanță locală.
+* Asigurați-vă că folosiți **Node.js 24+** (`node -v` pentru verificare).
+* Asigurați-vă că **Corepack este activat** (`corepack enable`) astfel încât Yarn 4 să fie disponibil.
+* Încercați să ștergeți `node_modules` și să rulați din nou `yarn install` dacă dependențele par deteriorate.
+
+Încă aveți probleme? Cereți ajutor pe [Discordul Aegis](https://discord.com/channels/1130383047699738754/1130386664812982322).

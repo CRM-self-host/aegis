@@ -1,0 +1,77 @@
+---
+title: Comandi
+icon: terminale
+description: Comandi utili per sviluppare Aegis.
+---
+
+I comandi possono essere eseguiti dalla radice del repository usando `npx nx`. Usa `npx nx run {project}:{command}` per specificare esplicitamente il target.
+
+## Avviare l'app
+
+```bash
+npx nx start aegis-front          # Frontend dev server (http://localhost:3001)
+npx nx start aegis-server         # Backend server (http://localhost:3000)
+npx nx run aegis-server:worker    # Background worker
+```
+
+## Database
+
+```bash
+npx nx database:reset aegis-server                          # Reset and seed database
+npx nx run aegis-server:database:migrate:prod               # Run migrations
+npx nx run aegis-server:database:migrate:generate --name <name> --type <fast|slow>  # Generate a migration
+```
+
+## Linting
+
+```bash
+npx nx lint:diff-with-main aegis-front    # Lint changed files (fastest)
+npx nx lint:diff-with-main aegis-server
+npx nx lint aegis-front --configuration=fix  # Auto-fix
+```
+
+## Controllo dei tipi
+
+```bash
+npx nx typecheck aegis-front
+npx nx typecheck aegis-server
+```
+
+## Testing
+
+```bash
+# Frontend
+npx nx test aegis-front                          # Jest unit tests
+npx nx storybook:build aegis-front               # Build Storybook
+npx nx storybook:test aegis-front                # Storybook tests
+
+# Backend
+npx nx run aegis-server:test:unit                # Unit tests
+npx nx run aegis-server:test:integration         # Integration tests
+npx nx run aegis-server:test:integration:with-db-reset  # Integration with DB reset
+
+# Single file (fastest)
+npx jest path/to/test.test.ts --config=packages/{project}/jest.config.mjs
+```
+
+## GraphQL
+
+```bash
+npx nx run aegis-front:graphql:generate                        # Regenerate types
+npx nx run aegis-front:graphql:generate --configuration=metadata  # Metadata schema
+```
+
+## Traduzioni
+
+```bash
+npx nx run aegis-front:lingui:extract   # Extract strings
+npx nx run aegis-front:lingui:compile   # Compile translations
+```
+
+## Compilazione
+
+```bash
+npx nx build aegis-shared   # Must be built first
+npx nx build aegis-front
+npx nx build aegis-server
+```

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: u84u-redis
+  namespace: u84u
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+    - port: 6379
+      protocol: TCP
+      targetPort: 6379
+  selector:
+    app: u84u-redis
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  type: ClusterIP

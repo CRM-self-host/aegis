@@ -7,9 +7,9 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened, labeled]
     paths:
-      - packages/twenty-docker/**
-      - packages/twenty-server/**
-      - packages/twenty-front/**
+      - packages/aegis-docker/**
+      - packages/aegis-server/**
+      - packages/aegis-front/**
       - .github/workflows/preview-env-dispatch.yaml
       - .github/workflows/preview-env-keepalive.yaml
 
@@ -47,6 +47,6 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.CI_PRIVILEGED_DISPATCH_TOKEN }}
-          repository: twentyhq/ci-privileged
+          repository: u84u/ci-privileged
           event-type: preview-env-url
           client-payload: '{"pr_number": ${{ toJSON(github.event.pull_request.number) }}, "keepalive_dispatch_time": ${{ toJSON(github.event.pull_request.updated_at) }}, "repo": ${{ toJSON(github.repository) }}}'

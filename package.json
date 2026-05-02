@@ -174,7 +174,7 @@
     "yarn": ">=4.0.2"
   },
   "license": "AGPL-3.0",
-  "name": "twenty",
+  "name": "aegis",
   "packageManager": "yarn@4.13.0",
   "resolutions": {
     "graphql": "16.8.1",
@@ -190,32 +190,32 @@
   "version": "0.2.1",
   "nx": {},
   "scripts": {
-    "docs:generate": "tsx packages/twenty-docs/scripts/generate-docs-json.ts",
-    "docs:generate-navigation-template": "tsx packages/twenty-docs/scripts/generate-navigation-template.ts",
-    "docs:generate-paths": "tsx packages/twenty-docs/scripts/generate-documentation-paths.ts",
-    "start": "npx concurrently --kill-others 'npx nx run-many -t start -p twenty-server twenty-front' 'npx wait-on tcp:3000 && npx nx run twenty-server:worker'"
+    "docs:generate": "tsx packages/aegis-docs/scripts/generate-docs-json.ts",
+    "docs:generate-navigation-template": "tsx packages/aegis-docs/scripts/generate-navigation-template.ts",
+    "docs:generate-paths": "tsx packages/aegis-docs/scripts/generate-documentation-paths.ts",
+    "start": "npx concurrently --kill-others 'npx nx run-many -t start -p aegis-server aegis-front' 'npx wait-on tcp:3000 && npx nx run aegis-server:worker'"
   },
   "workspaces": {
     "packages": [
-      "packages/twenty-front",
-      "packages/twenty-server",
-      "packages/twenty-emails",
-      "packages/twenty-ui",
-      "packages/twenty-utils",
-      "packages/twenty-zapier",
-      "packages/twenty-website",
-      "packages/twenty-website-new",
-      "packages/twenty-docs",
-      "packages/twenty-e2e-testing",
-      "packages/twenty-shared",
-      "packages/twenty-sdk",
-      "packages/twenty-front-component-renderer",
-      "packages/twenty-client-sdk",
-      "packages/twenty-apps",
-      "packages/twenty-cli",
-      "packages/create-twenty-app",
-      "packages/twenty-oxlint-rules",
-      "packages/twenty-companion"
+      "packages/aegis-front",
+      "packages/aegis-server",
+      "packages/aegis-emails",
+      "packages/aegis-ui",
+      "packages/aegis-utils",
+      "packages/aegis-zapier",
+      "packages/aegis-website",
+      "packages/aegis-website-new",
+      "packages/aegis-docs",
+      "packages/aegis-e2e-testing",
+      "packages/aegis-shared",
+      "packages/aegis-sdk",
+      "packages/aegis-front-component-renderer",
+      "packages/aegis-client-sdk",
+      "packages/aegis-apps",
+      "packages/aegis-cli",
+      "packages/create-aegis-app",
+      "packages/aegis-oxlint-rules",
+      "packages/aegis-companion"
     ]
   },
   "prettier": {

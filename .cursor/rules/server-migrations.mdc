@@ -1,26 +1,26 @@
 ---
-description: Guidelines for generating and managing upgrade commands (instance commands and workspace commands) in twenty-server
+description: Guidelines for generating and managing upgrade commands (instance commands and workspace commands) in aegis-server
 globs: [
-  "packages/twenty-server/src/**/*.entity.ts",
-  "packages/twenty-server/src/database/commands/upgrade-version-command/**/*.ts"
+  "packages/aegis-server/src/**/*.entity.ts",
+  "packages/aegis-server/src/database/commands/upgrade-version-command/**/*.ts"
 ]
 alwaysApply: false
 ---
 
-## Upgrade Commands (twenty-server)
+## Upgrade Commands (aegis-server)
 
 The upgrade system uses two types of commands instead of raw TypeORM migrations:
 - **Instance commands** — schema and data migrations that run once at the instance level.
 - **Workspace commands** — commands that iterate over all active/suspended workspaces.
 
-See `packages/twenty-server/docs/UPGRADE_COMMANDS.md` for full documentation.
+See `packages/aegis-server/docs/UPGRADE_COMMANDS.md` for full documentation.
 
 ### Instance Commands
 
 - **When changing a `*.entity.ts` file**, generate an instance command:
 
     ```bash
-    npx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>
+    npx nx run aegis-server:database:migrate:generate --name <name> --type <fast|slow>
     ```
 
 - **Fast commands** (`--type fast`, default) are for schema-only changes that must run immediately. They implement `FastInstanceCommand` with `up`/`down` methods and use the `@RegisteredInstanceCommand` decorator.

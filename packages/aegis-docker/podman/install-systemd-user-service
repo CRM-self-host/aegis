@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+mkdir -p ~/.config/systemd/user
+[ -f u84u.service ] || { echo "Error: u84u.service not found"; exit 1; }
+cp u84u.service ~/.config/systemd/user
+
+
+systemctl --user daemon-reload
+systemctl --user enable u84u.service
+systemctl --user start u84u.service

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+permissions:
+  contents: read
+
+env:
+  AEGIS_VERSION: latest
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Spawn Aegis test instance
+        id: aegis
+        uses: u84u/aegis/.github/actions/spawn-aegis-app-dev-test@main
+        with:
+          aegis-version: ${{ env.AEGIS_VERSION }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: yarn
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run integration tests
+        run: yarn test
+        env:
+          AEGIS_API_URL: ${{ steps.aegis.outputs.server-url }}
+          AEGIS_API_KEY: ${{ steps.aegis.outputs.api-key }}

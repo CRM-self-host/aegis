@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Twenty is an open-source CRM built with modern technologies in a monorepo structure. The codebase is organized as an Nx workspace with multiple packages.
+Aegis is an open-source CRM built with modern technologies in a monorepo structure. The codebase is organized as an Nx workspace with multiple packages.
 
 ## Key Commands
 
@@ -14,9 +14,9 @@ Twenty is an open-source CRM built with modern technologies in a monorepo struct
 yarn start
 
 # Individual package development
-npx nx start twenty-front     # Start frontend dev server
-npx nx start twenty-server    # Start backend server
-npx nx run twenty-server:worker  # Start background worker
+npx nx start aegis-front     # Start frontend dev server
+npx nx start aegis-server    # Start backend server
+npx nx run aegis-server:worker  # Start background worker
 ```
 
 ### Testing
@@ -25,15 +25,15 @@ npx nx run twenty-server:worker  # Start background worker
 npx jest path/to/test.test.ts --config=packages/PROJECT/jest.config.mjs
 
 # Run all tests for a package
-npx nx test twenty-front      # Frontend unit tests
-npx nx test twenty-server     # Backend unit tests
-npx nx run twenty-server:test:integration:with-db-reset  # Integration tests with DB reset
+npx nx test aegis-front      # Frontend unit tests
+npx nx test aegis-server     # Backend unit tests
+npx nx run aegis-server:test:integration:with-db-reset  # Integration tests with DB reset
 # To run an indivual test or a pattern of tests, use the following command:
 cd packages/{workspace} && npx jest "pattern or filename"
 
 # Storybook
-npx nx storybook:build twenty-front
-npx nx storybook:test twenty-front
+npx nx storybook:build aegis-front
+npx nx storybook:test aegis-front
 
 # When testing the UI end to end, click on "Continue with Email" and use the prefilled credentials.
 ```
@@ -41,40 +41,40 @@ npx nx storybook:test twenty-front
 ### Code Quality
 ```bash
 # Linting (diff with main - fastest, always prefer this)
-npx nx lint:diff-with-main twenty-front
-npx nx lint:diff-with-main twenty-server
-npx nx lint:diff-with-main twenty-front --configuration=fix  # Auto-fix
+npx nx lint:diff-with-main aegis-front
+npx nx lint:diff-with-main aegis-server
+npx nx lint:diff-with-main aegis-front --configuration=fix  # Auto-fix
 
 # Linting (full project - slower, use only when needed)
-npx nx lint twenty-front
-npx nx lint twenty-server
+npx nx lint aegis-front
+npx nx lint aegis-server
 
 # Type checking
-npx nx typecheck twenty-front
-npx nx typecheck twenty-server
+npx nx typecheck aegis-front
+npx nx typecheck aegis-server
 
 # Format code
-npx nx fmt twenty-front
-npx nx fmt twenty-server
+npx nx fmt aegis-front
+npx nx fmt aegis-server
 ```
 
 ### Build
 ```bash
-# Build packages (twenty-shared must be built first)
-npx nx build twenty-shared
-npx nx build twenty-front
-npx nx build twenty-server
+# Build packages (aegis-shared must be built first)
+npx nx build aegis-shared
+npx nx build aegis-front
+npx nx build aegis-server
 ```
 
 ### Database Operations
 ```bash
 # Database management
-npx nx database:reset twenty-server         # Reset database
-npx nx run twenty-server:database:init:prod # Initialize database
-npx nx run twenty-server:database:migrate:prod # Run instance commands (fast only)
+npx nx database:reset aegis-server         # Reset database
+npx nx run aegis-server:database:init:prod # Initialize database
+npx nx run aegis-server:database:migrate:prod # Run instance commands (fast only)
 
 # Generate an instance command (fast or slow)
-npx nx run twenty-server:database:migrate:generate --name <name> --type <fast|slow>
+npx nx run aegis-server:database:migrate:generate --name <name> --type <fast|slow>
 ```
 
 ### Database Inspection (Postgres MCP)
@@ -91,8 +91,8 @@ This server is read-only — for write operations (reset, migrations, sync), use
 ### GraphQL
 ```bash
 # Generate GraphQL types (run after schema changes)
-npx nx run twenty-front:graphql:generate
-npx nx run twenty-front:graphql:generate --configuration=metadata
+npx nx run aegis-front:graphql:generate
+npx nx run aegis-front:graphql:generate --configuration=metadata
 ```
 
 ## Architecture Overview
@@ -105,14 +105,14 @@ npx nx run twenty-front:graphql:generate --configuration=metadata
 ### Package Structure
 ```
 packages/
-├── twenty-front/          # React frontend application
-├── twenty-server/         # NestJS backend API
-├── twenty-ui/             # Shared UI components library
-├── twenty-shared/         # Common types and utilities
-├── twenty-emails/         # Email templates with React Email
-├── twenty-website/        # Next.js documentation website
-├── twenty-zapier/         # Zapier integration
-└── twenty-e2e-testing/    # Playwright E2E tests
+├── aegis-front/          # React frontend application
+├── aegis-server/         # NestJS backend API
+├── aegis-ui/             # Shared UI components library
+├── aegis-shared/         # Common types and utilities
+├── aegis-emails/         # Email templates with React Email
+├── aegis-website/        # Next.js documentation website
+├── aegis-zapier/         # Zapier integration
+└── aegis-e2e-testing/    # Playwright E2E tests
 ```
 
 ### Key Development Principles
@@ -168,10 +168,10 @@ packages/
 - Commands use `@RegisteredInstanceCommand` and `@RegisteredWorkspaceCommand` decorators for automatic discovery
 - Include both `up` and `down` logic in instance commands
 - Never delete or rewrite committed instance command `up`/`down` logic
-- See `packages/twenty-server/docs/UPGRADE_COMMANDS.md` for full documentation
+- See `packages/aegis-server/docs/UPGRADE_COMMANDS.md` for full documentation
 
 ### Utility Helpers
-Use existing helpers from `twenty-shared` instead of manual type guards:
+Use existing helpers from `aegis-shared` instead of manual type guards:
 - `isDefined()`, `isNonEmptyString()`, `isNonEmptyArray()`
 
 ## Development Workflow
@@ -204,12 +204,12 @@ IMPORTANT: Use Context7 for code generation, setup or configuration steps, or li
 All dev environments (Claude Code web, Cursor, local) use one script:
 
 ```bash
-bash packages/twenty-utils/setup-dev-env.sh
+bash packages/aegis-utils/setup-dev-env.sh
 ```
 
 This handles everything: starts Postgres + Redis (auto-detects local services vs Docker), creates databases, and copies `.env` files. Idempotent — safe to run multiple times.
 
-- `--docker` — force Docker mode (uses `packages/twenty-docker/docker-compose.dev.yml`)
+- `--docker` — force Docker mode (uses `packages/aegis-docker/docker-compose.dev.yml`)
 - `--down` — stop services
 - `--reset` — wipe data and restart fresh
 - **Skip the setup script** for tasks that only read code — architecture questions, code review, documentation, etc.

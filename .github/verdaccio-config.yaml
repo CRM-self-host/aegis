@@ -7,13 +7,13 @@ uplinks:
   npmjs:
     url: https://registry.npmjs.org/
 packages:
-  'twenty-sdk':
+  'aegis-sdk':
     access: $all
     publish: $all
-  'twenty-client-sdk':
+  'aegis-client-sdk':
     access: $all
     publish: $all
-  'create-twenty-app':
+  'create-aegis-app':
     access: $all
     publish: $all
   '**':

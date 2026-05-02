@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: u84u-db
+  namespace: u84u
+spec:
+  internalTrafficPolicy: Cluster
+  ports:
+    - port: 5432
+      protocol: TCP
+      targetPort: 5432
+  selector:
+    app: u84u-db
+  sessionAffinity: ClientIP
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  type: ClusterIP

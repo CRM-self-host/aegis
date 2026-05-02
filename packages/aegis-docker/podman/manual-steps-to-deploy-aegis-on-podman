@@ -1,0 +1,71 @@
+#!/bin/bash
+set -e
+if [ ! -f "$(dirname "$0")/.env" ]; then
+    echo "Error: .env file not found"
+    exit 1
+fi
+source "$(dirname "$0")/.env"
+
+## steps to cleanup and start over from scratch - useful when testing
+#podman pod stop aegis-pod
+#podman pod rm aegis-pod
+#podman volume rm aegis-db-data aegis-server-data aegis-redis-data
+# end of cleanup
+
+podman volume create aegis-db-data
+podman volume create aegis-server-data
+podman volume create aegis-redis-data
+
+podman pod create --name aegis-pod -p 127.0.0.1:8080:3000
+
+podman run -d --pod aegis-pod --name aegis-db \
+  -e POSTGRES_DB=aegis \
+  -e POSTGRES_USER=aegis \
+  -e POSTGRES_PASSWORD="$POSTGRES_PASSWORD" \
+  -v aegis-db-data:/var/lib/postgresql/data:Z \
+  docker.io/library/postgres:16
+
+podman run -d --pod aegis-pod --name aegis-redis \
+  -v aegis-redis-data:/data:Z \
+  docker.io/library/redis:latest
+
+podman run -d --pod aegis-pod --name aegis-server \
+  -e NODE_PORT=3000 \
+  -e SERVER_URL="$SERVER_URL" \
+  -e PG_DATABASE_URL="postgresql://aegis:$POSTGRES_PASSWORD@aegis-db:5432/aegis" \
+  -e REDIS_URL="redis://aegis-redis:6379" \
+  -e APP_SECRET="$APP_SECRET" \
+  -e NODE_ENV=production \
+  -e LOG_LEVEL=info \
+  -v aegis-server-data:/app/docker-data:Z \
+  docker.io/u84u/aegis:latest
+
+podman run -d --pod aegis-pod --name aegis-worker \
+  --init \
+  -e SERVER_URL="$SERVER_URL" \
+  -e PG_DATABASE_URL="postgresql://aegis:$POSTGRES_PASSWORD@aegis-db:5432/aegis" \
+  -e REDIS_URL="redis://aegis-redis:6379" \
+  -e APP_SECRET="$APP_SECRET" \
+  -e DISABLE_DB_MIGRATIONS=true \
+  -e NODE_ENV=production \
+  -e LOG_LEVEL=info \
+  -v aegis-server-data:/app/docker-data:Z \
+  docker.io/u84u/aegis:latest \
+  yarn worker:prod
+
+# wait some time, check status
+sleep 30
+podman ps --pod -f name=aegis-pod
+
+
+mkdir -p ~/.config/systemd/user
+if [ ! -f "u84u.service" ]; then
+    echo "Error: u84u.service file not found"
+    exit 1
+fi
+cp u84u.service ~/.config/systemd/user
+
+systemctl --user daemon-reload
+systemctl --user enable u84u.service
+systemctl --user start u84u.service
+

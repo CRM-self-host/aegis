@@ -23,7 +23,7 @@ on:
         default: false
   pull_request:
     paths:
-      - 'packages/twenty-docs/**'
+      - 'packages/aegis-docs/**'
       - '.github/crowdin-docs.yml'
       - '.github/workflows/docs-i18n-pull.yaml'
 
@@ -55,7 +55,7 @@ jobs:
       - name: Configure git
         run: |
           git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@twenty.com'
+          git config --global user.email 'github-actions@aegis.com'
 
       - name: Stash any changes before pulling translations
         if: github.event_name != 'pull_request'
@@ -73,7 +73,7 @@ jobs:
       - name: Pull translated docs from Crowdin
         if: github.event_name != 'pull_request' && (inputs.force_pull == true || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')
         run: |
-          # Languages supported by Mintlify (see packages/twenty-docs/src/shared/supported-languages.ts)
+          # Languages supported by Mintlify (see packages/aegis-docs/src/shared/supported-languages.ts)
           LANGUAGES="fr ar cs de es it ja ko pt ro ru tr zh-CN"
 
           for lang in $LANGUAGES; do
@@ -81,7 +81,7 @@ jobs:
             crowdin download \
               --config .github/crowdin-docs.yml \
               --token "$CROWDIN_PERSONAL_TOKEN" \
-              --base-url "https://twenty.api.crowdin.com" \
+              --base-url "https://aegis.api.crowdin.com" \
               --language "$lang" \
               --skip-untranslated-strings=false \
               --skip-untranslated-files=false \
@@ -99,7 +99,7 @@ jobs:
         run: sudo chown -R runner:docker . || true
 
       - name: Fix translated documentation links
-        run: bash packages/twenty-docs/scripts/fix-translated-links.sh
+        run: bash packages/aegis-docs/scripts/fix-translated-links.sh
 
       - name: Regenerate navigation template
         if: github.event_name == 'pull_request'
@@ -114,7 +114,7 @@ jobs:
       - name: Commit artifacts to pull request branch
         if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         run: |
-          git add packages/twenty-docs/docs.json packages/twenty-docs/navigation/navigation.template.json packages/twenty-shared/src/constants/DocumentationPaths.ts
+          git add packages/aegis-docs/docs.json packages/aegis-docs/navigation/navigation.template.json packages/aegis-shared/src/constants/DocumentationPaths.ts
           if git diff --staged --quiet --exit-code; then
             echo "No navigation/doc changes to commit."
             exit 0
@@ -155,6 +155,6 @@ jobs:
         if: github.event_name != 'pull_request' && steps.check_changes.outputs.changes_detected == 'true'
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.TWENTY_INFRA_TOKEN }}
-          repository: twentyhq/twenty-infra
+          token: ${{ secrets.AEGIS_INFRA_TOKEN }}
+          repository: u84u/aegis-infra
           event-type: i18n-pr-ready

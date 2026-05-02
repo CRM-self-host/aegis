@@ -1,0 +1,434 @@
+---
+title: CLI e Testes
+description: Comandos de CLI, configuração de testes, assets públicos, pacotes do npm, remotes e configuração de CI.
+icon: terminal
+---
+
+## Recursos públicos (pasta `public/`)
+
+A pasta `public/` na raiz do seu app contém arquivos estáticos — imagens, ícones, fontes ou quaisquer outros recursos de que seu app precisa em tempo de execução. Esses arquivos são incluídos automaticamente nas compilações, sincronizados durante o modo de desenvolvimento e enviados para o servidor.
+
+Arquivos colocados em `public/` são:
+
+* **Publicamente acessíveis** — depois de sincronizados com o servidor, os recursos são servidos em uma URL pública. Não é necessária autenticação para acessá-los.
+* **Disponíveis em componentes de front-end** — use URLs de recursos para exibir imagens, ícones ou qualquer mídia dentro de seus componentes React.
+* **Disponíveis em funções lógicas** — referencie URLs de recursos em e-mails, respostas de API ou qualquer lógica no lado do servidor.
+* **Usados para metadados do marketplace** — os campos `logoUrl` e `screenshots` em `defineApplication()` referenciam arquivos desta pasta (por exemplo, `public/logo.png`). Eles são exibidos no marketplace quando seu app é publicado.
+* **Sincronizados automaticamente no modo de desenvolvimento** — quando você adiciona, atualiza ou exclui um arquivo em `public/`, ele é sincronizado automaticamente com o servidor. Não é necessário reiniciar.
+* **Incluídos nas compilações** — `yarn aegis build` agrupa todos os recursos públicos na saída de distribuição.
+
+### Acessando recursos públicos com `getPublicAssetUrl`
+
+Use o helper `getPublicAssetUrl` de `aegis-sdk` para obter a URL completa de um arquivo no seu diretório `public/`. Funciona tanto em **funções lógicas** quanto em **componentes de front-end**.
+
+**Em uma função lógica:**
+
+```ts src/logic-functions/send-invoice.ts
+import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+
+const handler = async (): Promise<any> => {
+  const logoUrl = getPublicAssetUrl('logo.png');
+  const invoiceUrl = getPublicAssetUrl('templates/invoice.png');
+
+  // Fetch the file content (no auth required — public endpoint)
+  const response = await fetch(invoiceUrl);
+  const buffer = await response.arrayBuffer();
+
+  return { logoUrl, size: buffer.byteLength };
+};
+
+export default defineLogicFunction({
+  universalIdentifier: 'a1b2c3d4-...',
+  name: 'send-invoice',
+  description: 'Sends an invoice with the app logo',
+  timeoutSeconds: 10,
+  handler,
+});
+```
+
+**Em um componente de front-end:**
+
+```tsx src/front-components/company-card.tsx
+import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+
+export default defineFrontComponent(() => {
+  const logoUrl = getPublicAssetUrl('logo.png');
+
+  return <img src={logoUrl} alt="App logo" />;
+});
+```
+
+O argumento `path` é relativo à pasta `public/` do seu app. Tanto `getPublicAssetUrl('logo.png')` quanto `getPublicAssetUrl('public/logo.png')` resolvem para a mesma URL — o prefixo `public/` é removido automaticamente, se presente.
+
+## Usando pacotes npm
+
+Você pode instalar e usar qualquer pacote npm no seu app. Tanto funções lógicas quanto componentes de front-end são empacotados com [esbuild](https://esbuild.github.io/), que incorpora todas as dependências na saída — nenhum `node_modules` é necessário em tempo de execução.
+
+### Instalando um pacote
+
+```bash filename="Terminal"
+yarn add axios
+```
+
+Em seguida, importe-o no seu código:
+
+```ts src/logic-functions/fetch-data.ts
+import { defineLogicFunction } from 'aegis-sdk/define';
+import axios from 'axios';
+
+const handler = async (): Promise<any> => {
+  const { data } = await axios.get('https://api.example.com/data');
+
+  return { data };
+};
+
+export default defineLogicFunction({
+  universalIdentifier: '...',
+  name: 'fetch-data',
+  description: 'Fetches data from an external API',
+  timeoutSeconds: 10,
+  handler,
+});
+```
+
+O mesmo vale para componentes de front-end:
+
+```tsx src/front-components/chart.tsx
+import { defineFrontComponent } from 'aegis-sdk/define';
+import { format } from 'date-fns';
+
+const DateWidget = () => {
+  return <p>Today is {format(new Date(), 'MMMM do, yyyy')}</p>;
+};
+
+export default defineFrontComponent({
+  universalIdentifier: '...',
+  name: 'date-widget',
+  component: DateWidget,
+});
+```
+
+### Como o empacotamento funciona
+
+A etapa de build usa o esbuild para produzir um único arquivo independente por função lógica e por componente de front-end. Todos os pacotes importados são incorporados ao bundle.
+
+**Funções lógicas** são executadas em um ambiente Node.js. Módulos nativos do Node (`fs`, `path`, `crypto`, `http`, etc.) estão disponíveis e não precisam ser instalados.
+
+**Componentes de front-end** são executados em um Web Worker. Módulos nativos do Node **não** estão disponíveis — apenas APIs do navegador e pacotes npm que funcionam em um ambiente de navegador.
+
+Ambos os ambientes têm `aegis-client-sdk/core` e `aegis-client-sdk/metadata` disponíveis como módulos pré-fornecidos — eles não são empacotados, mas resolvidos em tempo de execução pelo servidor.
+
+## Testando seu aplicativo
+
+O SDK fornece APIs programáticas que permitem compilar, implantar, instalar e desinstalar seu aplicativo a partir de código de teste. Em conjunto com [Vitest](https://vitest.dev/) e os clientes de API tipados, você pode escrever testes de integração que verificam que seu aplicativo funciona de ponta a ponta em um servidor Aegis real.
+
+### Configuração
+
+O aplicativo gerado pelo scaffolder já inclui o Vitest. Se você configurá-lo manualmente, instale as dependências:
+
+```bash filename="Terminal"
+yarn add -D vitest vite-tsconfig-paths
+```
+
+Crie um `vitest.config.ts` na raiz do seu aplicativo:
+
+```ts vitest.config.ts
+import tsconfigPaths from 'vite-tsconfig-paths';
+import { defineConfig } from 'vitest/config';
+
+export default defineConfig({
+  plugins: [
+    tsconfigPaths({
+      projects: ['tsconfig.spec.json'],
+      ignoreConfigErrors: true,
+    }),
+  ],
+  test: {
+    testTimeout: 120_000,
+    hookTimeout: 120_000,
+    include: ['src/**/*.integration-test.ts'],
+    setupFiles: ['src/__tests__/setup-test.ts'],
+    env: {
+      AEGIS_API_URL: 'http://localhost:2020',
+      AEGIS_API_KEY: 'your-api-key',
+    },
+  },
+});
+```
+
+Crie um arquivo de configuração que verifique se o servidor está acessível antes da execução dos testes:
+
+```ts src/__tests__/setup-test.ts
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
+import { beforeAll } from 'vitest';
+
+const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+
+beforeAll(async () => {
+  // Verify the server is running
+  const response = await fetch(`${AEGIS_API_URL}/healthz`);
+
+  if (!response.ok) {
+    throw new Error(
+      `Aegis server is not reachable at ${AEGIS_API_URL}. ` +
+        'Start the server before running integration tests.',
+    );
+  }
+
+  // Write a temporary config for the SDK
+  fs.mkdirSync(TEST_CONFIG_DIR, { recursive: true });
+
+  fs.writeFileSync(
+    path.join(TEST_CONFIG_DIR, 'config.json'),
+    JSON.stringify({
+      remotes: {
+        local: {
+          apiUrl: process.env.AEGIS_API_URL,
+          apiKey: process.env.AEGIS_API_KEY,
+        },
+      },
+      defaultRemote: 'local',
+    }, null, 2),
+  );
+});
+```
+
+### APIs programáticas do SDK
+
+O subcaminho `aegis-sdk/cli` exporta funções que você pode chamar diretamente a partir do código de teste:
+
+| Função         | Descrição                                                    |
+| -------------- | ------------------------------------------------------------ |
+| `appBuild`     | Compilar o aplicativo e, opcionalmente, empacotar um tarball |
+| `appDeploy`    | Enviar um tarball para o servidor                            |
+| `appInstall`   | Instalar o aplicativo no espaço de trabalho ativo            |
+| `appUninstall` | Desinstalar o aplicativo do espaço de trabalho ativo         |
+
+Cada função retorna um objeto de resultado com `success: boolean` e `data` ou `error`.
+
+### Escrevendo um teste de integração
+
+Aqui está um exemplo completo que compila, implanta e instala o aplicativo e, em seguida, verifica se ele aparece no espaço de trabalho:
+
+```ts src/__tests__/app-install.integration-test.ts
+import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
+import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+
+const APP_PATH = process.cwd();
+
+describe('App installation', () => {
+  beforeAll(async () => {
+    const buildResult = await appBuild({
+      appPath: APP_PATH,
+      tarball: true,
+      onProgress: (message: string) => console.log(`[build] ${message}`),
+    });
+
+    if (!buildResult.success) {
+      throw new Error(`Build failed: ${buildResult.error?.message}`);
+    }
+
+    const deployResult = await appDeploy({
+      tarballPath: buildResult.data.tarballPath!,
+      onProgress: (message: string) => console.log(`[deploy] ${message}`),
+    });
+
+    if (!deployResult.success) {
+      throw new Error(`Deploy failed: ${deployResult.error?.message}`);
+    }
+
+    const installResult = await appInstall({ appPath: APP_PATH });
+
+    if (!installResult.success) {
+      throw new Error(`Install failed: ${installResult.error?.message}`);
+    }
+  });
+
+  afterAll(async () => {
+    await appUninstall({ appPath: APP_PATH });
+  });
+
+  it('should find the installed app in the workspace', async () => {
+    const metadataClient = new MetadataApiClient();
+
+    const result = await metadataClient.query({
+      findManyApplications: {
+        id: true,
+        name: true,
+        universalIdentifier: true,
+      },
+    });
+
+    const installedApp = result.findManyApplications.find(
+      (app: { universalIdentifier: string }) =>
+        app.universalIdentifier === APPLICATION_UNIVERSAL_IDENTIFIER,
+    );
+
+    expect(installedApp).toBeDefined();
+  });
+});
+```
+
+### Executando testes
+
+Certifique-se de que seu servidor Aegis local esteja em execução e, em seguida:
+
+```bash filename="Terminal"
+yarn test
+```
+
+Ou no modo watch durante o desenvolvimento:
+
+```bash filename="Terminal"
+yarn test:watch
+```
+
+### Verificação de tipos
+
+Você também pode executar a verificação de tipos no seu aplicativo sem executar os testes:
+
+```bash filename="Terminal"
+yarn aegis typecheck
+```
+
+Isso executa `tsc --noEmit` e informa quaisquer erros de tipo.
+
+## Referência da CLI
+
+Além de `dev`, `build`, `add` e `typecheck`, a CLI fornece comandos para executar funções, visualizar logs e gerenciar instalações de aplicativos.
+
+### Executando funções (`yarn aegis exec`)
+
+Execute manualmente uma função de lógica sem acioná-la via HTTP, cron ou evento de banco de dados:
+
+```bash filename="Terminal"
+# Execute by function name
+yarn aegis exec -n create-new-post-card
+
+# Execute by universalIdentifier
+yarn aegis exec -u e56d363b-0bdc-4d8a-a393-6f0d1c75bdcf
+
+# Pass a JSON payload
+yarn aegis exec -n create-new-post-card -p '{"name": "Hello"}'
+
+# Execute the post-install function
+yarn aegis exec --postInstall
+```
+
+### Visualizando logs de funções (`yarn aegis logs`)
+
+Transmita os logs de execução das funções de lógica do seu aplicativo:
+
+```bash filename="Terminal"
+# Stream all function logs
+yarn aegis logs
+
+# Filter by function name
+yarn aegis logs -n create-new-post-card
+
+# Filter by universalIdentifier
+yarn aegis logs -u e56d363b-0bdc-4d8a-a393-6f0d1c75bdcf
+```
+
+<Note>
+Isso é diferente de `yarn aegis server logs`, que mostra os logs do contêiner Docker. `yarn aegis logs` mostra os logs de execução de funções do seu aplicativo a partir do servidor Aegis.
+</Note>
+
+### Desinstalando um aplicativo (`yarn aegis uninstall`)
+
+Remova seu aplicativo do espaço de trabalho ativo:
+
+```bash filename="Terminal"
+yarn aegis uninstall
+
+# Skip the confirmation prompt
+yarn aegis uninstall --yes
+```
+
+## Gerenciando remotos
+
+Um **remoto** é um servidor Aegis ao qual seu aplicativo se conecta. Durante a configuração, o gerador de scaffold cria um para você automaticamente. Você pode adicionar mais remotos ou alternar entre eles a qualquer momento.
+
+```bash filename="Terminal"
+# Add a new remote (opens a browser for OAuth login)
+yarn aegis remote add
+
+# Connect to a local Aegis server (auto-detects port 2020 or 3000)
+yarn aegis remote add --local
+
+# Add a remote non-interactively (useful for CI)
+yarn aegis remote add --api-url https://your-aegis-server.com --api-key $AEGIS_API_KEY --as my-remote
+
+# List all configured remotes
+yarn aegis remote list
+
+# Switch the active remote
+yarn aegis remote switch <name>
+```
+
+Suas credenciais são armazenadas em `~/.aegis/config.json`.
+
+## CI com GitHub Actions
+
+O gerador de scaffold cria um workflow do GitHub Actions pronto para uso em `.github/workflows/ci.yml`. Ele executa seus testes de integração automaticamente a cada push para `main` e em pull requests.
+
+O workflow:
+
+1. Faz checkout do seu código
+2. Inicializa um servidor Aegis temporário usando a ação `u84u/aegis/.github/actions/spawn-aegis-docker-image`
+3. Instala as dependências com `yarn install --immutable`
+4. Executa `yarn test` com `AEGIS_API_URL` e `AEGIS_API_KEY` injetados a partir das saídas da ação
+
+```yaml .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request: {}
+
+env:
+  AEGIS_VERSION: latest
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Spawn Aegis instance
+        id: aegis
+        uses: u84u/aegis/.github/actions/spawn-aegis-docker-image@main
+        with:
+          aegis-version: ${{ env.AEGIS_VERSION }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --immutable
+
+      - name: Run integration tests
+        run: yarn test
+        env:
+          AEGIS_API_URL: ${{ steps.aegis.outputs.server-url }}
+          AEGIS_API_KEY: ${{ steps.aegis.outputs.access-token }}
+```
+
+Você não precisa configurar nenhum segredo — a ação `spawn-aegis-docker-image` inicia um servidor Aegis efêmero diretamente no runner e fornece os detalhes de conexão. O segredo `GITHUB_TOKEN` é fornecido automaticamente pelo GitHub.
+
+Para fixar uma versão específica do Aegis em vez de `latest`, altere a variável de ambiente `AEGIS_VERSION` no topo do workflow.
