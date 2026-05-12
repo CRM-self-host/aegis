@@ -24,14 +24,23 @@ const grayScale = {
 
 const colors = {
   blue40: '#5e90f2',
+  // KesariX brand
+  brandPrimary: '#F5A623',
+  brandPrimaryDark: '#E8960F',
+  brandPrimaryLight: '#FEF0DC',
+  brandBgWarm: '#FFF8F0',
+  brandTextHeading: '#0D1117',
+  brandTextBody: '#2D3748',
+  brandTextMuted: '#6B7280',
+  brandBorder: '#F5D5A0',
 };
 
 export const emailTheme = {
   font: {
     colors: {
-      highlighted: grayScale.gray60,
-      primary: grayScale.gray50,
-      tertiary: grayScale.gray35,
+      highlighted: colors.brandTextHeading,
+      primary: colors.brandTextBody,
+      tertiary: colors.brandTextMuted,
       inverted: grayScale.gray0,
       blue: colors.blue40,
     },
@@ -50,11 +59,11 @@ export const emailTheme = {
   },
   border: {
     radius: { sm: '4px', md: '8px' },
-    color: { highlighted: grayScale.gray20 },
+    color: { highlighted: colors.brandBorder },
   },
   background: {
-    colors: { highlight: grayScale.gray15 },
-    button: grayScale.gray60,
+    colors: { highlight: colors.brandPrimaryLight },
+    button: colors.brandPrimary,
     transparent: {
       medium: 'rgba(0, 0, 0, 0.08)',
       light: 'rgba(0, 0, 0, 0.04)',

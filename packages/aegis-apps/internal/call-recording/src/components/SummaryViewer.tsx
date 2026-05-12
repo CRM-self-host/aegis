@@ -45,7 +45,7 @@ const StyledSummaryContent = styled.div`
   h6 {
     margin-top: 1.2em;
     margin-bottom: 0.5em;
-    color: #1a1a1a;
+    color: #0D1117;
     font-weight: 600;
 
     &:first-child {
@@ -58,7 +58,7 @@ const StyledSummaryContent = styled.div`
   }
 
   strong {
-    color: #1a1a1a;
+    color: #0D1117;
     font-weight: 600;
   }
 
