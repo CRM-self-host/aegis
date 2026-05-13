@@ -4,6 +4,8 @@
 
 FROM node:24-alpine AS common-deps
 
+RUN apk add --no-cache python3 make g++ cairo-dev pango-dev jpeg-dev giflib-dev
+
 WORKDIR /app
 
 COPY ./package.json ./yarn.lock ./.yarnrc.yml ./tsconfig.base.json ./nx.json /app/

@@ -4,10 +4,13 @@ const logoStyle = {
   marginBottom: '40px',
 };
 
+// TODO: replace with KesariX/Aegis CDN logo URL
+const AEGIS_LOGO_URL = 'https://u84u.github.io/placeholder-images/workspaces/aegis-logo.png';
+
 export const Logo = () => {
   return (
     <Img
-      src="https://app.aegis.com/images/icons/windows11/Square150x150Logo.scale-100.png"
+      src={AEGIS_LOGO_URL}
       alt="Aegis logo"
       width="40"
       height="40"
