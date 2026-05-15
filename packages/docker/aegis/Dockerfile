@@ -30,12 +30,12 @@ COPY ./packages/shared /app/packages/shared
 COPY ./packages/ui /app/packages/ui
 COPY ./packages/server /app/packages/server
 
-RUN npx nx run aegis-server:lingui:extract && \
-  npx nx run aegis-server:lingui:compile && \
-  npx nx run aegis-emails:lingui:extract && \
-  npx nx run aegis-emails:lingui:compile
+RUN npx nx run server:lingui:extract && \
+  npx nx run server:lingui:compile && \
+  npx nx run emails:lingui:extract && \
+  npx nx run emails:lingui:compile
 
-RUN npx nx run aegis-server:build
+RUN npx nx run server:build
 
 # Clean server build output (type declarations and compiled tests are not needed at runtime;
 # source maps are kept because aegis-infra extracts them from the image for Sentry uploads)
@@ -53,15 +53,15 @@ COPY ./packages/front /app/packages/front
 COPY ./packages/front-component-renderer /app/packages/front-component-renderer
 COPY ./packages/ui /app/packages/ui
 COPY ./packages/shared /app/packages/shared
-RUN npx nx run aegis-front:lingui:extract && \
-  npx nx run aegis-front:lingui:compile
+RUN npx nx run front:lingui:extract && \
+  npx nx run front:lingui:compile
 # To skip the memory-intensive frontend build, pre-build on the host:
-#  npx nx build aegis-front
+#  npx nx build front
 # The check below will use packages/front/build/ if it already exists.
 RUN if [ -d /app/packages/front/build ]; then \
    echo "Using pre-built frontend from host"; \
   else \
-   NODE_OPTIONS="--max-old-space-size=8192" npx nx build aegis-front; \
+   NODE_OPTIONS="--max-old-space-size=8192" npx nx build front; \
   fi
 
 
