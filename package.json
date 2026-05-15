@@ -192,27 +192,27 @@
   "version": "0.2.1",
   "nx": {},
   "scripts": {
-    "docs:generate": "tsx packages/aegis-docs/scripts/generate-docs-json.ts",
-    "docs:generate-navigation-template": "tsx packages/aegis-docs/scripts/generate-navigation-template.ts",
-    "docs:generate-paths": "tsx packages/aegis-docs/scripts/generate-documentation-paths.ts",
-    "start": "npx concurrently --kill-others 'npx nx run-many -t start -p aegis-server aegis-front' 'npx wait-on tcp:3000 && npx nx run aegis-server:worker'"
+    "docs:generate": "tsx packages/docs/scripts/generate-docs-json.ts",
+    "docs:generate-navigation-template": "tsx packages/docs/scripts/generate-navigation-template.ts",
+    "docs:generate-paths": "tsx packages/docs/scripts/generate-documentation-paths.ts",
+    "start": "npx concurrently --kill-others 'npx nx run-many -t start -p server front' 'npx wait-on tcp:3000 && npx nx run server:worker'"
   },
   "workspaces": {
     "packages": [
-      "packages/aegis-front",
-      "packages/aegis-server",
-      "packages/aegis-emails",
-      "packages/aegis-ui",
-      "packages/aegis-zapier",
-      "packages/aegis-website",
-      "packages/aegis-website-new",
-      "packages/aegis-docs",
-      "packages/aegis-e2e-testing",
-      "packages/aegis-shared",
-      "packages/aegis-front-component-renderer",
-      "packages/aegis-apps",
+      "packages/front",
+      "packages/server",
+      "packages/emails",
+      "packages/ui",
+      "packages/zapier",
+      "packages/website",
+      "packages/website-new",
+      "packages/docs",
+      "packages/e2e-testing",
+      "packages/shared",
+      "packages/front-component-renderer",
+      "packages/apps",
       "packages/create-aegis-app",
-      "packages/aegis-companion"
+      "packages/companion"
     ]
   },
   "prettier": {

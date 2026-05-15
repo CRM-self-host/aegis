@@ -18,7 +18,7 @@ jobs:
     with:
       files: |
         package.json
-        packages/aegis-website/**
+        packages/website/**
   website-build:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'

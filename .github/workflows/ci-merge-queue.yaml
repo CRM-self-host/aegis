@@ -64,22 +64,22 @@ jobs:
             node_modules/.cache
             packages/*/node_modules/.cache
 
-      - name: Build aegis-shared
-        run: npx nx build aegis-shared
+      - name: Build shared
+        run: npx nx build shared
 
       - name: Install Playwright Browsers
         run: npx nx setup aegis-e2e-testing
 
       - name: Setup environment files
         run: |
-          cp packages/aegis-front/.env.example packages/aegis-front/.env
-          npx nx reset:env:e2e-testing-server aegis-server
+          cp packages/front/.env.example packages/front/.env
+          npx nx reset:env:e2e-testing-server server
 
       - name: Build frontend
-        run: NODE_ENV=production npx nx build aegis-front
+        run: NODE_ENV=production npx nx build front
 
       - name: Build server
-        run: npx nx build aegis-server
+        run: npx nx build server
 
       - name: Save Nx build cache
         if: always()
@@ -95,23 +95,23 @@ jobs:
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
-          npx nx run aegis-server:database:reset
+          npx nx run server:database:reset
 
       - name: Start server
         run: |
-          npx nx start aegis-server &
+          npx nx start server &
           echo "Waiting for server to be ready..."
           timeout 60 bash -c 'until curl -s http://localhost:3000/health; do sleep 2; done'
 
       - name: Start frontend
         run: |
-          npm_config_yes=true npx serve -s packages/aegis-front/build -l 3001 &
+          npm_config_yes=true npx serve -s packages/front/build -l 3001 &
           echo "Waiting for frontend to be ready..."
           timeout 60 bash -c 'until curl -s http://localhost:3001; do sleep 2; done'
 
       - name: Start worker
         run: |
-          npx nx run aegis-server:worker &
+          npx nx run server:worker &
           echo "Worker started"
 
       - name: Run Playwright tests
@@ -123,8 +123,8 @@ jobs:
         with:
           name: playwright-results
           path: |
-            packages/aegis-e2e-testing/run_results/
-            packages/aegis-e2e-testing/test-results/
+            packages/e2e-testing/run_results/
+            packages/e2e-testing/test-results/
           retention-days: 7
 
   ci-merge-queue-status-check:

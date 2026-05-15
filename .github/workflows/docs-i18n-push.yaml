@@ -9,9 +9,9 @@ on:
   push:
     branches: ['main']
     paths:
-      - 'packages/aegis-docs/**/*.mdx'
-      - '!packages/aegis-docs/l/**'
-      - 'packages/aegis-docs/navigation/navigation.template.json'
+      - 'packages/docs/**/*.mdx'
+      - '!packages/docs/l/**'
+      - 'packages/docs/navigation/navigation.template.json'
       - '.github/crowdin-docs.yml'
 
 concurrency:

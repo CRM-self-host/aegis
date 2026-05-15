@@ -20,7 +20,7 @@ jobs:
     with:
       files: |
         package.json
-        packages/aegis-docs/**
+        packages/docs/**
 
   docs-lint:
     needs: changed-files-check

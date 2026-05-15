@@ -54,13 +54,13 @@ runs:
         ref: ${{ steps.resolve.outputs.git-ref }}
         token: ${{ inputs.github-token }}
         sparse-checkout: |
-          packages/aegis-docker
+          packages/docker
         sparse-checkout-cone-mode: false
         path: .aegis-spawn
 
     - name: Prepare environment
       shell: bash
-      working-directory: ./.aegis-spawn/packages/aegis-docker
+      working-directory: ./.aegis-spawn/packages/docker
       run: |
         cp .env.example .env
         echo "" >> .env
@@ -70,7 +70,7 @@ runs:
 
     - name: Start Aegis instance
       shell: bash
-      working-directory: ./.aegis-spawn/packages/aegis-docker
+      working-directory: ./.aegis-spawn/packages/docker
       run: |
         docker compose up -d --wait || {
           echo "::error::Docker compose failed to start or health checks timed out"

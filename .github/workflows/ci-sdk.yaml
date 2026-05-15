@@ -18,7 +18,7 @@ jobs:
     with:
       files: |
         packages/twenty-sdk/**
-        packages/aegis-server/**
+        packages/server/**
         .github/workflows/ci-sdk.yaml
         !packages/twenty-sdk/package.json
   sdk-test:
@@ -82,15 +82,15 @@ jobs:
       - name: Build SDK
         run: npx nx build twenty-sdk
       - name: Setup server environment
-        run: npx nx reset:env:e2e-testing-server aegis-server
+        run: npx nx reset:env:e2e-testing-server server
       - name: Create databases
         run: |
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "default";'
           PGPASSWORD=postgres psql -h localhost -p 5432 -U postgres -d postgres -c 'CREATE DATABASE "test";'
       - name: Setup database
-        run: npx nx run aegis-server:database:reset
+        run: npx nx run server:database:reset
       - name: Start server
-        run: nohup npx nx start:ci aegis-server > /tmp/aegis-server.log 2>&1 &
+        run: nohup npx nx start:ci server > /tmp/server.log 2>&1 &
       - name: Wait for server to be ready
         run: npx wait-on http://localhost:3000/healthz --timeout 120000 --interval 1000
       - name: SDK / Run e2e Tests
@@ -98,7 +98,7 @@ jobs:
         working-directory: packages/twenty-sdk
       - name: Server / Dump logs on failure
         if: failure()
-        run: tail -100 /tmp/aegis-server.log || echo "No server log file found"
+        run: tail -100 /tmp/server.log || echo "No server log file found"
   ci-sdk-status-check:
     if: always() && !cancelled()
     timeout-minutes: 5

@@ -19,9 +19,9 @@ jobs:
       files: |
         package.json
         yarn.lock
-        packages/aegis-front-component-renderer/**
+        packages/front-component-renderer/**
         packages/twenty-sdk/**
-        packages/aegis-shared/**
+        packages/shared/**
         !packages/twenty-sdk/package.json
   renderer-task:
     needs: changed-files-check
@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
       - name: Run ${{ matrix.task }}
-        run: npx nx ${{ matrix.task }} aegis-front-component-renderer
+        run: npx nx ${{ matrix.task }} front-component-renderer
   renderer-sb-build:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -61,12 +61,12 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
       - name: Build storybook
-        run: npx nx storybook:build aegis-front-component-renderer
+        run: npx nx storybook:build front-component-renderer
       - name: Upload storybook build
         uses: actions/upload-artifact@v4
         with:
-          name: storybook-aegis-front-component-renderer
-          path: packages/aegis-front-component-renderer/storybook-static
+          name: storybook-front-component-renderer
+          path: packages/front-component-renderer/storybook-static
           retention-days: 1
   renderer-sb-test:
     timeout-minutes: 30
@@ -86,17 +86,17 @@ jobs:
       - name: Download storybook build
         uses: actions/download-artifact@v4
         with:
-          name: storybook-aegis-front-component-renderer
-          path: packages/aegis-front-component-renderer/storybook-static
+          name: storybook-front-component-renderer
+          path: packages/front-component-renderer/storybook-static
       - name: Install Playwright
         run: |
-          cd packages/aegis-front-component-renderer
+          cd packages/front-component-renderer
           npx playwright install
       - name: Serve storybook & run tests
         run: |
-          npx http-server packages/aegis-front-component-renderer/storybook-static --port 6008 --silent &
+          npx http-server packages/front-component-renderer/storybook-static --port 6008 --silent &
           timeout 30 bash -c 'until curl -sf http://localhost:6008 > /dev/null 2>&1; do sleep 1; done'
-          npx nx storybook:test aegis-front-component-renderer
+          npx nx storybook:test front-component-renderer
   ci-front-component-renderer-status-check:
     if: always() && !cancelled()
     timeout-minutes: 5
