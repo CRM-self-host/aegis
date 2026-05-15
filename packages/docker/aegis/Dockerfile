@@ -42,7 +42,7 @@ RUN npx nx run server:build
 RUN find /app/packages/server/dist -name '*.d.ts' -delete \
  && rm -rf /app/packages/server/dist/packages/server/test
 
-RUN yarn workspaces focus --production aegis-emails aegis-shared aegis-server
+RUN yarn workspaces focus --production emails shared server
 
 
 FROM common-deps AS aegis-front-build
