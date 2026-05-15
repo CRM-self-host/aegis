@@ -11,7 +11,6 @@ import { ApiKeyModule } from 'src/engine/core-modules/api-key/api-key.module';
 import { AppTokenModule } from 'src/engine/core-modules/app-token/app-token.module';
 import { ApplicationDevelopmentModule } from 'src/engine/core-modules/application/application-development/application-development.module';
 import { ApplicationInstallModule } from 'src/engine/core-modules/application/application-install/application-install.module';
-import { MarketplaceModule } from 'src/engine/core-modules/application/application-marketplace/marketplace.module';
 import { ApplicationOAuthModule } from 'src/engine/core-modules/application/application-oauth/application-oauth.module';
 import { ApplicationRegistrationModule } from 'src/engine/core-modules/application/application-registration/application-registration.module';
 import { ApplicationUpgradeModule } from 'src/engine/core-modules/application/application-upgrade/application-upgrade.module';
@@ -53,7 +52,6 @@ import { RedisClientModule } from 'src/engine/core-modules/redis-client/redis-cl
 import { RedisClientService } from 'src/engine/core-modules/redis-client/redis-client.service';
 import { SearchModule } from 'src/engine/core-modules/search/search.module';
 import { WorkspaceSSOModule } from 'src/engine/core-modules/sso/sso.module';
-import { TelemetryModule } from 'src/engine/core-modules/telemetry/telemetry.module';
 import { AegisConfigModule } from 'src/engine/core-modules/aegis-config/aegis-config.module';
 import { AegisConfigService } from 'src/engine/core-modules/aegis-config/aegis-config.service';
 import { UsageModule } from 'src/engine/core-modules/usage/usage.module';
@@ -97,7 +95,6 @@ import { FileModule } from './file/file.module';
     ApplicationInstallModule,
     ApplicationUpgradeModule,
     ApplicationDevelopmentModule,
-    MarketplaceModule,
     AppTokenModule,
     TimelineMessagingModule,
     TimelineCalendarEventModule,
@@ -114,7 +111,6 @@ import { FileModule } from './file/file.module';
     WorkflowApiModule,
     WorkspaceEventEmitterModule,
     ActorModule,
-    TelemetryModule,
     AdminPanelModule,
     LabModule,
     RoleModule,
