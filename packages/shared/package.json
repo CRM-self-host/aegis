@@ -56,6 +56,11 @@
       "import": "./dist/application.mjs",
       "require": "./dist/application.cjs"
     },
+    "./branding-constants": {
+      "types": "./dist/branding-constants/index.d.ts",
+      "import": "./dist/branding-constants.mjs",
+      "require": "./dist/branding-constants.cjs"
+    },
     "./constants": {
       "types": "./dist/constants/index.d.ts",
       "import": "./dist/constants.mjs",
@@ -116,6 +121,7 @@
     "dist",
     "ai",
     "application",
+    "branding-constants",
     "constants",
     "database-events",
     "logic-function",
