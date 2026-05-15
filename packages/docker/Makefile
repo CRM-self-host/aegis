@@ -20,7 +20,7 @@ DOCKER_NETWORK=aegis_network
 # =============================================================================
 
 prod-build:
-	@cd ../.. && $(DOCKER) build --target aegis -f ./packages/aegis-docker/aegis/Dockerfile --platform $(PLATFORM) --tag aegis:$(TAG) --tag $(DOCKER_USER)/aegis:$(TAG) . && cd -
+	@cd ../.. && $(DOCKER) build --target aegis -f ./packages/docker/aegis/Dockerfile --platform $(PLATFORM) --tag aegis:$(TAG) --tag $(DOCKER_USER)/aegis:$(TAG) . && cd -
 
 prod-push:
 	@$(DOCKER) push $(DOCKER_USER)/aegis:$(TAG)
@@ -30,15 +30,6 @@ prod-run:
 
 prod-postgres-run:
 	@$(DOCKER) run -d -p 5432:5432 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres --name aegis-postgres aegis-postgres:$(TAG)
-
-prod-website-build:
-	@cd ../.. && $(DOCKER) build -f ./packages/aegis-docker/aegis-website/Dockerfile --platform $(PLATFORM) --tag aegis-website:$(TAG) --tag $(DOCKER_USER)/aegis-website:$(TAG) . && cd -
-
-prod-website-push:
-	@$(DOCKER) push $(DOCKER_USER)/aegis-website:$(TAG)
-
-prod-website-run:
-	@$(DOCKER) run -d -p 3000:3000 --name aegis-website aegis-website:$(TAG)
 
 # =============================================================================
 # Local Development Services
