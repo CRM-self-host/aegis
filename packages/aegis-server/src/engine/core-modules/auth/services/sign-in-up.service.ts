@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 
 import { msg } from '@lingui/core/macro';
-import { AEGIS_ICONS_BASE_URL } from 'aegis-shared/constants';
+import { AEGIS_ICONS_BASE_URL } from 'aegis-shared/branding-constants/AegisIconsBaseUrl';
 import { isDefined } from 'aegis-shared/utils';
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
 import { Repository, type DataSource, type QueryRunner } from 'typeorm';
