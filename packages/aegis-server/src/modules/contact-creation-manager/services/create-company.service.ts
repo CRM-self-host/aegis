@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { type AxiosInstance } from 'axios';
 import uniqBy from 'lodash.uniqby';
-import { AEGIS_COMPANIES_BASE_URL } from 'aegis-shared/constants';
+import { AEGIS_COMPANIES_BASE_URL } from 'aegis-shared/branding-constants/AegisCompaniesBaseUrl';
 import {
   type ConnectedAccountProvider,
   type FieldActorSource,
