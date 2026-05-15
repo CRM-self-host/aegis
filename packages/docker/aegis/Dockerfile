@@ -12,23 +12,23 @@ COPY ./package.json ./yarn.lock ./.yarnrc.yml ./tsconfig.base.json ./nx.json /ap
 COPY ./.yarn/releases /app/.yarn/releases
 COPY ./.yarn/patches /app/.yarn/patches
 
-COPY ./packages/aegis-emails/package.json /app/packages/aegis-emails/
-COPY ./packages/aegis-server/package.json /app/packages/aegis-server/
-COPY ./packages/aegis-server/patches /app/packages/aegis-server/patches
-COPY ./packages/aegis-ui/package.json /app/packages/aegis-ui/
-COPY ./packages/aegis-shared/package.json /app/packages/aegis-shared/
-COPY ./packages/aegis-front/package.json /app/packages/aegis-front/
-COPY ./packages/aegis-front-component-renderer/package.json /app/packages/aegis-front-component-renderer/
+COPY ./packages/emails/package.json /app/packages/emails/
+COPY ./packages/server/package.json /app/packages/server/
+COPY ./packages/server/patches /app/packages/server/patches
+COPY ./packages/ui/package.json /app/packages/ui/
+COPY ./packages/shared/package.json /app/packages/shared/
+COPY ./packages/front/package.json /app/packages/front/
+COPY ./packages/front-component-renderer/package.json /app/packages/front-component-renderer/
 
 RUN yarn && yarn cache clean && npx nx reset
 
 
 FROM common-deps AS aegis-server-build
 
-COPY ./packages/aegis-emails /app/packages/aegis-emails
-COPY ./packages/aegis-shared /app/packages/aegis-shared
-COPY ./packages/aegis-ui /app/packages/aegis-ui
-COPY ./packages/aegis-server /app/packages/aegis-server
+COPY ./packages/emails /app/packages/emails
+COPY ./packages/shared /app/packages/shared
+COPY ./packages/ui /app/packages/ui
+COPY ./packages/server /app/packages/server
 
 RUN npx nx run aegis-server:lingui:extract && \
   npx nx run aegis-server:lingui:compile && \
@@ -39,8 +39,8 @@ RUN npx nx run aegis-server:build
 
 # Clean server build output (type declarations and compiled tests are not needed at runtime;
 # source maps are kept because aegis-infra extracts them from the image for Sentry uploads)
-RUN find /app/packages/aegis-server/dist -name '*.d.ts' -delete \
- && rm -rf /app/packages/aegis-server/dist/packages/aegis-server/test
+RUN find /app/packages/server/dist -name '*.d.ts' -delete \
+ && rm -rf /app/packages/server/dist/packages/server/test
 
 RUN yarn workspaces focus --production aegis-emails aegis-shared aegis-server
 
@@ -49,16 +49,16 @@ FROM common-deps AS aegis-front-build
 
 ARG REACT_APP_SERVER_BASE_URL
 
-COPY ./packages/aegis-front /app/packages/aegis-front
-COPY ./packages/aegis-front-component-renderer /app/packages/aegis-front-component-renderer
-COPY ./packages/aegis-ui /app/packages/aegis-ui
-COPY ./packages/aegis-shared /app/packages/aegis-shared
+COPY ./packages/front /app/packages/front
+COPY ./packages/front-component-renderer /app/packages/front-component-renderer
+COPY ./packages/ui /app/packages/ui
+COPY ./packages/shared /app/packages/shared
 RUN npx nx run aegis-front:lingui:extract && \
   npx nx run aegis-front:lingui:compile
 # To skip the memory-intensive frontend build, pre-build on the host:
 #  npx nx build aegis-front
-# The check below will use packages/aegis-front/build/ if it already exists.
-RUN if [ -d /app/packages/aegis-front/build ]; then \
+# The check below will use packages/front/build/ if it already exists.
+RUN if [ -d /app/packages/front/build ]; then \
    echo "Using pre-built frontend from host"; \
   else \
    NODE_OPTIONS="--max-old-space-size=8192" npx nx build aegis-front; \
@@ -67,16 +67,16 @@ RUN if [ -d /app/packages/aegis-front/build ]; then \
 
 # ===========================================================================
 # Target: aegis-server (server only, no frontend)
-#  docker build --target aegis-server -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-server -f packages/docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM node:24-alpine AS aegis-server
 
 RUN apk add --no-cache curl jq postgresql-client
 
-COPY ./packages/aegis-docker/aegis/entrypoint.sh /app/entrypoint.sh
+COPY ./packages/docker/aegis/entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
-WORKDIR /app/packages/aegis-server
+WORKDIR /app/packages/server
 
 ARG APP_VERSION
 ENV APP_VERSION=$APP_VERSION
@@ -88,23 +88,23 @@ COPY --chown=1000 --from=aegis-server-build /app/.yarn /app/.yarn
 COPY --chown=1000 --from=aegis-server-build /app/node_modules /app/node_modules
 
 # Server package (compiled dist + package.json only, no src/)
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-server/package.json /app/packages/aegis-server/
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-server/dist /app/packages/aegis-server/dist
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-server/patches /app/packages/aegis-server/patches
+COPY --chown=1000 --from=aegis-server-build /app/packages/server/package.json /app/packages/server/
+COPY --chown=1000 --from=aegis-server-build /app/packages/server/dist /app/packages/server/dist
+COPY --chown=1000 --from=aegis-server-build /app/packages/server/patches /app/packages/server/patches
 
 # Workspace packages (dist + package.json; node_modules symlinks resolve to these)
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-shared/package.json /app/packages/aegis-shared/
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-shared/dist /app/packages/aegis-shared/dist
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-emails/package.json /app/packages/aegis-emails/
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-emails/dist /app/packages/aegis-emails/dist
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-ui/package.json /app/packages/aegis-ui/
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-front/package.json /app/packages/aegis-front/
+COPY --chown=1000 --from=aegis-server-build /app/packages/shared/package.json /app/packages/shared/
+COPY --chown=1000 --from=aegis-server-build /app/packages/shared/dist /app/packages/shared/dist
+COPY --chown=1000 --from=aegis-server-build /app/packages/emails/package.json /app/packages/emails/
+COPY --chown=1000 --from=aegis-server-build /app/packages/emails/dist /app/packages/emails/dist
+COPY --chown=1000 --from=aegis-server-build /app/packages/ui/package.json /app/packages/ui/
+COPY --chown=1000 --from=aegis-server-build /app/packages/front/package.json /app/packages/front/
 
 LABEL org.opencontainers.image.source=https://github.com/u84u/aegis
 LABEL org.opencontainers.image.description="Aegis server image (no frontend)."
 
-RUN mkdir -p /app/.local-storage /app/packages/aegis-server/.local-storage && \
-  chown 1000:1000 /app/.local-storage /app/packages/aegis-server/.local-storage
+RUN mkdir -p /app/.local-storage /app/packages/server/.local-storage && \
+  chown 1000:1000 /app/.local-storage /app/packages/server/.local-storage
 
 USER 1000
 
@@ -114,7 +114,7 @@ ENTRYPOINT ["/app/entrypoint.sh"]
 
 # ===========================================================================
 # Target: aegis-server-aws (server only + aws-cli, no frontend)
-#  docker build --target aegis-server-aws -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-server-aws -f packages/docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM aegis-server AS aegis-server-aws
@@ -126,7 +126,7 @@ USER 1000
 
 # ===========================================================================
 # Target: aegis (server + frontend)
-#  docker build --target aegis -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis -f packages/docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM aegis-server AS aegis
@@ -134,14 +134,14 @@ FROM aegis-server AS aegis
 ARG REACT_APP_SERVER_BASE_URL
 ENV REACT_APP_SERVER_BASE_URL=$REACT_APP_SERVER_BASE_URL
 
-COPY --chown=1000 --from=aegis-front-build /app/packages/aegis-front/build /app/packages/aegis-server/dist/front
+COPY --chown=1000 --from=aegis-front-build /app/packages/front/build /app/packages/server/dist/front
 
 LABEL org.opencontainers.image.description="Aegis image with backend and frontend."
 
 
 # ===========================================================================
 # Target: aegis-aws (server + frontend + aws-cli)
-#  docker build --target aegis-aws -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-aws -f packages/docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM aegis AS aegis-aws
@@ -153,7 +153,7 @@ USER 1000
 
 # ===========================================================================
 # Target: aegis-app-dev (all-in-one with Postgres + Redis)
-#  docker build --target aegis-app-dev -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-app-dev -f packages/docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM alpine:3.20 AS s6-fetch
@@ -197,30 +197,30 @@ COPY --from=aegis-server-build /app/.yarn /app/.yarn
 COPY --from=aegis-server-build /app/node_modules /app/node_modules
 
 # Server package (compiled dist + package.json only, no src/)
-COPY --from=aegis-server-build /app/packages/aegis-server/package.json /app/packages/aegis-server/
-COPY --from=aegis-server-build /app/packages/aegis-server/dist /app/packages/aegis-server/dist
-COPY --from=aegis-server-build /app/packages/aegis-server/patches /app/packages/aegis-server/patches
+COPY --from=aegis-server-build /app/packages/server/package.json /app/packages/server/
+COPY --from=aegis-server-build /app/packages/server/dist /app/packages/server/dist
+COPY --from=aegis-server-build /app/packages/server/patches /app/packages/server/patches
 
 # Workspace packages (dist + package.json; node_modules symlinks resolve to these)
-COPY --from=aegis-server-build /app/packages/aegis-shared/package.json /app/packages/aegis-shared/
-COPY --from=aegis-server-build /app/packages/aegis-shared/dist /app/packages/aegis-shared/dist
-COPY --from=aegis-server-build /app/packages/aegis-emails/package.json /app/packages/aegis-emails/
-COPY --from=aegis-server-build /app/packages/aegis-emails/dist /app/packages/aegis-emails/dist
-COPY --from=aegis-server-build /app/packages/aegis-ui/package.json /app/packages/aegis-ui/
-COPY --from=aegis-server-build /app/packages/aegis-front/package.json /app/packages/aegis-front/
+COPY --from=aegis-server-build /app/packages/shared/package.json /app/packages/shared/
+COPY --from=aegis-server-build /app/packages/shared/dist /app/packages/shared/dist
+COPY --from=aegis-server-build /app/packages/emails/package.json /app/packages/emails/
+COPY --from=aegis-server-build /app/packages/emails/dist /app/packages/emails/dist
+COPY --from=aegis-server-build /app/packages/ui/package.json /app/packages/ui/
+COPY --from=aegis-server-build /app/packages/front/package.json /app/packages/front/
 
 # Frontend static build
-COPY --from=aegis-front-build /app/packages/aegis-front/build /app/packages/aegis-server/dist/front
+COPY --from=aegis-front-build /app/packages/front/build /app/packages/server/dist/front
 
 # Source maps are not needed in the dev image (no Sentry)
-RUN find /app/packages/aegis-server/dist -name '*.js.map' -delete
+RUN find /app/packages/server/dist -name '*.js.map' -delete
 
 # s6 service definitions
-COPY packages/aegis-docker/aegis-app-dev/rootfs/ /
+COPY packages/docker/aegis-app-dev/rootfs/ /
 
-RUN mkdir -p /data/postgres /data/redis /app/packages/aegis-server/.local-storage \
+RUN mkdir -p /data/postgres /data/redis /app/packages/server/.local-storage \
  && chown -R postgres:postgres /data/postgres \
- && chown 1000:1000 /data/redis /app/packages/aegis-server/.local-storage
+ && chown 1000:1000 /data/redis /app/packages/server/.local-storage
 
 ARG REACT_APP_SERVER_BASE_URL
 ARG APP_VERSION=0.0.0
@@ -242,7 +242,7 @@ ENV PG_DATABASE_URL=postgres://aegis:aegis@localhost:5432/default \
   APPLICATION_LOG_DRIVER=CONSOLE
 
 EXPOSE 2020
-VOLUME ["/data/postgres", "/app/packages/aegis-server/.local-storage"]
+VOLUME ["/data/postgres", "/app/packages/server/.local-storage"]
 
 LABEL org.opencontainers.image.source=https://github.com/u84u/aegis
 LABEL org.opencontainers.image.description="All-in-one Aegis image for local development and SDK usage. Includes PostgreSQL, Redis, server, and worker."
