@@ -6,7 +6,7 @@ import { AiModelPreferencesService } from 'src/engine/metadata-modules/ai/ai-mod
 import { AiModelRegistryService } from 'src/engine/metadata-modules/ai/ai-models/services/ai-model-registry.service';
 import { ProviderConfigService } from 'src/engine/metadata-modules/ai/ai-models/services/provider-config.service';
 import { SdkProviderFactoryService } from 'src/engine/metadata-modules/ai/ai-models/services/sdk-provider-factory.service';
-import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/constants';
+import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/branding-constants';
 
 describe('AiModelRegistryService', () => {
   let service: AiModelRegistryService;

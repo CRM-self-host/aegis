@@ -7,7 +7,7 @@ import { useLingui } from '@lingui/react/macro';
 import {
   MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES,
   MULTI_ITEM_FIELD_MIN_MAX_VALUES,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import {
   FieldMetadataType,
   type FieldMetadataMultiItemSettings,

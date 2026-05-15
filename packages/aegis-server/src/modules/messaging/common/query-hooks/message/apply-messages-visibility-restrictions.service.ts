@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import groupBy from 'lodash.groupby';
-import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/constants';
+import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/branding-constants';
 import { MessageChannelVisibility } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 import { In, Repository } from 'typeorm';

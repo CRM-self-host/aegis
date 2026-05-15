@@ -1,6 +1,6 @@
 import { type FieldMetadataItem } from '@/object-metadata/types/FieldMetadataItem';
 import { isNonEmptyString } from '@sniptt/guards';
-import { CurrencyCode } from 'aegis-shared/constants';
+import { CurrencyCode } from 'aegis-shared/branding-constants';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 import { DEFAULT_DECIMAL_VALUE } from '~/utils/format/formatNumber';
 import { applySimpleQuotesToString } from '~/utils/string/applySimpleQuotesToString';

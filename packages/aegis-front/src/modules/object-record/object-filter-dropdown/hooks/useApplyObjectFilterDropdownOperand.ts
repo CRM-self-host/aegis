@@ -15,7 +15,7 @@ import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/use
 import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
 import { stringifyRelativeDateFilter } from '@/views/view-filter-value/utils/stringifyRelativeDateFilter';
 
-import { DEFAULT_RELATIVE_DATE_FILTER_VALUE } from 'aegis-shared/constants';
+import { DEFAULT_RELATIVE_DATE_FILTER_VALUE } from 'aegis-shared/branding-constants';
 import {
   isDefined,
   relativeDateFilterStringifiedSchema,

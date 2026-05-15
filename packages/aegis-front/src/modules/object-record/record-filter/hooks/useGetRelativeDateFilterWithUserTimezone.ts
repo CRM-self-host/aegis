@@ -2,7 +2,7 @@ import { currentWorkspaceMemberState } from '@/auth/states/currentWorkspaceMembe
 import { detectCalendarStartDay } from '@/localization/utils/detection/detectCalendarStartDay';
 import { useUserTimezone } from '@/ui/input/components/internal/date/hooks/useUserTimezone';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import { type FirstDayOfTheWeek } from 'aegis-shared/types';
 import { type RelativeDateFilter } from 'aegis-shared/utils';
 

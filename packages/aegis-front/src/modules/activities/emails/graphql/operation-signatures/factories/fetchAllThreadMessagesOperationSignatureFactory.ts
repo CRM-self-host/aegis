@@ -1,6 +1,6 @@
 import { CoreObjectNameSingular } from 'aegis-shared/types';
 import { type RecordGqlOperationSignatureFactory } from '@/object-record/graphql/types/RecordGqlOperationSignatureFactory';
-import { QUERY_MAX_RECORDS } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS } from 'aegis-shared/branding-constants';
 
 type FetchAllThreadMessagesOperationSignatureFactory = {
   messageThreadId: string | null;

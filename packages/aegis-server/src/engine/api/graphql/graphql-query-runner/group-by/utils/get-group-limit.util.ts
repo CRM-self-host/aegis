@@ -1,4 +1,4 @@
-import { DEFAULT_NUMBER_OF_GROUPS_LIMIT } from 'aegis-shared/constants';
+import { DEFAULT_NUMBER_OF_GROUPS_LIMIT } from 'aegis-shared/branding-constants';
 
 export const getGroupLimit = (limit?: number): number => {
   if (

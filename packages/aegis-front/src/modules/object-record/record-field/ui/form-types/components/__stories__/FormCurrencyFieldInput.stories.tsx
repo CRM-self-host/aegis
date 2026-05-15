@@ -2,7 +2,7 @@ import { FormCurrencyFieldInput } from '@/object-record/record-field/ui/form-typ
 import { type FieldCurrencyValue } from '@/object-record/record-field/ui/types/FieldMetadata';
 import { type Meta, type StoryObj } from '@storybook/react-vite';
 import { expect, within } from 'storybook/test';
-import { CurrencyCode } from 'aegis-shared/constants';
+import { CurrencyCode } from 'aegis-shared/branding-constants';
 import { WorkflowStepDecorator } from '~/testing/decorators/WorkflowStepDecorator';
 import { MOCKED_STEP_ID } from '~/testing/mock-data/workflow';
 

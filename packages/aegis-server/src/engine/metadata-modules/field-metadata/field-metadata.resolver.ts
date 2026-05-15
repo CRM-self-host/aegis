@@ -1,7 +1,7 @@
 import { UseFilters, UseGuards, UsePipes } from '@nestjs/common';
 import { Args, Context, Mutation, Parent, ResolveField } from '@nestjs/graphql';
 
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';

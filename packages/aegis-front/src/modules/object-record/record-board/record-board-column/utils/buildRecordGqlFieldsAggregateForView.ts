@@ -4,7 +4,7 @@ import { type RecordGqlFieldsAggregate } from '@/object-record/graphql/types/Rec
 
 import { AggregateOperations } from '@/object-record/record-table/constants/AggregateOperations';
 import { type ExtendedAggregateOperations } from '@/object-record/record-table/types/ExtendedAggregateOperations';
-import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/constants';
+import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/branding-constants';
 import { type Nullable } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 

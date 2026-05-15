@@ -1,5 +1,5 @@
 import { type CurrentWorkspaceMember } from '@/auth/states/currentWorkspaceMemberState';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 
 import { detectCalendarStartDay } from '@/localization/utils/detection/detectCalendarStartDay';
 import { type WorkspaceMember } from '@/workspace-member/types/WorkspaceMember';

@@ -1,7 +1,7 @@
 import {
   CalendarStartDay,
   GROUP_BY_DATE_GRANULARITY_THAT_REQUIRE_TIME_ZONE,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import {
   FirstDayOfTheWeek,
   ObjectRecordGroupByDateGranularity,

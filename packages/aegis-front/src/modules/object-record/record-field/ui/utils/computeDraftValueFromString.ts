@@ -12,7 +12,7 @@ import { isFieldPhones } from '@/object-record/record-field/ui/types/guards/isFi
 import { isFieldRelation } from '@/object-record/record-field/ui/types/guards/isFieldRelation';
 import { isFieldText } from '@/object-record/record-field/ui/types/guards/isFieldText';
 import { isFieldUuid } from '@/object-record/record-field/ui/types/guards/isFieldUuid';
-import { CurrencyCode } from 'aegis-shared/constants';
+import { CurrencyCode } from 'aegis-shared/branding-constants';
 import { CustomError } from 'aegis-shared/utils';
 
 type computeDraftValueFromStringParams = {

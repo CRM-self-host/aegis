@@ -8,7 +8,7 @@ import {
   ResolveField,
 } from '@nestjs/graphql';
 
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';
 import { PreventNestToAutoLogGraphqlErrorsFilter } from 'src/engine/core-modules/graphql/filters/prevent-nest-to-auto-log-graphql-errors.filter';

@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 
 import { isDefined } from 'class-validator';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
 import { AuthWorkspace } from 'src/engine/decorators/auth/auth-workspace.decorator';

@@ -1,4 +1,4 @@
-import { VIEW_GROUP_VISIBLE_OPTIONS_MAX } from 'aegis-shared/constants';
+import { VIEW_GROUP_VISIBLE_OPTIONS_MAX } from 'aegis-shared/branding-constants';
 import { type EnumFieldMetadataType } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 import { v4 } from 'uuid';

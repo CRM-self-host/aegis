@@ -4,7 +4,7 @@ import { IDField } from '@ptc-org/nestjs-query-graphql';
 import {
   PermissionFlagType,
   PermissionsOnAllObjectRecords,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import { type APP_LOCALES, SOURCE_LOCALE } from 'aegis-shared/translations';
 import {
   Column,

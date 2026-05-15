@@ -2,7 +2,7 @@ import { useApplyObjectFilterDropdownFilterValue } from '@/object-record/object-
 import { useObjectFilterDropdownFilterValue } from '@/object-record/object-filter-dropdown/hooks/useObjectFilterDropdownFilterValue';
 import { RatingInput } from '@/ui/field/input/components/RatingInput';
 import { styled } from '@linaria/react';
-import { RATING_VALUES } from 'aegis-shared/constants';
+import { RATING_VALUES } from 'aegis-shared/branding-constants';
 import { type FieldRatingValue } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 import { themeCssVariables } from 'aegis-ui/theme-constants';

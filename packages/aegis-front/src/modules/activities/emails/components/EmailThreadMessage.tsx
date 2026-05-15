@@ -7,7 +7,7 @@ import { EmailThreadMessageReceivers } from '@/activities/emails/components/Emai
 import { EmailThreadMessageSender } from '@/activities/emails/components/EmailThreadMessageSender';
 import { EmailThreadNotShared } from '@/activities/emails/components/EmailThreadNotShared';
 import { type EmailThreadMessageParticipant } from '@/activities/emails/types/EmailThreadMessageParticipant';
-import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/constants';
+import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/branding-constants';
 import { MessageParticipantRole } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 import { themeCssVariables } from 'aegis-ui/theme-constants';

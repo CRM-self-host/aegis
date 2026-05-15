@@ -17,7 +17,7 @@ import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomStat
 import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/constants';
+import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 

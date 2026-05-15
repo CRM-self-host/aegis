@@ -10,7 +10,7 @@ import { DateTimeSettingsDateFormatSelect } from '@/settings/experience/componen
 import { DateTimeSettingsTimeFormatSelect } from '@/settings/experience/components/DateTimeSettingsTimeFormatSelect';
 import { DateTimeSettingsTimeZoneSelect } from '@/settings/experience/components/DateTimeSettingsTimeZoneSelect';
 import { NumberFormatSelect } from '@/settings/experience/components/NumberFormatSelect';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import {
   WorkspaceMemberDateFormatEnum,

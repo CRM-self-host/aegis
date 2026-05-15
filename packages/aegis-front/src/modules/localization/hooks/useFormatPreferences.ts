@@ -18,7 +18,7 @@ import { getWorkspaceMemberUpdateFromFormatPreferences } from '@/localization/ut
 import { useUpdateWorkspaceMemberSettings } from '@/settings/profile/hooks/useUpdateWorkspaceMemberSettings';
 import { useAtomState } from '@/ui/utilities/state/jotai/hooks/useAtomState';
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import { logError } from '~/utils/logError';
 
 export type FormatPreferenceKey = keyof WorkspaceMemberFormatPreferences;

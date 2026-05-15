@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { ViewVisibility } from 'aegis-shared/types';
 

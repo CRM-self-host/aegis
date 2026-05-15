@@ -1,4 +1,4 @@
-import { RESERVED_SUBDOMAINS } from 'aegis-shared/constants';
+import { RESERVED_SUBDOMAINS } from 'aegis-shared/branding-constants';
 import { isValidAegisSubdomain } from 'aegis-shared/utils';
 
 export const isSubdomainValid = (subdomain: string) => {

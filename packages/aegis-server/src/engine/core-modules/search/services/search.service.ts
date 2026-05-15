@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { isNonEmptyString } from '@sniptt/guards';
 import chunk from 'lodash.chunk';
-import { OBJECTS_WITH_CHANNEL_VISIBILITY_CONSTRAINTS } from 'aegis-shared/constants';
+import { OBJECTS_WITH_CHANNEL_VISIBILITY_CONSTRAINTS } from 'aegis-shared/branding-constants';
 import {
   FieldMetadataType,
   FileFolder,

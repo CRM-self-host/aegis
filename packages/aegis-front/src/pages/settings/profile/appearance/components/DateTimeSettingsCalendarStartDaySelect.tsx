@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { detectCalendarStartDay } from '@/localization/utils/detection/detectCalendarStartDay';
 import { Select } from '@/ui/input/components/Select';
 import { t } from '@lingui/core/macro';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import { type SelectOption } from 'aegis-ui/input';
 
 type DateTimeSettingsCalendarStartDaySelectProps = {

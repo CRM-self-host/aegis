@@ -10,7 +10,7 @@ import { CoreObjectNameSingular } from 'aegis-shared/types';
 import { useFindOneRecord } from '@/object-record/hooks/useFindOneRecord';
 import { UserContext } from '@/users/contexts/UserContext';
 import { useContext } from 'react';
-import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/constants';
+import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/branding-constants';
 import { CombinedGraphQLErrors } from '@apollo/client/errors';
 import { isDefined } from 'aegis-shared/utils';
 import { themeCssVariables } from 'aegis-ui/theme-constants';

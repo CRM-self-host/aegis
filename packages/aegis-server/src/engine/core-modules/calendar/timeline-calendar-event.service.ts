@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import omit from 'lodash.omit';
-import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/constants';
+import { FIELD_RESTRICTED_ADDITIONAL_PERMISSIONS_REQUIRED } from 'aegis-shared/branding-constants';
 import { Any, In, type Repository } from 'typeorm';
 
 import { CalendarChannelVisibility } from 'aegis-shared/types';

@@ -1,4 +1,4 @@
-import { type PermissionFlagType } from 'aegis-shared/constants';
+import { type PermissionFlagType } from 'aegis-shared/branding-constants';
 
 import { type UserWorkspacePermissions } from 'src/engine/metadata-modules/permissions/types/user-workspace-permissions';
 import { type UserWorkspacePermissionsDto } from 'src/engine/metadata-modules/role/dtos/user-workspace-permissions.dto';

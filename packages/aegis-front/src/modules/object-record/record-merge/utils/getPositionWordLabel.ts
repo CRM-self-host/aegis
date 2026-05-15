@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import { type MUTATION_MAX_MERGE_RECORDS } from 'aegis-shared/constants';
+import { type MUTATION_MAX_MERGE_RECORDS } from 'aegis-shared/branding-constants';
 import { type FixedLengthArray } from '@/object-record/record-merge/types/FixedLengthArray';
 
 export const getPositionWordLabel = (index: number): string => {

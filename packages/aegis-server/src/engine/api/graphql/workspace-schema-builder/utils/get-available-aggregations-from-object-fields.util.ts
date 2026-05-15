@@ -1,7 +1,7 @@
 import { GraphQLISODateTime } from '@nestjs/graphql';
 
 import { GraphQLFloat, GraphQLInt, type GraphQLScalarType } from 'graphql';
-import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/constants';
+import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/branding-constants';
 import { AggregateOperations, FieldMetadataType } from 'aegis-shared/types';
 import { capitalize, isFieldMetadataDateKind } from 'aegis-shared/utils';
 

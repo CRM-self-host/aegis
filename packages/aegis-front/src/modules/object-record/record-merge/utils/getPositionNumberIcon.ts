@@ -1,4 +1,4 @@
-import { type MUTATION_MAX_MERGE_RECORDS } from 'aegis-shared/constants';
+import { type MUTATION_MAX_MERGE_RECORDS } from 'aegis-shared/branding-constants';
 import {
   IconSquareNumber1,
   IconSquareNumber2,

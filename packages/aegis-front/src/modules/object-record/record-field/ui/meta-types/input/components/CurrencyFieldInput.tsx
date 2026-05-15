@@ -3,7 +3,7 @@ import { isNonEmptyString } from '@sniptt/guards';
 
 import { type FieldCurrencyValue } from '@/object-record/record-field/ui/types/FieldMetadata';
 import { CurrencyInput } from '@/ui/field/input/components/CurrencyInput';
-import { CurrencyCode } from 'aegis-shared/constants';
+import { CurrencyCode } from 'aegis-shared/branding-constants';
 
 import { useCurrencyField } from '@/object-record/record-field/ui/meta-types/hooks/useCurrencyField';
 

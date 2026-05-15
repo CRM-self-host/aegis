@@ -11,7 +11,7 @@ import { FocusComponentType } from '@/ui/utilities/focus/types/FocusComponentTyp
 import { useStore } from 'jotai';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback } from 'react';
-import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/constants';
+import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 
 export const useOpenFilesFieldInput = () => {

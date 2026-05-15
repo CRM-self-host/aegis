@@ -24,7 +24,7 @@ import { AegisConfigService } from 'src/engine/core-modules/aegis-config/aegis-c
 import {
   AUTO_SELECT_FAST_MODEL_ID,
   AUTO_SELECT_SMART_MODEL_ID,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import { MODEL_FAMILY_LABELS } from 'src/engine/metadata-modules/ai/ai-models/constants/model-family-labels.const';
 import { AiModelRegistryService } from 'src/engine/metadata-modules/ai/ai-models/services/ai-model-registry.service';
 

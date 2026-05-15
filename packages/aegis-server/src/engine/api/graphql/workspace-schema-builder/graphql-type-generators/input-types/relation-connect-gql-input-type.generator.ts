@@ -7,7 +7,7 @@ import {
   type GraphQLInputType,
   GraphQLString,
 } from 'graphql';
-import { RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/constants';
+import { RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/branding-constants';
 import { compositeTypeDefinitions } from 'aegis-shared/types';
 import { getUniqueConstraintsFields, pascalCase } from 'aegis-shared/utils';
 

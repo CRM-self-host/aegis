@@ -12,7 +12,7 @@ import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomState
 import { UserContext } from '@/users/contexts/UserContext';
 import { t } from '@lingui/core/macro';
 import { useContext } from 'react';
-import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/constants';
+import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/branding-constants';
 import { findById, isDefined } from 'aegis-shared/utils';
 import { type AggregateChartConfiguration } from '~/generated-metadata/graphql';
 import { dateLocaleState } from '~/localization/states/dateLocaleState';

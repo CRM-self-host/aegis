@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { isNumber } from '@sniptt/guards';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import { FirstDayOfTheWeek } from 'aegis-shared/types';
 import {
   convertCalendarStartDayNonIsoNumberToFirstDayOfTheWeek,

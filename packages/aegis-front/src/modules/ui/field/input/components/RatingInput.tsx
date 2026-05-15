@@ -3,7 +3,7 @@ import { styled } from '@linaria/react';
 import { useContext, useState } from 'react';
 
 import { useClearField } from '@/object-record/record-field/ui/hooks/useClearField';
-import { RATING_VALUES } from 'aegis-shared/constants';
+import { RATING_VALUES } from 'aegis-shared/branding-constants';
 import { type FieldRatingValue } from 'aegis-shared/types';
 import { IconAegisStarFilled } from 'aegis-ui/display';
 import { ThemeContext, themeCssVariables } from 'aegis-ui/theme-constants';

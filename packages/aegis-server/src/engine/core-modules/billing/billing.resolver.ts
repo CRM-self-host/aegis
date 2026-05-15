@@ -3,7 +3,7 @@
 import { UseFilters, UseGuards, UsePipes } from '@nestjs/common';
 import { Args, Mutation, Query } from '@nestjs/graphql';
 
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
 
 import { type ApiKeyEntity } from 'src/engine/core-modules/api-key/api-key.entity';

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { MAX_EMAIL_RECIPIENTS } from 'aegis-shared/constants';
+import { MAX_EMAIL_RECIPIENTS } from 'aegis-shared/branding-constants';
 import { type EmailAttachment } from 'aegis-shared/types';
 
 import { useSendEmail } from '@/activities/emails/hooks/useSendEmail';

@@ -1,4 +1,4 @@
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import {
   Column,
   CreateDateColumn,

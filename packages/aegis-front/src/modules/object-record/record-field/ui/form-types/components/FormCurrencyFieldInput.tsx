@@ -8,7 +8,7 @@ import { CURRENCIES } from '@/settings/data-model/constants/Currencies';
 import { InputLabel } from '@/ui/input/components/InputLabel';
 import { t } from '@lingui/core/macro';
 import { useMemo } from 'react';
-import { type CurrencyCode } from 'aegis-shared/constants';
+import { type CurrencyCode } from 'aegis-shared/branding-constants';
 import { IconCircleOff } from 'aegis-ui/display';
 
 type FormCurrencyFieldInputProps = {

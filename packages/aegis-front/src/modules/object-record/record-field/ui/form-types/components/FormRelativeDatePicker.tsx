@@ -3,7 +3,7 @@ import { RelativeDatePickerHeader } from '@/ui/input/components/internal/date/co
 
 import { isNonEmptyString } from '@sniptt/guards';
 import { useId } from 'react';
-import { DEFAULT_RELATIVE_DATE_FILTER_VALUE } from 'aegis-shared/constants';
+import { DEFAULT_RELATIVE_DATE_FILTER_VALUE } from 'aegis-shared/branding-constants';
 
 import {
   type RelativeDateFilter,

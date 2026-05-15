@@ -1,4 +1,4 @@
-import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/constants';
+import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/branding-constants';
 import { type FlatAgent } from 'src/engine/metadata-modules/flat-agent/types/flat-agent.type';
 import { type AllStandardAgentName } from 'src/engine/workspace-manager/aegis-standard-application/types/all-standard-agent-name.type';
 import {

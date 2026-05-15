@@ -4,7 +4,7 @@ import {
   DOCUMENTATION_DEFAULT_PATH,
   DOCUMENTATION_SUPPORTED_LANGUAGES,
   type DocumentationPath,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 
 export const getDocumentationUrl = ({
   locale,

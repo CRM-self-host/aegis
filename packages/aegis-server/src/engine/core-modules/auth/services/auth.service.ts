@@ -8,7 +8,7 @@ import { render } from '@react-email/render';
 import { addMilliseconds } from 'date-fns';
 import ms from 'ms';
 import { PasswordUpdateNotifyEmail } from 'aegis-emails';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { AppPath, ConnectedAccountProvider } from 'aegis-shared/types';
 import { assertIsDefinedOrThrow, isDefined } from 'aegis-shared/utils';
 import { IsNull, Repository } from 'typeorm';

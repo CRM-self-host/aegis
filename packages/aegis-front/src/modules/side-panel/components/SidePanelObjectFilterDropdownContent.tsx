@@ -1,6 +1,6 @@
 import { useLingui } from '@lingui/react/macro';
 import { useState } from 'react';
-import { OBJECTS_WITH_CHANNEL_VISIBILITY_CONSTRAINTS } from 'aegis-shared/constants';
+import { OBJECTS_WITH_CHANNEL_VISIBILITY_CONSTRAINTS } from 'aegis-shared/branding-constants';
 import { IconCube, TintedIconTile } from 'aegis-ui/display';
 import { MenuItemSelectAvatar, MenuItemToggle } from 'aegis-ui/navigation';
 

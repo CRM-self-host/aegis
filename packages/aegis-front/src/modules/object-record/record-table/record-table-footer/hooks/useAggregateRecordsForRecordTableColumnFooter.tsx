@@ -19,7 +19,7 @@ import { useAtomFamilyStateValue } from '@/ui/utilities/state/jotai/hooks/useAto
 import { useAtomStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomStateValue';
 import { UserContext } from '@/users/contexts/UserContext';
 import { useContext } from 'react';
-import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/constants';
+import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/branding-constants';
 import {
   computeRecordGqlOperationFilter,
   findById,

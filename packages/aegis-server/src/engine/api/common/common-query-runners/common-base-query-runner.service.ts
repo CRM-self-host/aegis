@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import { type PermissionFlagType } from 'aegis-shared/constants';
+import { type PermissionFlagType } from 'aegis-shared/branding-constants';
 
 import { QueryResultFieldValue } from 'src/engine/api/graphql/workspace-query-runner/factories/query-result-getters/interfaces/query-result-field-value';
 

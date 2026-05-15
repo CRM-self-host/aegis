@@ -1,4 +1,4 @@
-import { VIEW_GROUP_VISIBLE_OPTIONS_MAX } from 'aegis-shared/constants';
+import { VIEW_GROUP_VISIBLE_OPTIONS_MAX } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { v4 } from 'uuid';
 

@@ -1,5 +1,5 @@
 import { t } from '@lingui/core/macro';
-import { RESERVED_SUBDOMAINS, SUBDOMAIN_PATTERN } from 'aegis-shared/constants';
+import { RESERVED_SUBDOMAINS, SUBDOMAIN_PATTERN } from 'aegis-shared/branding-constants';
 import { z } from 'zod';
 
 export const getSubdomainValidationSchema = () =>

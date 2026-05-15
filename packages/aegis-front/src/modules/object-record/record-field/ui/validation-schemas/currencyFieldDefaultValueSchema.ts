@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { currencyCodeSchema } from '@/object-record/record-field/ui/validation-schemas/currencyCodeSchema';
-import { type CurrencyCode } from 'aegis-shared/constants';
+import { type CurrencyCode } from 'aegis-shared/branding-constants';
 import { stripSimpleQuotesFromString } from '~/utils/string/stripSimpleQuotesFromString';
 import { simpleQuotesStringSchema } from '~/utils/validation-schemas/simpleQuotesStringSchema';
 

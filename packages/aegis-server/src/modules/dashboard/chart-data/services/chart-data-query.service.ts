@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import {
   AggregateOperations,
   type ChartFilter,

@@ -3,7 +3,7 @@ import { Args, Context, Mutation, Query } from '@nestjs/graphql';
 import { InjectRepository } from '@nestjs/typeorm';
 
 import omit from 'lodash.omit';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { SOURCE_LOCALE } from 'aegis-shared/translations';
 import { TwoFactorAuthenticationStrategy } from 'aegis-shared/types';
 import { assertIsDefinedOrThrow, isDefined } from 'aegis-shared/utils';

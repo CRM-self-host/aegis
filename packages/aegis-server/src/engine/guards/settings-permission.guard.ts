@@ -8,7 +8,7 @@ import {
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { msg } from '@lingui/core/macro';
-import { type PermissionFlagType } from 'aegis-shared/constants';
+import { type PermissionFlagType } from 'aegis-shared/branding-constants';
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
 
 import {

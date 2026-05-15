@@ -14,7 +14,7 @@ import { cursorFamilyState } from '@/object-record/states/cursorFamilyState';
 import { hasNextPageFamilyState } from '@/object-record/states/hasNextPageFamilyState';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
 import { getQueryIdentifier } from '@/object-record/utils/getQueryIdentifier';
-import { QUERY_DEFAULT_LIMIT_RECORDS } from 'aegis-shared/constants';
+import { QUERY_DEFAULT_LIMIT_RECORDS } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { useStore } from 'jotai';
 

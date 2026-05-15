@@ -5,7 +5,7 @@ import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 import {
   AUTO_SELECT_FAST_MODEL_ID,
   AUTO_SELECT_SMART_MODEL_ID,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import { ApolloFactory, type Options } from '@/apollo/services/apollo.factory';
 import { CUSTOM_WORKSPACE_APPLICATION_MOCK } from '@/object-metadata/hooks/__tests__/constants/CustomWorkspaceApplicationMock.test.constant';
 import { WorkspaceActivationStatus } from '~/generated-metadata/graphql';

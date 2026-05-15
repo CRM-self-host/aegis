@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 
-import { QUERY_MAX_RECORDS } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS } from 'aegis-shared/branding-constants';
 
 import { InjectMessageQueue } from 'src/engine/core-modules/message-queue/decorators/message-queue.decorator';
 import { MessageQueue } from 'src/engine/core-modules/message-queue/message-queue.constants';

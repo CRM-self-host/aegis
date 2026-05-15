@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { msg, t } from '@lingui/core/macro';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { ALL_METADATA_NAME } from 'aegis-shared/metadata';
 import { isDefined } from 'aegis-shared/utils';
 

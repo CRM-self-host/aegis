@@ -7,7 +7,7 @@ import { detectNumberFormat } from '@/localization/utils/detection/detectNumberF
 import { detectTimeFormat } from '@/localization/utils/detection/detectTimeFormat';
 import { detectTimeZone } from '@/localization/utils/detection/detectTimeZone';
 import { createAtomState } from '@/ui/utilities/state/jotai/utils/createAtomState';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 
 export type WorkspaceMemberFormatPreferences = {
   timeZone: string;

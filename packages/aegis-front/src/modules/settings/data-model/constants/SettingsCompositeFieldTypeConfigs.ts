@@ -14,7 +14,7 @@ import { type CompositeFieldType } from '@/settings/data-model/types/CompositeFi
 import {
   COMPOSITE_FIELD_TYPE_SUB_FIELDS_NAMES,
   CurrencyCode,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import { ConnectedAccountProvider } from 'aegis-shared/types';
 import {
   IllustrationIconCurrency,

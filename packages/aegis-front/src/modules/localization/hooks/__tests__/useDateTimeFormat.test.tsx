@@ -7,7 +7,7 @@ import { TimeFormat } from '@/localization/constants/TimeFormat';
 import { useDateTimeFormat } from '@/localization/hooks/useDateTimeFormat';
 import { workspaceMemberFormatPreferencesState } from '@/localization/states/workspaceMemberFormatPreferencesState';
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 
 const mockPreferences = {
   timeZone: 'America/New_York',

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { DEFAULT_NUMBER_OF_GROUPS_LIMIT } from 'aegis-shared/constants';
+import { DEFAULT_NUMBER_OF_GROUPS_LIMIT } from 'aegis-shared/branding-constants';
 
 import { GroupByArgProcessorService } from 'src/engine/api/common/common-args-processors/group-by-arg-processor/group-by-arg-processor.service';
 import { CommonGroupByQueryRunnerService } from 'src/engine/api/common/common-query-runners/common-group-by-query-runner.service';

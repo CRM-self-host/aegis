@@ -1,5 +1,5 @@
 import { isObject } from '@sniptt/guards';
-import { RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/constants';
+import { RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 
 const { CONNECT, DISCONNECT } = RELATION_NESTED_QUERY_KEYWORDS;

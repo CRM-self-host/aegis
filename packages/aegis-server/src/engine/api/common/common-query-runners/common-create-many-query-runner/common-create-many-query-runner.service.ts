@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { msg } from '@lingui/core/macro';
-import { QUERY_MAX_RECORDS } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS } from 'aegis-shared/branding-constants';
 import { ObjectRecord } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 import { FindOptionsRelations, In, InsertResult, ObjectLiteral } from 'typeorm';

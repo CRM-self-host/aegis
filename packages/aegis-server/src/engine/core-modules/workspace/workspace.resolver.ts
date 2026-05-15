@@ -9,7 +9,7 @@ import { Args, Mutation, Parent, Query, ResolveField } from '@nestjs/graphql';
 
 import assert from 'assert';
 
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { FeatureFlagKey, FileFolder } from 'aegis-shared/types';
 import { assertIsDefinedOrThrow, isDefined } from 'aegis-shared/utils';
 

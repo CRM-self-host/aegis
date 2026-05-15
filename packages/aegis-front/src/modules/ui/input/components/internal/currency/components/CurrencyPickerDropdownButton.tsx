@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react';
 
 import { Dropdown } from '@/ui/layout/dropdown/components/Dropdown';
-import { CurrencyCode } from 'aegis-shared/constants';
+import { CurrencyCode } from 'aegis-shared/branding-constants';
 
 import { CURRENCIES } from '@/settings/data-model/constants/Currencies';
 import { type Currency } from '@/ui/input/components/internal/types/Currency';

@@ -1,4 +1,4 @@
-import { type RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/constants';
+import { type RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/branding-constants';
 import { type QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 
 import { type BaseWorkspaceEntity } from 'src/engine/aegis-orm/base.workspace-entity';

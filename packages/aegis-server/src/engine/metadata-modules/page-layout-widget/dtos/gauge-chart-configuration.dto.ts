@@ -14,7 +14,7 @@ import {
   Min,
 } from 'class-validator';
 import { GraphQLJSON } from 'graphql-type-json';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import {
   AggregateOperations,
   type ChartFilter,

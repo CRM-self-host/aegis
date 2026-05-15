@@ -1,6 +1,6 @@
 import { msg, t } from '@lingui/core/macro';
 import { isNonEmptyString } from '@sniptt/guards';
-import { QUOTED_STRING_REGEX } from 'aegis-shared/constants';
+import { QUOTED_STRING_REGEX } from 'aegis-shared/branding-constants';
 import {
   FieldMetadataType,
   type EnumFieldMetadataType,

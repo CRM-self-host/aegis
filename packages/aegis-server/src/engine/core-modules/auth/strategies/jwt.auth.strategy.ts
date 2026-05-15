@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { msg } from '@lingui/core/macro';
 import { Strategy } from 'passport-jwt';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { assertIsDefinedOrThrow, isDefined } from 'aegis-shared/utils';
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
 import { Repository } from 'typeorm';

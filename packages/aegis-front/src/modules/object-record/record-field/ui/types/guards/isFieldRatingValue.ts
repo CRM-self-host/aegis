@@ -1,4 +1,4 @@
-import { RATING_VALUES } from 'aegis-shared/constants';
+import { RATING_VALUES } from 'aegis-shared/branding-constants';
 import { type FieldRatingValue } from 'aegis-shared/types';
 
 export const isFieldRatingValue = (

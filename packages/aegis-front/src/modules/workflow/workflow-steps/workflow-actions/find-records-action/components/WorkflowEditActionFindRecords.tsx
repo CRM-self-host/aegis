@@ -4,7 +4,7 @@ import { msg } from '@lingui/core/macro';
 import { useLingui } from '@lingui/react/macro';
 import { isNumber } from '@sniptt/guards';
 import { useEffect, useState } from 'react';
-import { QUERY_MAX_RECORDS } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { HorizontalSeparator } from 'aegis-ui/display';
 import { type JsonValue } from 'type-fest';

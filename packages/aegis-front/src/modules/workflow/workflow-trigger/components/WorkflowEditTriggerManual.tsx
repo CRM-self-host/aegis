@@ -12,7 +12,7 @@ import { MANUAL_TRIGGER_IS_PINNED_OPTIONS } from '@/workflow/workflow-trigger/co
 import { getManualTriggerDefaultSettings } from '@/workflow/workflow-trigger/utils/getManualTriggerDefaultSettings';
 import { styled } from '@linaria/react';
 import { useLingui } from '@lingui/react/macro';
-import { QUERY_MAX_RECORDS } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { TRIGGER_STEP_ID } from 'aegis-shared/workflow';
 import { useIcons } from 'aegis-ui/display';

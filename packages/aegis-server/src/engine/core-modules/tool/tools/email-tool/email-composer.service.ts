@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { toPlainText } from '@react-email/render';
 import DOMPurify from 'dompurify';
-import { MAX_EMAIL_RECIPIENTS } from 'aegis-shared/constants';
+import { MAX_EMAIL_RECIPIENTS } from 'aegis-shared/branding-constants';
 import {
   ConnectedAccountProvider,
   type EmailAttachment,

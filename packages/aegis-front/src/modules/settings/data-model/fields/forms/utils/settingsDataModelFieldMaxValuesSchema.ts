@@ -1,4 +1,4 @@
-import { MULTI_ITEM_FIELD_MIN_MAX_VALUES } from 'aegis-shared/constants';
+import { MULTI_ITEM_FIELD_MIN_MAX_VALUES } from 'aegis-shared/branding-constants';
 import { z } from 'zod';
 
 export const settingsDataModelFieldMaxValuesSchema = z.object({

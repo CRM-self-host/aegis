@@ -1,5 +1,5 @@
 import { msg } from '@lingui/core/macro';
-import { FILES_FIELD_MAX_NUMBER_OF_VALUES } from 'aegis-shared/constants';
+import { FILES_FIELD_MAX_NUMBER_OF_VALUES } from 'aegis-shared/branding-constants';
 import { type FieldMetadataType } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 

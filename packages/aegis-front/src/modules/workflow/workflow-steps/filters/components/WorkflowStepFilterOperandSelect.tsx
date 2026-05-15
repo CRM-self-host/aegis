@@ -9,7 +9,7 @@ import { useUpsertStepFilterSettings } from '@/workflow/workflow-steps/filters/h
 import { WorkflowStepFilterContext } from '@/workflow/workflow-steps/filters/states/context/WorkflowStepFilterContext';
 import { getStepFilterOperands } from '@/workflow/workflow-steps/filters/utils/getStepFilterOperands';
 import { useContext } from 'react';
-import { DEFAULT_RELATIVE_DATE_FILTER_VALUE } from 'aegis-shared/constants';
+import { DEFAULT_RELATIVE_DATE_FILTER_VALUE } from 'aegis-shared/branding-constants';
 import { ViewFilterOperand, type StepFilter } from 'aegis-shared/types';
 
 type WorkflowStepFilterOperandSelectProps = {

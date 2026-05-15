@@ -9,7 +9,7 @@ import {
 } from '@nestjs/graphql';
 
 import { InjectRepository } from '@nestjs/typeorm';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { Repository } from 'typeorm';
 import GraphQLJSON from 'graphql-type-json';

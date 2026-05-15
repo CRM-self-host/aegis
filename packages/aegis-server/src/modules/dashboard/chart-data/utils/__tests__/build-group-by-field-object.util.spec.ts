@@ -1,4 +1,4 @@
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 import {
   FieldMetadataType,
   ObjectRecordGroupByDateGranularity,

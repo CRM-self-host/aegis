@@ -2,7 +2,7 @@ import { type ExecutionContext } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 
 import { SettingsPermissionGuard } from 'src/engine/guards/settings-permission.guard';
 import { PermissionsException } from 'src/engine/metadata-modules/permissions/permissions.exception';

@@ -4,7 +4,7 @@ import isEmpty from 'lodash.isempty';
 import {
   QUERY_MAX_RECORDS,
   QUERY_MAX_RECORDS_FROM_RELATION,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import { ObjectRecord, OrderByDirection } from 'aegis-shared/types';
 import { isDefined } from 'aegis-shared/utils';
 import { FindOptionsRelations, In, ObjectLiteral } from 'typeorm';

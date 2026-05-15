@@ -10,7 +10,7 @@ import { RecordTableContextProvider } from '@/object-record/record-table/compone
 import { ViewComponentInstanceContext } from '@/views/states/contexts/ViewComponentInstanceContext';
 import { type MockedResponse } from '@apollo/client/testing';
 import gql from 'graphql-tag';
-import { QUERY_DEFAULT_LIMIT_RECORDS } from 'aegis-shared/constants';
+import { QUERY_DEFAULT_LIMIT_RECORDS } from 'aegis-shared/branding-constants';
 import { getRecordFromRecordNode } from '@/object-record/cache/utils/getRecordFromRecordNode';
 import { getJestMetadataAndApolloMocksWrapper } from '~/testing/jest/getJestMetadataAndApolloMocksWrapper';
 import { JestRecordIndexContextProviderWrapper } from '~/testing/jest/JestRecordIndexContextProviderWrapper';

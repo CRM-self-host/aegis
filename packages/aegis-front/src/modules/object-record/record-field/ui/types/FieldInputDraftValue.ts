@@ -18,7 +18,7 @@ import {
   type FieldUUidValue,
   type PhoneRecord,
 } from '@/object-record/record-field/ui/types/FieldMetadata';
-import { type CurrencyCode } from 'aegis-shared/constants';
+import { type CurrencyCode } from 'aegis-shared/branding-constants';
 import { type FieldRatingValue } from 'aegis-shared/types';
 
 export type FieldTextDraftValue = string;

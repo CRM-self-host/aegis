@@ -8,7 +8,7 @@ import { TimeFormat } from '@/localization/constants/TimeFormat';
 import { workspaceMemberFormatPreferencesState } from '@/localization/states/workspaceMemberFormatPreferencesState';
 import { jotaiStore } from '@/ui/utilities/state/jotai/jotaiStore';
 import { useParseZonedDateTimeToIMaskDateTimeInputString } from '@/ui/input/components/internal/date/hooks/useParseZonedDateTimeToIMaskDateTimeInputString';
-import { CalendarStartDay } from 'aegis-shared/constants';
+import { CalendarStartDay } from 'aegis-shared/branding-constants';
 
 describe('useParseZonedDateTimeToIMaskDateTimeInputString', () => {
   const testZonedDateTime = Temporal.ZonedDateTime.from({

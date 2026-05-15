@@ -1,7 +1,7 @@
 import {
   CURRENCY_CODE_LABELS,
   type CurrencyCode,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import {
   IconCoins,
   IconCurrencyAfghani,

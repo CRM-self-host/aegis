@@ -1,5 +1,5 @@
 import { type FlexibleSchema } from '@ai-sdk/provider-utils';
-import { type PermissionFlagType } from 'aegis-shared/constants';
+import { type PermissionFlagType } from 'aegis-shared/branding-constants';
 
 import { type ToolExecutionContext } from 'src/engine/core-modules/tool/types/tool-execution-context.type';
 import { type ToolInput } from 'src/engine/core-modules/tool/types/tool-input.type';

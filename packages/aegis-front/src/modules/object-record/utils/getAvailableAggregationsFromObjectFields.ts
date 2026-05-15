@@ -3,7 +3,7 @@ import { isHiddenSystemField } from '@/object-metadata/utils/isHiddenSystemField
 import { AggregateOperations } from '@/object-record/record-table/constants/AggregateOperations';
 import { DateAggregateOperations } from '@/object-record/record-table/constants/DateAggregateOperations';
 import { type ExtendedAggregateOperations } from '@/object-record/record-table/types/ExtendedAggregateOperations';
-import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/constants';
+import { FIELD_FOR_TOTAL_COUNT_AGGREGATE_OPERATION } from 'aegis-shared/branding-constants';
 import { capitalize, isFieldMetadataDateKind } from 'aegis-shared/utils';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 

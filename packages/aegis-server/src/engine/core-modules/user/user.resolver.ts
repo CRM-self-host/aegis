@@ -6,7 +6,7 @@ import crypto from 'crypto';
 
 import { msg } from '@lingui/core/macro';
 import { GraphQLJSONObject } from 'graphql-type-json';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
 import { In, Repository } from 'typeorm';

@@ -8,7 +8,7 @@ import { type FieldLinksValue } from '@/object-record/record-field/ui/types/Fiel
 import { linksSchema } from '@/object-record/record-field/ui/types/guards/isFieldLinksValue';
 import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
 import { useContext, useMemo } from 'react';
-import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/constants';
+import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/branding-constants';
 import { absoluteUrlSchema, isDefined } from 'aegis-shared/utils';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 import { MultiItemFieldInput } from './MultiItemFieldInput';

@@ -21,7 +21,7 @@ import {
   type RecordGqlOperationVariables,
 } from 'aegis-shared/types';
 
-import { QUERY_DEFAULT_LIMIT_RECORDS } from 'aegis-shared/constants';
+import { QUERY_DEFAULT_LIMIT_RECORDS } from 'aegis-shared/branding-constants';
 
 export type UseFindManyRecordsParams<T> = ObjectMetadataItemIdentifier &
   RecordGqlOperationVariables & {

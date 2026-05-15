@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { CurrencyCode } from 'aegis-shared/constants';
+import { CurrencyCode } from 'aegis-shared/branding-constants';
 import { type FieldCurrencyValue } from '@/object-record/record-field/ui/types/FieldMetadata';
 
 const currencySchema = z.object({

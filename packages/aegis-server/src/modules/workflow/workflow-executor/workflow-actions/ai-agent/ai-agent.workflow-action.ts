@@ -10,7 +10,7 @@ import { AgentAsyncExecutorService } from 'src/engine/metadata-modules/ai/ai-age
 import { AgentEntity } from 'src/engine/metadata-modules/ai/ai-agent/entities/agent.entity';
 import { AiBillingService } from 'src/engine/metadata-modules/ai/ai-billing/services/ai-billing.service';
 import { UsageOperationType } from 'src/engine/core-modules/usage/enums/usage-operation-type.enum';
-import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/constants';
+import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/branding-constants';
 import {
   WorkflowStepExecutorException,
   WorkflowStepExecutorExceptionCode,

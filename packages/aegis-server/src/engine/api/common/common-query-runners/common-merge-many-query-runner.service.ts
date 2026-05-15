@@ -4,7 +4,7 @@ import { msg } from '@lingui/core/macro';
 import {
   MUTATION_MAX_MERGE_RECORDS,
   QUERY_MAX_RECORDS_FROM_RELATION,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import {
   FieldMetadataSettingsMapping,
   FieldMetadataType,

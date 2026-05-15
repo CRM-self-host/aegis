@@ -21,7 +21,7 @@ import { useAtomComponentSelectorValue } from '@/ui/utilities/state/jotai/hooks/
 import { useAtomComponentStateValue } from '@/ui/utilities/state/jotai/hooks/useAtomComponentStateValue';
 import { t } from '@lingui/core/macro';
 import { isNonEmptyString } from '@sniptt/guards';
-import { MAX_OPTIONS_TO_DISPLAY } from 'aegis-shared/constants';
+import { MAX_OPTIONS_TO_DISPLAY } from 'aegis-shared/branding-constants';
 import { isDefined, parseJson } from 'aegis-shared/utils';
 import { MenuItem, MenuItemMultiSelect } from 'aegis-ui/navigation';
 import { z } from 'zod';

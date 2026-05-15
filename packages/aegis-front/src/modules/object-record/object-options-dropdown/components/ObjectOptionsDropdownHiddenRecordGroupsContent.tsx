@@ -20,7 +20,7 @@ import { useAtomComponentSelectorValue } from '@/ui/utilities/state/jotai/hooks/
 import { useSetAtomState } from '@/ui/utilities/state/jotai/hooks/useSetAtomState';
 import { useLingui } from '@lingui/react/macro';
 import { useLocation } from 'react-router-dom';
-import { VIEW_GROUP_VISIBLE_OPTIONS_MAX } from 'aegis-shared/constants';
+import { VIEW_GROUP_VISIBLE_OPTIONS_MAX } from 'aegis-shared/branding-constants';
 import { SettingsPath } from 'aegis-shared/types';
 import { getSettingsPath } from 'aegis-shared/utils';
 import { IconChevronLeft, IconSettings } from 'aegis-ui/display';

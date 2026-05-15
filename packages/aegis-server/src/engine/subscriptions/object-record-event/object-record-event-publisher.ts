@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { QUERY_MAX_RECORDS_FROM_RELATION } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS_FROM_RELATION } from 'aegis-shared/branding-constants';
 import { type ObjectRecordEvent } from 'aegis-shared/database-events';
 import {
   Nullable,

@@ -1,6 +1,6 @@
 import { useDateTimeFormat } from '@/localization/hooks/useDateTimeFormat';
 import { format, isValid, parse } from 'date-fns';
-import { DATE_TYPE_FORMAT } from 'aegis-shared/constants';
+import { DATE_TYPE_FORMAT } from 'aegis-shared/branding-constants';
 import { getDateFormatStringForDatePickerInputMask } from '~/utils/date-utils';
 
 export const useParseDateInputStringToPlainDate = () => {

@@ -4,7 +4,7 @@ import { type SpreadsheetImportFieldValidationDefinition } from '@/spreadsheet-i
 import { t } from '@lingui/core/macro';
 import { isDate, isString } from '@sniptt/guards';
 import { parsePhoneNumberWithError } from 'libphonenumber-js';
-import { RATING_VALUES } from 'aegis-shared/constants';
+import { RATING_VALUES } from 'aegis-shared/branding-constants';
 import {
   absoluteUrlSchema,
   getCountryCodesForCallingCode,

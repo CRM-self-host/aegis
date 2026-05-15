@@ -2,7 +2,7 @@ import { type OpenAPIV3_1 } from 'openapi-types';
 import {
   QUERY_DEFAULT_LIMIT_RECORDS,
   QUERY_MAX_RECORDS,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import { OrderByDirection } from 'aegis-shared/types';
 
 export const computeLimitParameters = (

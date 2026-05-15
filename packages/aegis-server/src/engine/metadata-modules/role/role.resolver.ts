@@ -7,7 +7,7 @@ import {
 import { Args, Mutation, Parent, Query, ResolveField } from '@nestjs/graphql';
 
 import { msg } from '@lingui/core/macro';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 
 import { MetadataResolver } from 'src/engine/api/graphql/graphql-config/decorators/metadata-resolver.decorator';

@@ -1,7 +1,7 @@
 import {
   QUERY_DEFAULT_LIMIT_RECORDS,
   QUERY_MAX_RECORDS,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 
 import {
   RestInputRequestParserException,

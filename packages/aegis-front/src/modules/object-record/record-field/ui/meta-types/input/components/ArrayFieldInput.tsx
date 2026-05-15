@@ -6,7 +6,7 @@ import { MultiItemFieldInput } from '@/object-record/record-field/ui/meta-types/
 import { MULTI_ITEM_FIELD_INPUT_DROPDOWN_ID_PREFIX } from '@/object-record/record-field/ui/meta-types/input/constants/MultiItemFieldInputDropdownClickOutsideId';
 import { arraySchema } from '@/object-record/record-field/ui/types/guards/isFieldArrayValue';
 import { useContext, useMemo } from 'react';
-import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/constants';
+import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 

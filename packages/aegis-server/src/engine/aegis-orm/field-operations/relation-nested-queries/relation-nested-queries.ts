@@ -1,5 +1,5 @@
 import { isDefined } from 'class-validator';
-import { RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/constants';
+import { RELATION_NESTED_QUERY_KEYWORDS } from 'aegis-shared/branding-constants';
 import {
   type EntityTarget,
   type ObjectLiteral,

@@ -1,6 +1,6 @@
 import { type AgentManifest } from 'aegis-shared/application';
 
-import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/constants';
+import { AUTO_SELECT_SMART_MODEL_ID } from 'aegis-shared/branding-constants';
 import { type ModelId } from 'src/engine/metadata-modules/ai/ai-models/types/model-id.type';
 import { type UniversalFlatAgent } from 'src/engine/workspace-manager/workspace-migration/universal-flat-entity/types/universal-flat-agent.type';
 

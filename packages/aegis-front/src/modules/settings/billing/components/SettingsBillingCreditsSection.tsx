@@ -12,7 +12,7 @@ import { useSubscriptionStatus } from '@/workspace/hooks/useSubscriptionStatus';
 import { styled } from '@linaria/react';
 import { t } from '@lingui/core/macro';
 import { useContext } from 'react';
-import { DOCUMENTATION_PATHS } from 'aegis-shared/constants';
+import { DOCUMENTATION_PATHS } from 'aegis-shared/branding-constants';
 import { SettingsPath } from 'aegis-shared/types';
 import { formatToShortNumber, getSettingsPath } from 'aegis-shared/utils';
 import {

@@ -9,7 +9,7 @@ import { emailSchema } from '@/object-record/record-field/ui/validation-schemas/
 import { useSetAtomComponentState } from '@/ui/utilities/state/jotai/hooks/useSetAtomComponentState';
 import { useLingui } from '@lingui/react/macro';
 import { useCallback, useContext, useMemo } from 'react';
-import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/constants';
+import { MULTI_ITEM_FIELD_DEFAULT_MAX_VALUES } from 'aegis-shared/branding-constants';
 import { isDefined } from 'aegis-shared/utils';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 import { useCopyToClipboard } from '~/hooks/useCopyToClipboard';

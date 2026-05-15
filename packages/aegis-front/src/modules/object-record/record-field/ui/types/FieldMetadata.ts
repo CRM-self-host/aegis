@@ -1,7 +1,7 @@
 import { type FieldMetadataItemRelation } from '@/object-metadata/types/FieldMetadataItemRelation';
 import { type ZodHelperLiteral } from '@/object-record/record-field/ui/types/ZodHelperLiteral';
 import { type ObjectRecord } from '@/object-record/types/ObjectRecord';
-import { type CurrencyCode } from 'aegis-shared/constants';
+import { type CurrencyCode } from 'aegis-shared/branding-constants';
 import {
   ConnectedAccountProvider,
   type AllowedAddressSubField,

@@ -2,7 +2,7 @@ import { isNonEmptyString } from '@sniptt/guards';
 import {
   GROUP_BY_DATE_GRANULARITY_THAT_REQUIRE_TIME_ZONE,
   IANA_TIME_ZONES,
-} from 'aegis-shared/constants';
+} from 'aegis-shared/branding-constants';
 import {
   FieldMetadataType,
   ObjectRecordGroupByDateGranularity,

@@ -9,7 +9,7 @@ import {
   FILTER_OPERANDS_MAP,
   getRecordFilterOperands,
 } from '@/object-record/record-filter/utils/getRecordFilterOperands';
-import { COMPOSITE_FIELD_TYPE_SUB_FIELDS_NAMES } from 'aegis-shared/constants';
+import { COMPOSITE_FIELD_TYPE_SUB_FIELDS_NAMES } from 'aegis-shared/branding-constants';
 import {
   compositeTypeDefinitions,
   FieldMetadataType,

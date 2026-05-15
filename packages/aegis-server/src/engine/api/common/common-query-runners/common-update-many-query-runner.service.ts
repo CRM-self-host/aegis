@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 
 import { isDefined } from 'class-validator';
-import { QUERY_MAX_RECORDS_FROM_RELATION } from 'aegis-shared/constants';
+import { QUERY_MAX_RECORDS_FROM_RELATION } from 'aegis-shared/branding-constants';
 import { ObjectRecord } from 'aegis-shared/types';
 import { FindOptionsRelations, ObjectLiteral } from 'typeorm';
 

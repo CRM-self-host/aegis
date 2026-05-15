@@ -2,7 +2,7 @@ import { upsertPermissionFlags } from 'test/integration/metadata/suites/permissi
 import { createOneRole } from 'test/integration/metadata/suites/role/utils/create-one-role.util';
 import { deleteOneRole } from 'test/integration/metadata/suites/role/utils/delete-one-role.util';
 import { jestExpectToBeDefined } from 'test/utils/jest-expect-to-be-defined.util.test';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 
 describe('Permission flag upsert should succeed', () => {
   let createdRoleId: string;

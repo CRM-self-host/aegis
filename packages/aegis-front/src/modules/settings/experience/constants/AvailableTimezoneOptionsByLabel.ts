@@ -1,4 +1,4 @@
-import { IANA_TIME_ZONES } from 'aegis-shared/constants';
+import { IANA_TIME_ZONES } from 'aegis-shared/branding-constants';
 import { formatTimeZoneLabel } from '@/localization/utils/formatTimeZoneLabel';
 import { type SelectOption } from 'aegis-ui/input';
 

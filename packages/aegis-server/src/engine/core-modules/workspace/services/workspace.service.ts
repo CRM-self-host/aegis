@@ -5,7 +5,7 @@ import assert from 'assert';
 
 import { msg } from '@lingui/core/macro';
 import { TypeOrmQueryService } from '@ptc-org/nestjs-query-typeorm';
-import { PermissionFlagType } from 'aegis-shared/constants';
+import { PermissionFlagType } from 'aegis-shared/branding-constants';
 import { assertIsDefinedOrThrow, isDefined } from 'aegis-shared/utils';
 import { WorkspaceActivationStatus } from 'aegis-shared/workspace';
 import { DataSource, QueryRunner, Repository } from 'typeorm';
