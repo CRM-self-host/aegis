@@ -19,10 +19,7 @@ import { ApplicationModule } from 'src/engine/core-modules/application/applicati
 import { PreInstalledAppsModule } from 'src/engine/core-modules/application/pre-installed-apps/pre-installed-apps.module';
 import { ApprovedAccessDomainModule } from 'src/engine/core-modules/approved-access-domain/approved-access-domain.module';
 import { AuthModule } from 'src/engine/core-modules/auth/auth.module';
-import { BillingWebhookModule } from 'src/engine/core-modules/billing-webhook/billing-webhook.module';
-import { AppBillingModule } from 'src/engine/core-modules/billing/app-billing/app-billing.module';
-import { BillingModule } from 'src/engine/core-modules/billing/billing.module';
-import { BillingGraphqlApiExceptionFilter } from 'src/engine/core-modules/billing/filters/billing-graphql-api-exception.filter';
+import { SeatBillingModule } from "src/engine/core-modules/seat-billing/seat-billing.module";
 import { CacheStorageModule } from 'src/engine/core-modules/cache-storage/cache-storage.module';
 import { TimelineCalendarEventModule } from 'src/engine/core-modules/calendar/timeline-calendar-event.module';
 import { CaptchaModule } from 'src/engine/core-modules/captcha/captcha.module';
@@ -64,7 +61,6 @@ import { UserModule } from 'src/engine/core-modules/user/user.module';
 import { WorkflowApiModule } from 'src/engine/core-modules/workflow/workflow-api.module';
 import { WorkspaceInvitationModule } from 'src/engine/core-modules/workspace-invitation/workspace-invitation.module';
 import { WorkspaceModule } from 'src/engine/core-modules/workspace/workspace.module';
-import { AiBillingModule } from 'src/engine/metadata-modules/ai/ai-billing/ai-billing.module';
 import { AiModelsModule } from 'src/engine/metadata-modules/ai/ai-models/ai-models.module';
 import { PageLayoutModule } from 'src/engine/metadata-modules/page-layout/page-layout.module';
 import { RoleModule } from 'src/engine/metadata-modules/role/role.module';
@@ -87,8 +83,7 @@ import { FileModule } from './file/file.module';
     HealthModule,
     AuditModule,
     AuthModule,
-    BillingModule,
-    BillingWebhookModule,
+    SeatBillingModule,
     UsageModule,
     ClientConfigModule,
     FeatureFlagModule,
@@ -97,6 +92,7 @@ import { FileModule } from './file/file.module';
     OpenApiModule,
     ApplicationRegistrationModule,
     ApplicationOAuthModule,
+    SeatBillingModule,
     ApplicationModule,
     ApplicationInstallModule,
     ApplicationUpgradeModule,
@@ -154,7 +150,6 @@ import { FileModule } from './file/file.module';
     }),
     CacheStorageModule,
     AiModelsModule,
-    AiBillingModule,
     LogicFunctionModule.forRoot(),
     CodeInterpreterModule.forRoot(),
     SearchModule,
@@ -165,17 +160,16 @@ import { FileModule } from './file/file.module';
     DashboardModule,
     EventLogsModule,
     PreInstalledAppsModule,
-    AppBillingModule,
   ],
   providers: [
     {
       provide: APP_FILTER,
-      useClass: BillingGraphqlApiExceptionFilter,
     },
   ],
   exports: [
     AuditModule,
     AuthModule,
+    SeatBillingModule,
     FeatureFlagModule,
     TimelineMessagingModule,
     TimelineCalendarEventModule,
