@@ -16,7 +16,7 @@ Aplikace mohou definovat schopnosti AI, které fungují přímo v pracovním pro
 Dovednosti definují znovupoužitelné pokyny a schopnosti, které mohou agenti AI používat ve vašem pracovním prostoru. K definování dovedností s vestavěnou validací použijte `defineSkill()`:
 
 ```ts src/skills/example-skill.ts
-import { defineSkill } from 'aegis-sdk/define';
+import { defineSkill } from 'twenty-sdk/define';
 
 export default defineSkill({
   universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
@@ -45,7 +45,7 @@ Hlavní body:
 Agenti jsou asistenti AI, kteří běží ve vašem pracovním prostoru. K vytvoření agentů s vlastním systémovým promptem použijte `defineAgent()`:
 
 ```ts src/agents/example-agent.ts
-import { defineAgent } from 'aegis-sdk/define';
+import { defineAgent } from 'twenty-sdk/define';
 
 export default defineAgent({
   universalIdentifier: 'b3c4d5e6-f7a8-9012-bcde-f34567890123',

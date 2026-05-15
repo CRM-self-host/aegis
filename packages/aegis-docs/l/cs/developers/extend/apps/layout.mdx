@@ -26,7 +26,7 @@ Pohledy, položky navigační nabídky a rozvržení stránek se na sebe odkazuj
 Zobrazení jsou uložené konfigurace toho, jak se zobrazují záznamy objektu — včetně toho, která pole jsou viditelná, jejich pořadí a jaké filtry či seskupení jsou použity. Pomocí `defineView()` můžete k aplikaci přidat předkonfigurovaná zobrazení:
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk/define';
+import { defineView, ViewKey } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -62,7 +62,7 @@ Hlavní body:
 Položky navigační nabídky přidávají vlastní položky do postranního panelu pracovního prostoru. Použijte `defineNavigationMenuItem()` k odkazování na zobrazení, externí URL nebo objekty:
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -88,7 +88,7 @@ Hlavní body:
 Rozvržení stránek vám umožní přizpůsobit vzhled stránky s detailem záznamu — které karty se zobrazí, jaké widgety jsou uvnitř každé karty a jak jsou uspořádány. Pomocí `definePageLayout()` můžete k aplikaci přidat vlastní rozvržení:
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -139,7 +139,7 @@ Cílové rozvržení stránky musí být buď **standardní** rozvržení strán
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
 const COMPANY_RECORD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =

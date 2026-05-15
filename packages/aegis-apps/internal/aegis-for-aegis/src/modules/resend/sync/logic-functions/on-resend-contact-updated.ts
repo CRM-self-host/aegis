@@ -1,10 +1,10 @@
 import { isNonEmptyString } from '@sniptt/guards';
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import {
   type DatabaseEventPayload,
   type ObjectRecordUpdateEvent,
-} from 'aegis-sdk/logic-function';
+} from 'twenty-sdk/logic-function';
 import { isDefined } from '@utils/is-defined';
 
 import { ON_RESEND_CONTACT_UPDATED_LOGIC_FUNCTION_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';

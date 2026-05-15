@@ -1,4 +1,4 @@
-import { getClient } from 'src/modules/shared/aegis-client';
+import { getClient } from 'src/modules/shared/twenty-sdk/client';
 import type { IssueRow } from 'src/modules/github/issue/types/issue-row';
 
 export async function findIssueByNumberAndRepo(

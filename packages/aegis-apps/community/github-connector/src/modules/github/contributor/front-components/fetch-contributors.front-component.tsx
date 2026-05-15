@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   enqueueSnackbar,
   objectMetadataItem,
   unmountFrontComponent,
   updateProgress,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 import { callAppRoute } from 'src/modules/shared/call-app-route';
 
 type CountResponse = {

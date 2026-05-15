@@ -3001,7 +3001,7 @@ __metadata:
     react: "npm:^18.2.0"
     react-loading-skeleton: "npm:^3.5.0"
     react-markdown: "npm:^10.1.0"
-    aegis-sdk: "npm:0.6.3-alpha"
+    twenty-sdk: "npm:0.6.3-alpha"
     typescript: "npm:^5.9.3"
   languageName: unknown
   linkType: soft
@@ -6757,9 +6757,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aegis-sdk@npm:0.6.3-alpha":
+"twenty-sdk@npm:0.6.3-alpha":
   version: 0.6.3-alpha
-  resolution: "aegis-sdk@npm:0.6.3-alpha"
+  resolution: "twenty-sdk@npm:0.6.3-alpha"
   dependencies:
     "@chakra-ui/react": "npm:^3.33.0"
     "@emotion/react": "npm:^11.14.0"

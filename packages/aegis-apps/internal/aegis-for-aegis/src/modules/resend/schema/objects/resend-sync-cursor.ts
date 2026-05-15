@@ -5,7 +5,7 @@ import {
   SYNC_CURSOR_LAST_RUN_STATUS_FIELD_UNIVERSAL_IDENTIFIER,
   SYNC_CURSOR_STEP_FIELD_UNIVERSAL_IDENTIFIER,
 } from 'src/modules/resend/constants/universal-identifiers';
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 export default defineObject({
   universalIdentifier: RESEND_SYNC_CURSOR_OBJECT_UNIVERSAL_IDENTIFIER,

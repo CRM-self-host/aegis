@@ -1,4 +1,4 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import { formatFarewell } from '../utils/greeting.util';
 
 const handler = () => {

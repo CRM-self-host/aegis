@@ -1,5 +1,5 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
 
 import { RESEND_INITIAL_SYNC_MODE_MONITOR_LOGIC_FUNCTION_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';
 import { areAllSyncCursorsEmpty } from '@modules/resend/sync/utils/are-all-sync-cursors-empty';

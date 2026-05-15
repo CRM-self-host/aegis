@@ -1,4 +1,4 @@
-import { defineApplication } from 'aegis-sdk/define';
+import { defineApplication } from 'twenty-sdk/define';
 import { UNIVERSAL_IDENTIFIERS } from 'src/constants/universal-identifiers.constant';
 
 export const APPLICATION_UNIVERSAL_IDENTIFIER =

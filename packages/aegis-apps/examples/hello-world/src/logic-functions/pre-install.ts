@@ -1,5 +1,5 @@
-import { definePreInstallLogicFunction } from 'aegis-sdk/define';
-import { type InstallPayload } from 'aegis-sdk/logic-function';
+import { definePreInstallLogicFunction } from 'twenty-sdk/define';
+import { type InstallPayload } from 'twenty-sdk/logic-function';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log(

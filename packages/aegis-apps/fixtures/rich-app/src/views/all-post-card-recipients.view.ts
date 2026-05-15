@@ -1,4 +1,4 @@
-import { defineView } from 'aegis-sdk/define';
+import { defineView } from 'twenty-sdk/define';
 import { ViewType } from 'aegis-shared/types';
 import {
   POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER,

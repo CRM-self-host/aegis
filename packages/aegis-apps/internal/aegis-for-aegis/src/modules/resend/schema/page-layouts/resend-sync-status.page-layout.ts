@@ -4,7 +4,7 @@ import {
   RESEND_SYNC_STATUS_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER,
   RESEND_SYNC_STATUS_PAGE_WIDGET_UNIVERSAL_IDENTIFIER,
 } from '@modules/resend/constants/universal-identifiers';
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 
 export default definePageLayout({
   universalIdentifier: RESEND_SYNC_STATUS_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER,

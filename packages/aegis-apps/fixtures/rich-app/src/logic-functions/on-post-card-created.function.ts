@@ -1,4 +1,4 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 
 const handler = async () => {
   return { processed: true };

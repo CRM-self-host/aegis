@@ -1,5 +1,5 @@
 import { isDefined } from '@utils/is-defined';
-import { Callout, IconAlertCircle, themeCssVariables } from 'aegis-sdk/ui';
+import { Callout, IconAlertCircle, themeCssVariables } from 'twenty-sdk/ui';
 
 import { HtmlPreview } from '@modules/resend/html-viewer/components/HtmlPreview';
 import { useRecordHtml } from '@modules/resend/html-viewer/hooks/useRecordHtml';
@@ -10,7 +10,7 @@ type RecordHtmlViewerProps = {
 };
 
 // Styles are computed lazily inside the component body because the SDK
-// mocks `aegis-sdk/ui` at manifest-build time, which leaves
+// mocks `twenty-sdk/ui` at manifest-build time, which leaves
 // `themeCssVariables` undefined during static module evaluation.
 const getStyles = (): Record<string, React.CSSProperties> => {
   const stateContainer: React.CSSProperties = {

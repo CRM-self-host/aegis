@@ -1,4 +1,4 @@
-import { defineApplication } from 'aegis-sdk/define';
+import { defineApplication } from 'twenty-sdk/define';
 
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from './roles/default-function.role';
 

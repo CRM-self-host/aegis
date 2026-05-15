@@ -1,4 +1,4 @@
-import { defineRole } from 'aegis-sdk/define';
+import { defineRole } from 'twenty-sdk/define';
 import { PermissionFlagType } from 'aegis-shared/constants';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 import { isDefined } from '@utils/is-defined';
 

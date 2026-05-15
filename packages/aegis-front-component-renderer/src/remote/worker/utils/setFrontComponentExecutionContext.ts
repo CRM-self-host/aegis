@@ -1,9 +1,9 @@
-import { type FrontComponentExecutionContext } from 'aegis-sdk/front-component';
+import { type FrontComponentExecutionContext } from 'twenty-sdk/front-component';
 
 import {
   FRONT_COMPONENT_CONTEXT_KEY,
   FRONT_COMPONENT_LISTENERS_KEY,
-} from 'aegis-sdk/front-component-renderer';
+} from 'twenty-sdk/front-component-renderer';
 
 type Listener = () => void;
 

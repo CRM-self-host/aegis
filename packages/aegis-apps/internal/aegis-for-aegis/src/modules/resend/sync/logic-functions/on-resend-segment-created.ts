@@ -1,10 +1,10 @@
 import { isNonEmptyString } from '@sniptt/guards';
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import {
   type DatabaseEventPayload,
   type ObjectRecordCreateEvent,
-} from 'aegis-sdk/logic-function';
+} from 'twenty-sdk/logic-function';
 
 import { ON_RESEND_SEGMENT_CREATED_LOGIC_FUNCTION_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';
 import type { ResendSegmentRecord } from '@modules/resend/shared/types/resend-segment-record';

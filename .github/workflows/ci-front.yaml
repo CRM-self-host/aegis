@@ -28,8 +28,8 @@ jobs:
         packages/aegis-front-component-renderer/**
         packages/aegis-ui/**
         packages/aegis-shared/**
-        packages/aegis-sdk/**
-        !packages/aegis-sdk/package.json
+        packages/twenty-sdk/**
+        !packages/twenty-sdk/package.json
   front-sb-build:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'

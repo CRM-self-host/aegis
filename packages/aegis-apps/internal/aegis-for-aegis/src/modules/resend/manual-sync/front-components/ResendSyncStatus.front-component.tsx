@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 
 import { ResendSyncStatus } from '@modules/resend/manual-sync/components/ResendSyncStatus';
 import { RESEND_SYNC_STATUS_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';

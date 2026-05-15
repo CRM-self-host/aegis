@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-sdk/clients';
 import { isDefined } from 'aegis-shared/utils';
 
 type CallRecording = {

@@ -65,14 +65,14 @@ yarn app:uninstall
 yarn help
 ```
 
-참고: [create-aegis-app](https://www.npmjs.com/package/create-aegis-app) 및 [aegis-sdk CLI](https://www.npmjs.com/package/aegis-sdk)의 CLI 참고 페이지도 확인하세요.
+참고: [create-aegis-app](https://www.npmjs.com/package/create-aegis-app) 및 [twenty-sdk CLI](https://www.npmjs.com/package/twenty-sdk)의 CLI 참고 페이지도 확인하세요.
 
 ## 프로젝트 구조(스캐폴딩됨)
 
 `npx create-aegis-app@latest my-aegis-app`를 실행하면, 스캐폴더가 다음을 수행합니다:
 
 * `my-aegis-app/`에 최소한의 기본 애플리케이션을 복사합니다
-* 로컬 `aegis-sdk` 종속성과 Yarn 4 구성을 추가합니다
+* 로컬 `twenty-sdk` 종속성과 Yarn 4 구성을 추가합니다
 * `aegis` CLI와 연결된 설정 파일과 스크립트를 생성합니다
 * 기본 애플리케이션 구성과 기본 함수 역할을 생성합니다
 
@@ -154,7 +154,7 @@ src/
 
 개요:
 
-* **package.json**: 앱 이름, 버전, 엔진(Node 24+, Yarn 4)을 선언하고, `aegis-sdk`와 함께 `app:dev`, `entity:add`, `function:logs`, `function:execute`, `app:uninstall`, `auth:login` 같은 스크립트를 추가합니다. 이 스크립트들은 로컬 `aegis` CLI에 위임됩니다.
+* **package.json**: 앱 이름, 버전, 엔진(Node 24+, Yarn 4)을 선언하고, `twenty-sdk`와 함께 `app:dev`, `entity:add`, `function:logs`, `function:execute`, `app:uninstall`, `auth:login` 같은 스크립트를 추가합니다. 이 스크립트들은 로컬 `aegis` CLI에 위임됩니다.
 * **.gitignore**: `node_modules`, `.yarn`, `generated/`(타입드 클라이언트), `dist/`, `build/`, 커버리지 폴더, 로그 파일, `.env*` 파일 등의 일반 산출물을 무시합니다.
 * **yarn.lock**, **.yarnrc.yml**, **.yarn/**: 프로젝트에서 사용하는 Yarn 4 툴체인을 고정하고 구성합니다.
 * **.nvmrc**: 프로젝트에서 예상하는 Node.js 버전을 고정합니다.
@@ -170,7 +170,7 @@ src/
 
 이후 명령을 실행하면 더 많은 파일과 폴더가 추가됩니다:
 
-* `yarn app:dev`는 `node_modules/aegis-sdk/generated`에 타입드 Aegis 클라이언트를 자동으로 생성합니다.
+* `yarn app:dev`는 `node_modules/twenty-sdk/generated`에 타입드 Aegis 클라이언트를 자동으로 생성합니다.
 * `yarn entity:add`는 사용자 정의 객체, 함수, 프런트 컴포넌트 또는 역할에 대한 엔티티 정의 파일을 `src/` 아래에 추가합니다.
 
 ## 인증
@@ -208,7 +208,7 @@ yarn auth:status
 
 ## SDK 리소스(타입 및 구성) 사용
 
-aegis-sdk는 앱 내부에서 사용하는 타입드 빌딩 블록과 헬퍼 함수를 제공합니다. 가장 자주 사용하게 될 핵심 요소는 다음과 같습니다.
+twenty-sdk는 앱 내부에서 사용하는 타입드 빌딩 블록과 헬퍼 함수를 제공합니다. 가장 자주 사용하게 될 핵심 요소는 다음과 같습니다.
 
 ### 헬퍼 함수
 
@@ -229,7 +229,7 @@ SDK는 앱 엔티티를 정의할 때 사용할 수 있는, 내장 검증이 포
 
 ```typescript
 // src/app/postCard.object.ts
-import { defineObject, FieldType } from 'aegis-sdk';
+import { defineObject, FieldType } from 'twenty-sdk';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',
@@ -320,7 +320,7 @@ Use `defineApplication()` to define your application configuration:
 
 ```typescript
 // src/app/application.config.ts
-import { defineApplication } from 'aegis-sdk';
+import { defineApplication } from 'twenty-sdk';
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from './default-function.role';
 
 export default defineApplication({
@@ -360,7 +360,7 @@ export default defineApplication({
 
 ```typescript
 // src/app/default-function.role.ts
-import { defineRole, PermissionFlag } from 'aegis-sdk';
+import { defineRole, PermissionFlag } from 'twenty-sdk';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   'b648f87b-1d26-4961-b974-0908fd991061';
@@ -416,8 +416,8 @@ The `universalIdentifier` of this role is then referenced in `application.config
 
 ```typescript
 // src/app/createPostCard.function.ts
-import { defineFunction } from 'aegis-sdk';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk';
+import { defineFunction } from 'twenty-sdk';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk';
 import Aegis, { type Person } from '~/generated';
 
 const handler = async (params: RoutePayload) => {
@@ -509,10 +509,10 @@ export default defineFunction({
   **기존 함수 마이그레이션 방법:** 핸들러에서 params 객체에서 직접 구조 분해하는 대신 `event.body`, `event.queryStringParameters`, 또는 `event.pathParameters`에서 구조 분해하도록 업데이트하세요.
 </Warning>
 
-라우트 트리거가 로직 함수를 호출하면, AWS HTTP API v2 형식을 따르는 `RoutePayload` 객체를 받습니다. `aegis-sdk`에서 해당 타입을 임포트하세요:
+라우트 트리거가 로직 함수를 호출하면, AWS HTTP API v2 형식을 따르는 `RoutePayload` 객체를 받습니다. `twenty-sdk`에서 해당 타입을 임포트하세요:
 
 ```typescript
-import { defineFunction, type RoutePayload } from 'aegis-sdk';
+import { defineFunction, type RoutePayload } from 'twenty-sdk';
 
 const handler = async (event: RoutePayload) => {
   // Access request data
@@ -582,7 +582,7 @@ const handler = async (event: RoutePayload) => {
 
 ### 생성된 타입드 클라이언트
 
-`yarn app:dev`는 `node_modules/aegis-sdk/generated`에 타입드 Aegis 클라이언트를 자동으로 생성합니다. 함수에서 사용하세요:
+`yarn app:dev`는 `node_modules/twenty-sdk/generated`에 타입드 Aegis 클라이언트를 자동으로 생성합니다. 함수에서 사용하세요:
 
 ```typescript
 import Aegis from '~/generated';
@@ -612,10 +612,10 @@ const { me } = await client.query({ me: { id: true, displayName: true } });
 
 ## 수동 설정(스캐폴더 없이)
 
-최적의 시작 경험을 위해 `create-aegis-app` 사용을 권장하지만, 프로젝트를 수동으로 설정할 수도 있습니다. CLI를 전역으로 설치하지 마세요. 대신 `aegis-sdk`를 로컬 종속성으로 추가하고 package.json에 스크립트를 연결하세요:
+최적의 시작 경험을 위해 `create-aegis-app` 사용을 권장하지만, 프로젝트를 수동으로 설정할 수도 있습니다. CLI를 전역으로 설치하지 마세요. 대신 `twenty-sdk`를 로컬 종속성으로 추가하고 package.json에 스크립트를 연결하세요:
 
 ```bash filename="Terminal"
-yarn add -D aegis-sdk
+yarn add -D twenty-sdk
 ```
 
 그런 다음 다음과 같은 스크립트를 추가하세요:

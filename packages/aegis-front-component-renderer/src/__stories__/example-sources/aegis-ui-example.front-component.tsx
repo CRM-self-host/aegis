@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { useState } from 'react';
 import {
   Button,
@@ -8,7 +8,7 @@ import {
   Status,
   Tag,
   ThemeProvider,
-} from 'aegis-sdk/ui';
+} from 'twenty-sdk/ui';
 
 const CARD_STYLE = {
   padding: 24,

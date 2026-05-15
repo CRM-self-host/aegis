@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId, updateProgress, enqueueSnackbar, unmountFrontComponent } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId, updateProgress, enqueueSnackbar, unmountFrontComponent } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { isDefined } from 'aegis-shared/utils';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 

@@ -15,7 +15,7 @@ import { isDefined } from 'aegis-shared/utils';
 import { installStyleBridge } from '@/polyfills/installStyleBridge';
 import { installStylePropertyOnRemoteElements } from '@/remote/utils/installStylePropertyOnRemoteElements';
 import { patchRemoteElementSetAttribute } from '@/remote/utils/patchRemoteElementSetAttribute';
-import { type FrontComponentExecutionContext } from 'aegis-sdk/front-component';
+import { type FrontComponentExecutionContext } from 'twenty-sdk/front-component';
 import { frontComponentHostCommunicationApi } from '@/constants/frontComponentHostCommunicationApi';
 import { HTML_TAG_TO_CUSTOM_ELEMENT_TAG } from '@/constants/HtmlTagToRemoteComponent';
 import { setFrontComponentExecutionContext } from './utils/setFrontComponentExecutionContext';
@@ -52,8 +52,8 @@ const fetchComponentSource = async (
 };
 
 const SDK_IMPORT_SPECIFIERS = [
-  'aegis-client-sdk/core',
-  'aegis-client-sdk/metadata',
+  'twenty-client-sdk/core',
+  'twenty-client-sdk/metadata',
 ] as const;
 
 // Rewrites bare SDK import specifiers to the blob URLs provided by the host.
@@ -62,8 +62,8 @@ const rewriteSdkImports = (
   sdkClientUrls: { core: string; metadata: string },
 ): string => {
   const specifierToBlobUrl: Record<string, string> = {
-    'aegis-client-sdk/core': sdkClientUrls.core,
-    'aegis-client-sdk/metadata': sdkClientUrls.metadata,
+    'twenty-client-sdk/core': sdkClientUrls.core,
+    'twenty-client-sdk/metadata': sdkClientUrls.metadata,
   };
 
   let rewritten = source;

@@ -5,9 +5,9 @@ import {
   SUMMARIZE_PERSON_RECORDINGS_COMMAND_UNIVERSAL_IDENTIFIER,
   SUMMARIZE_PERSON_RECORDINGS_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER,
 } from 'src/constants/summarize-person-recordings-universal-identifiers';
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-sdk/clients';
 import { isDefined } from 'aegis-shared/utils';
 
 const SUMMARIZATION_SYSTEM_PROMPT = [

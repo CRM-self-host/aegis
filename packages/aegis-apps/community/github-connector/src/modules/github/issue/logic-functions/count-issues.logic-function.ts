@@ -1,5 +1,5 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { type RoutePayload } from 'aegis-sdk/logic-function';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { type RoutePayload } from 'twenty-sdk/logic-function';
 import { countAcrossRepos } from 'src/modules/github/connector/count-across-repos';
 import { countIssues } from 'src/modules/github/issue/graphql/github/count-issues';
 

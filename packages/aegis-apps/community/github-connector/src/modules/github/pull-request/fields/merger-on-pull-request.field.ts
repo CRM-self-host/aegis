@@ -1,4 +1,4 @@
-import { defineField, FieldType, RelationType, OnDeleteAction } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType, OnDeleteAction } from 'twenty-sdk/define';
 import { PULL_REQUEST_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request/objects/pull-request.object';
 import { CONTRIBUTOR_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/objects/contributor.object';
 import { MERGED_PULL_REQUESTS_ON_CONTRIBUTOR_FIELD_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/fields/merged-pull-requests-on-contributor.field';

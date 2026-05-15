@@ -1,4 +1,4 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { resendInitialSyncModeMonitorHandler } from '@modules/resend/sync/logic-functions/resend-initial-sync-mode-monitor';
@@ -6,11 +6,11 @@ import { resendInitialSyncModeMonitorHandler } from '@modules/resend/sync/logic-
 const mockSetInitialSyncMode = vi.fn();
 const mockAreAllSyncCursorsEmpty = vi.fn();
 
-vi.mock('aegis-client-sdk/core', () => ({
+vi.mock('twenty-client-sdk/core', () => ({
   CoreApiClient: vi.fn(),
 }));
 
-vi.mock('aegis-client-sdk/metadata', () => ({
+vi.mock('twenty-client-sdk/metadata', () => ({
   MetadataApiClient: vi.fn(),
 }));
 

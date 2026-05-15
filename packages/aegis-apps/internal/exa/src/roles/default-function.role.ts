@@ -1,4 +1,4 @@
-import { defineRole } from 'aegis-sdk/define';
+import { defineRole } from 'twenty-sdk/define';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   '9a55f3d2-f87c-4f1b-a0f3-5d1c6b8a2e4c';

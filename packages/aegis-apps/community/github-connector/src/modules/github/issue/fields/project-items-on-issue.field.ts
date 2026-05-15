@@ -1,4 +1,4 @@
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 import { ISSUE_UNIVERSAL_IDENTIFIER } from 'src/modules/github/issue/objects/issue.object';
 import { PROJECT_ITEM_UNIVERSAL_IDENTIFIER } from 'src/modules/github/project-item/objects/project-item.object';
 import { LINKED_ISSUE_ON_PROJECT_ITEM_FIELD_UNIVERSAL_IDENTIFIER } from 'src/modules/github/project-item/fields/linked-issue-on-project-item.field';

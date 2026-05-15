@@ -26,7 +26,7 @@ Vistas, itens de navegação e layouts de página referenciam-se mutuamente por 
 As visualizações são configurações salvas de como os registros de um objeto são exibidos — incluindo quais campos são visíveis, sua ordem e quaisquer filtros ou grupos aplicados. Use `defineView()` para enviar visualizações pré-configuradas com seu app:
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk/define';
+import { defineView, ViewKey } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -62,7 +62,7 @@ Pontos-chave:
 Os itens do menu de navegação adicionam entradas personalizadas à barra lateral do espaço de trabalho. Use `defineNavigationMenuItem()` para vincular a visualizações, URLs externas ou objetos:
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -88,7 +88,7 @@ Pontos-chave:
 Layouts de página permitem personalizar como uma página de detalhes do registro se parece — quais abas aparecem, quais widgets estão dentro de cada aba e como eles são organizados. Use `definePageLayout()` para enviar layouts personalizados com seu app:
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -139,7 +139,7 @@ O layout de página de destino deve ser um layout de página **padrão** do Aegi
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
 const COMPANY_RECORD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =

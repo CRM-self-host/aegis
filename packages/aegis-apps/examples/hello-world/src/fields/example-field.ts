@@ -1,4 +1,4 @@
-import { defineField, FieldType } from 'aegis-sdk/define';
+import { defineField, FieldType } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from 'src/objects/example-object';
 
 export default defineField({

@@ -3,7 +3,7 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { getFrontComponentBuildPlugins } from 'aegis-sdk/front-component-renderer/build';
+import { getFrontComponentBuildPlugins } from 'twenty-sdk/front-component-renderer/build';
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 const exampleSourcesDir = path.resolve(
@@ -28,12 +28,12 @@ const aegisUiIndividualIndex = path.resolve(
 
 const sdkDefineIndex = path.resolve(
   dirname,
-  '../../../aegis-sdk/dist/define/index.mjs',
+  '../../../twenty-sdk/dist/define/index.mjs',
 );
 
 const sdkFrontComponentIndex = path.resolve(
   dirname,
-  '../../../aegis-sdk/dist/front-component/index.mjs',
+  '../../../twenty-sdk/dist/front-component/index.mjs',
 );
 
 const aegisSharedIndividualDir = path.resolve(
@@ -65,9 +65,9 @@ const aegisSharedAliases = Object.fromEntries(
 const storyAlias = {
   react: path.join(rootNodeModules, 'react'),
   'react-dom': path.join(rootNodeModules, 'react-dom'),
-  'aegis-sdk/define': sdkDefineIndex,
-  'aegis-sdk/front-component': sdkFrontComponentIndex,
-  'aegis-sdk/ui': aegisUiIndividualIndex,
+  'twenty-sdk/define': sdkDefineIndex,
+  'twenty-sdk/front-component': sdkFrontComponentIndex,
+  'twenty-sdk/ui': aegisUiIndividualIndex,
   ...aegisSharedAliases,
 };
 

@@ -3,7 +3,7 @@ import {
   definePageLayout,
   ObjectRecordGroupByDateGranularity,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { TOP_PR_AUTHORS_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/front-components/top-pr-authors.front-component';
 import { TOP_REVIEWERS_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/front-components/top-reviewers.front-component';
 import {

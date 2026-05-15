@@ -1,4 +1,4 @@
-import { chunkedBatchCreate } from 'src/modules/shared/aegis-client';
+import { chunkedBatchCreate } from 'src/modules/shared/twenty-sdk/client';
 import type { LinksFieldValue } from 'src/modules/shared/types';
 import type { PullRequestRow } from 'src/modules/github/pull-request/types/pull-request-row';
 

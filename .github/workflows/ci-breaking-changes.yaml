@@ -189,7 +189,7 @@ jobs:
           ADMIN_TOKEN=$(jq -r '.APPLE_JANE_ADMIN_ACCESS_TOKEN' packages/aegis-server/test/integration/constants/test-tokens.json)
 
           # Load introspection query from file
-          INTROSPECTION_QUERY=$(cat packages/aegis-utils/graphql-introspection-query.graphql)
+          INTROSPECTION_QUERY=$(cat scripts/graphql-introspection-query.graphql)
 
           # Prepare the query payload
           QUERY_PAYLOAD=$(echo "$INTROSPECTION_QUERY" | tr '\n' ' ' | sed 's/"/\\"/g')
@@ -349,7 +349,7 @@ jobs:
           ADMIN_TOKEN=$(jq -r '.APPLE_JANE_ADMIN_ACCESS_TOKEN' packages/aegis-server/test/integration/constants/test-tokens.json)
 
           # Load introspection query from file
-          INTROSPECTION_QUERY=$(cat packages/aegis-utils/graphql-introspection-query.graphql)
+          INTROSPECTION_QUERY=$(cat scripts/graphql-introspection-query.graphql)
 
           # Prepare the query payload
           QUERY_PAYLOAD=$(echo "$INTROSPECTION_QUERY" | tr '\n' ' ' | sed 's/"/\\"/g')

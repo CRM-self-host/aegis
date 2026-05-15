@@ -26,7 +26,7 @@ icon: table-columns
 العروض هي تكوينات محفوظة لكيفية عرض سجلات كائن ما — بما في ذلك الحقول المرئية وترتيبها وأي مرشّحات أو مجموعات مُطبَّقة. استخدم `defineView()` لتضمين عروض مُهيّأة مسبقًا مع تطبيقك:
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk/define';
+import { defineView, ViewKey } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -62,7 +62,7 @@ export default defineView({
 تضيف عناصر قائمة التنقل إدخالات مخصّصة إلى الشريط الجانبي لمساحة العمل. استخدم `defineNavigationMenuItem()` للارتباط بالعروض أو عناوين URL خارجية أو الكائنات:
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -88,7 +88,7 @@ export default defineNavigationMenuItem({
 تتيح لك تخطيطات الصفحات تخصيص مظهر صفحة تفاصيل السجل — ما الألسنة التي تظهر، وما الويدجتات داخل كل لسان، وكيف يتم ترتيبها. استخدم `definePageLayout()` لتضمين تخطيطات مخصّصة مع تطبيقك:
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -139,7 +139,7 @@ export default definePageLayout({
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
 const COMPANY_RECORD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =

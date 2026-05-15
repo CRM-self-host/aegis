@@ -20,9 +20,9 @@ jobs:
         package.json
         yarn.lock
         packages/aegis-front-component-renderer/**
-        packages/aegis-sdk/**
+        packages/twenty-sdk/**
         packages/aegis-shared/**
-        !packages/aegis-sdk/package.json
+        !packages/twenty-sdk/package.json
   renderer-task:
     needs: changed-files-check
     if: needs.changed-files-check.outputs.any_changed == 'true'
@@ -82,7 +82,7 @@ jobs:
       - name: Install dependencies
         uses: ./.github/actions/yarn-install
       - name: Build dependencies
-        run: npx nx build aegis-sdk
+        run: npx nx build twenty-sdk
       - name: Download storybook build
         uses: actions/download-artifact@v4
         with:

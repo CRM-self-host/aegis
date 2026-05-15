@@ -228,10 +228,10 @@
     "@types/tar": "^7.0.87",
     "@types/unzipper": "^0",
     "@yarnpkg/types": "^4.0.0",
-    "aegis-client-sdk": "workspace:*",
     "aegis-emails": "workspace:*",
     "aegis-shared": "workspace:*",
-    "rimraf": "^5.0.5"
+    "rimraf": "^5.0.5",
+    "twenty-client-sdk": "^2.5.0"
   },
   "engines": {
     "node": "^24.5.0",

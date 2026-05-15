@@ -18,7 +18,7 @@ icon: window-maximize
 Bir ön uç bileşenini çalışırken görmenin en hızlı yolu, onu bir komut olarak kaydetmektir. `isPinned: true` ile bir `command` alanı eklemek, sayfanın sağ üst köşesinde hızlı işlem düğmesi olarak görünmesini sağlar — herhangi bir sayfa düzenine gerek yoktur:
 
 ```tsx src/front-components/hello-world.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 
 const HelloWorld = () => {
   return (
@@ -77,8 +77,8 @@ Komutların ötesinde, bir ön uç bileşenini bir **sayfa düzeninde** widget o
 **Headless (`isHeadless: true`)** — Bileşen arka planda görünmez şekilde bağlanır. Yan paneli açmaz. Headless bileşenler, mantığı çalıştırıp ardından kendilerini kaldıran eylemler için tasarlanmıştır — örneğin, bir async görevi çalıştırma, bir sayfaya gitme veya bir onay modalı gösterme. Aşağıda açıklanan SDK Command bileşenleriyle doğal olarak eşleşirler.
 
 ```tsx src/front-components/sync-tracker.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId, enqueueSnackbar } from 'aegis-sdk/front-component';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId, enqueueSnackbar } from 'twenty-sdk/front-component';
 import { useEffect } from 'react';
 
 const SyncTracker = () => {
@@ -104,9 +104,9 @@ Bileşen `null` döndürdüğü için, Aegis bunun için bir kapsayıcı oluştu
 
 ## SDK Command bileşenleri
 
-`aegis-sdk` paketi, headless ön bileşenler için tasarlanmış dört Command yardımcı bileşeni sağlar. Her bileşen bağlandığında bir eylem yürütür, hataları bir snackbar bildirimi göstererek ele alır ve tamamlandığında ön bileşeni otomatik olarak kaldırır.
+`twenty-sdk` paketi, headless ön bileşenler için tasarlanmış dört Command yardımcı bileşeni sağlar. Her bileşen bağlandığında bir eylem yürütür, hataları bir snackbar bildirimi göstererek ele alır ve tamamlandığında ön bileşeni otomatik olarak kaldırır.
 
-Bunları `aegis-sdk/command` içinden içe aktarın:
+Bunları `twenty-sdk/command` içinden içe aktarın:
 
 * **`Command`** — `execute` prop'u aracılığıyla async bir geri çağrıyı çalıştırır.
 * **`CommandLink`** — Bir uygulama yoluna gider. Props: `to`, `params`, `queryParams`, `options`.
@@ -116,9 +116,9 @@ Bunları `aegis-sdk/command` içinden içe aktarın:
 `Command` kullanarak komut menüsünden bir eylem çalıştıran headless bir ön bileşenin tam örneği:
 
 ```tsx src/front-components/run-action.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { Command } from 'aegis-sdk/command';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { Command } from 'twenty-sdk/command';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const RunAction = () => {
   const execute = async () => {
@@ -152,8 +152,8 @@ export default defineFrontComponent({
 Ve yürütmeden önce onay istemek için `CommandModal` kullanan bir örnek:
 
 ```tsx src/front-components/delete-draft.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { CommandModal } from 'aegis-sdk/command';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { CommandModal } from 'twenty-sdk/command';
 
 const DeleteDraft = () => {
   const execute = async () => {
@@ -190,12 +190,12 @@ export default defineFrontComponent({
 Bileşeninizin içinde, geçerli kullanıcıya, kayda ve bileşen örneğine erişmek için SDK hook'larını kullanın:
 
 ```tsx src/front-components/record-info.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   useUserId,
   useRecordId,
   useFrontComponentId,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 const RecordInfo = () => {
   const userId = useUserId();
@@ -229,7 +229,7 @@ Kullanılabilir hook'lar:
 
 ## Host iletişim API'si
 
-Ön uç bileşenleri, `aegis-sdk`'deki işlevleri kullanarak gezinmeyi, modalları ve bildirimleri tetikleyebilir:
+Ön uç bileşenleri, `twenty-sdk`'deki işlevleri kullanarak gezinmeyi, modalları ve bildirimleri tetikleyebilir:
 
 | Fonksiyon                                       | Açıklama                           |
 | ----------------------------------------------- | ---------------------------------- |
@@ -244,10 +244,10 @@ Kullanılabilir hook'lar:
 Bir eylem tamamlandıktan sonra bir snackbar göstermek ve yan paneli kapatmak için host API'sini kullanan bir örnek:
 
 ```tsx src/front-components/archive-record.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { enqueueSnackbar, closeSidePanel } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { enqueueSnackbar, closeSidePanel } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const ArchiveRecord = () => {
   const recordId = useRecordId();
@@ -303,17 +303,17 @@ export default defineFrontComponent({
 
 ## Koşullu kullanılabilirlik ifadeleri
 
-`conditionalAvailabilityExpression` alanı, geçerli sayfa bağlamına göre bir komutun ne zaman görünür olacağını kontrol etmenizi sağlar. İfadeler oluşturmak için `aegis-sdk`'den türlendirilmiş değişkenleri ve operatörleri içe aktarın:
+`conditionalAvailabilityExpression` alanı, geçerli sayfa bağlamına göre bir komutun ne zaman görünür olacağını kontrol etmenizi sağlar. İfadeler oluşturmak için `twenty-sdk`'den türlendirilmiş değişkenleri ve operatörleri içe aktarın:
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   pageType,
   numberOfSelectedRecords,
   objectPermissions,
   everyEquals,
   isDefined,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 export default defineFrontComponent({
   universalIdentifier: '...',
@@ -373,7 +373,7 @@ export default defineFrontComponent({
 Ön uç bileşenleri, `getPublicAssetUrl` kullanarak uygulamanın `public/` dizinindeki dosyalara erişebilir:
 
 ```tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const Logo = () => <img src={getPublicAssetUrl('logo.png')} alt="Logo" />;
 
@@ -391,15 +391,15 @@ Ayrıntılar için [genel varlıklar bölümüne](/l/tr/developers/extend/apps/c
 Ön uç bileşenleri birden fazla biçimlendirme yaklaşımını destekler. Şunları kullanabilirsiniz:
 
 * **Satır içi stiller** — `style={{ color: 'red' }}`
-* **Aegis UI bileşenleri** — `aegis-sdk/ui` içinden içe aktarın (Button, Tag, Status, Chip, Avatar ve daha fazlası)
+* **Aegis UI bileşenleri** — `twenty-sdk/ui` içinden içe aktarın (Button, Tag, Status, Chip, Avatar ve daha fazlası)
 * **Emotion** — `@emotion/react` ile CSS-in-JS
 * **Styled-components** — `styled.div` kalıpları
 * **Tailwind CSS** — yardımcı sınıflar
 * **React ile uyumlu herhangi bir CSS-in-JS kitaplığı**
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { Button, Tag, Status } from 'aegis-sdk/ui';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { Button, Tag, Status } from 'twenty-sdk/ui';
 
 const StyledWidget = () => {
   return (

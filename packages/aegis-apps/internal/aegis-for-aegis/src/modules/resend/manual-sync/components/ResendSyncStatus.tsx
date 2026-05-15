@@ -1,6 +1,6 @@
 import { isDefined } from '@utils/is-defined';
 import { useEffect, useState } from 'react';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import {
   Callout,
   H2Title,
@@ -8,7 +8,7 @@ import {
   IconRefresh,
   Status,
   themeCssVariables,
-} from 'aegis-sdk/ui';
+} from 'twenty-sdk/ui';
 
 import { extractConnection } from '@modules/resend/shared/utils/typed-client';
 import { RESEND_SYNC_CURSOR_STEPS } from '@modules/resend/sync/cursor/constants/resend-sync-cursor-steps';

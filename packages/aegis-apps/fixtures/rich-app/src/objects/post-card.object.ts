@@ -1,4 +1,4 @@
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',

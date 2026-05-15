@@ -12,9 +12,9 @@ Logikfunktionen sind serverseitige TypeScript-Funktionen, die auf der Aegis-Plat
 Jede Funktionsdatei verwendet `defineLogicFunction()`, um eine Konfiguration mit einem Handler und optionalen Triggern zu exportieren.
 
 ```ts src/logic-functions/createPostCard.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk/define';
-import { CoreApiClient, type Person } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk/define';
+import { CoreApiClient, type Person } from 'twenty-client-sdk/core';
 
 const handler = async (params: RoutePayload) => {
   const client = new CoreApiClient();
@@ -79,10 +79,10 @@ yarn aegis logs
 #### Routen-Trigger-Payload
 
 Wenn ein Route-Trigger Ihre Logikfunktion aufruft, erhält sie ein `RoutePayload`-Objekt, das dem [AWS-HTTP-API-v2-Format](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html) folgt.
-Importieren Sie den Typ `RoutePayload` aus `aegis-sdk`:
+Importieren Sie den Typ `RoutePayload` aus `twenty-sdk`:
 
 ```ts
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk/define';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk/define';
 
 const handler = async (event: RoutePayload) => {
   const { headers, queryStringParameters, pathParameters, body } = event;
@@ -147,8 +147,8 @@ Logikfunktionen können als **Tools** für KI-Agenten und Workflows verfügbar g
 Um eine Logikfunktion als Tool zu markieren, setzen Sie `isTool: true`:
 
 ```ts src/logic-functions/enrich-company.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const handler = async (params: { companyName: string; domain?: string }) => {
   const client = new CoreApiClient();
@@ -213,7 +213,7 @@ export default defineLogicFunction({
 Eine Post-Installationsfunktion ist eine Logikfunktion, die automatisch ausgeführt wird, nachdem Ihre App in einem Arbeitsbereich installiert wurde. Der Server führt sie **nach** der Synchronisierung der Metadaten der App und der Generierung des SDK-Clients aus, sodass der Arbeitsbereich vollständig einsatzbereit ist und das neue Schema bereitsteht. Typische Anwendungsfälle umfassen das Befüllen von Standarddaten, das Erstellen anfänglicher Datensätze, das Konfigurieren von Arbeitsbereichseinstellungen oder das Bereitstellen von Ressourcen bei Diensten von Drittanbietern.
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Post install logic function executed successfully!', payload.previousVersion);
@@ -256,7 +256,7 @@ Hauptpunkte:
 Eine Pre-Install-Funktion ist eine Logikfunktion, die automatisch während der Installation ausgeführt wird, **bevor die Metadatenmigration des Workspaces angewendet wird**. Sie hat die gleiche Payload-Struktur wie Post-Install (`InstallPayload`), ist aber früher im Installationsablauf positioniert, sodass sie Zustände vorbereiten kann, von denen die bevorstehende Migration abhängt — typische Anwendungsfälle sind das Sichern von Daten, die Validierung der Kompatibilität mit dem neuen Schema oder das Archivieren von Datensätzen, die umstrukturiert oder entfernt werden sollen.
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Pre install logic function executed successfully!', payload.previousVersion);
@@ -314,7 +314,7 @@ Pre-Install ist immer **synchron** (blockiert die Installation und kann sie abbr
 Beispiel — nach der Installation einen Standard-`PostCard`-Datensatz anlegen:
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion }: InstallPayload): Promise<void> => {
@@ -346,7 +346,7 @@ export default definePostInstallLogicFunction({
 Beispiel — Datensätze vor einer destruktiven Migration archivieren:
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion, newVersion }: InstallPayload): Promise<void> => {
@@ -404,14 +404,14 @@ Im Zweifel auf **Post-Install** setzen. Greifen Sie nur zu Pre-Install, wenn die
 </Accordion>
 </AccordionGroup>
 
-## Typisierte API-Clients (aegis-client-sdk)
+## Typisierte API-Clients (twenty-client-sdk)
 
-Das Paket `aegis-client-sdk` stellt zwei typisierte GraphQL-Clients bereit, um aus Ihren Logikfunktionen und Frontend-Komponenten mit der Aegis-API zu interagieren.
+Das Paket `twenty-client-sdk` stellt zwei typisierte GraphQL-Clients bereit, um aus Ihren Logikfunktionen und Frontend-Komponenten mit der Aegis-API zu interagieren.
 
 | Client              | Importieren                  | Endpunkt                                                  | Generiert?                           |
 | ------------------- | ---------------------------- | --------------------------------------------------------- | ------------------------------------ |
-| `CoreApiClient`     | `aegis-client-sdk/core`     | `/graphql` — Arbeitsbereichsdaten (Datensätze, Objekte)   | Ja, zur Entwicklungs-/Build-Zeit     |
-| `MetadataApiClient` | `aegis-client-sdk/metadata` | `/metadata` — Arbeitsbereichskonfiguration, Datei-Uploads | Nein, wird vorgefertigt ausgeliefert |
+| `CoreApiClient`     | `twenty-client-sdk/core`     | `/graphql` — Arbeitsbereichsdaten (Datensätze, Objekte)   | Ja, zur Entwicklungs-/Build-Zeit     |
+| `MetadataApiClient` | `twenty-client-sdk/metadata` | `/metadata` — Arbeitsbereichskonfiguration, Datei-Uploads | Nein, wird vorgefertigt ausgeliefert |
 
 <AccordionGroup>
 <Accordion title="CoreApiClient" description="Arbeitsbereichsdaten (Datensätze, Objekte) abfragen und ändern">
@@ -419,7 +419,7 @@ Das Paket `aegis-client-sdk` stellt zwei typisierte GraphQL-Clients bereit, um a
 Der `CoreApiClient` ist der Haupt-Client zum Abfragen und Ändern von Arbeitsbereichsdaten. Er wird während `yarn aegis dev` oder `yarn aegis build` **aus Ihrem Arbeitsbereichsschema generiert** und ist daher vollständig typisiert, passend zu Ihren Objekten und Feldern.
 
 ```ts
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const client = new CoreApiClient();
 
@@ -464,7 +464,7 @@ Der Client verwendet eine Selection-Set-Syntax: Übergeben Sie `true`, um ein Fe
 `CoreSchema` stellt TypeScript-Typen bereit, die Ihren Arbeitsbereichsobjekten entsprechen — nützlich zum Typisieren von Komponentenzustand oder Funktionsparametern:
 
 ```ts
-import { CoreApiClient, CoreSchema } from 'aegis-client-sdk/core';
+import { CoreApiClient, CoreSchema } from 'twenty-client-sdk/core';
 import { useState } from 'react';
 
 const [company, setCompany] = useState<
@@ -488,7 +488,7 @@ setCompany(result.company);
 `MetadataApiClient` ist im SDK bereits vorgefertigt enthalten (keine Generierung erforderlich). Er fragt den Endpunkt `/metadata` nach Arbeitsbereichskonfiguration, Anwendungen und Datei-Uploads ab.
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadataClient = new MetadataApiClient();
 
@@ -517,7 +517,7 @@ const { objects } = await metadataClient.query({
 Der `MetadataApiClient` enthält eine Methode `uploadFile`, um Dateien an Felder des Typs Datei anzuhängen:
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import * as fs from 'fs';
 
 const metadataClient = new MetadataApiClient();

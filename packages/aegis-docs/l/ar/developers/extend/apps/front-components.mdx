@@ -18,7 +18,7 @@ icon: window-maximize
 أسرع طريقة لرؤية مكوّن أمامي قيد العمل هي تسجيله كأمر. إضافة حقل `command` مع `isPinned: true` يجعلُه يظهر كزر إجراء سريع في الزاوية العلوية اليمنى من الصفحة — دون الحاجة إلى تخطيط صفحة:
 
 ```tsx src/front-components/hello-world.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 
 const HelloWorld = () => {
   return (
@@ -77,8 +77,8 @@ export default defineFrontComponent({
 **عديم الرأس (`isHeadless: true`)** — يتم تركيب المكوّن بشكل غير مرئي في الخلفية. لا يفتح اللوحة الجانبية. تم تصميم المكوّنات عديمة الرأس لإجراءات تنفّذ منطقًا ثم تُزيل تركيبها ذاتيًا — على سبيل المثال، تشغيل مهمة غير متزامنة، أو الانتقال إلى صفحة، أو إظهار نافذة تأكيد منبثقة. تتوافق بشكل طبيعي مع مكوّنات Command في SDK الموصوفة أدناه.
 
 ```tsx src/front-components/sync-tracker.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId, enqueueSnackbar } from 'aegis-sdk/front-component';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId, enqueueSnackbar } from 'twenty-sdk/front-component';
 import { useEffect } from 'react';
 
 const SyncTracker = () => {
@@ -104,9 +104,9 @@ export default defineFrontComponent({
 
 ## مكوّنات Command في SDK
 
-توفر حزمة `aegis-sdk` أربعة مكوّنات مساعدة من نوع Command مصممة للمكوّنات عديمة الرأس في الواجهة الأمامية. كل مكوّن ينفّذ إجراءً عند التركيب، ويتعامل مع الأخطاء بعرض إشعار Snackbar، ويزيل تركيب مكوّن الواجهة الأمامية تلقائيًا عند الانتهاء.
+توفر حزمة `twenty-sdk` أربعة مكوّنات مساعدة من نوع Command مصممة للمكوّنات عديمة الرأس في الواجهة الأمامية. كل مكوّن ينفّذ إجراءً عند التركيب، ويتعامل مع الأخطاء بعرض إشعار Snackbar، ويزيل تركيب مكوّن الواجهة الأمامية تلقائيًا عند الانتهاء.
 
-استوردها من `aegis-sdk/command`:
+استوردها من `twenty-sdk/command`:
 
 * **`Command`** — يشغّل رد نداء غير متزامن عبر الخاصية `execute`.
 * **`CommandLink`** — ينتقل إلى مسار في التطبيق. الخصائص: `to`، `params`، `queryParams`، `options`.
@@ -116,9 +116,9 @@ export default defineFrontComponent({
 فيما يلي مثال كامل لمكوّن واجهة أمامية عديم الرأس يستخدم `Command` لتشغيل إجراء من قائمة الأوامر:
 
 ```tsx src/front-components/run-action.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { Command } from 'aegis-sdk/command';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { Command } from 'twenty-sdk/command';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const RunAction = () => {
   const execute = async () => {
@@ -152,8 +152,8 @@ export default defineFrontComponent({
 ومثال يستخدم `CommandModal` لطلب التأكيد قبل التنفيذ:
 
 ```tsx src/front-components/delete-draft.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { CommandModal } from 'aegis-sdk/command';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { CommandModal } from 'twenty-sdk/command';
 
 const DeleteDraft = () => {
   const execute = async () => {
@@ -190,12 +190,12 @@ export default defineFrontComponent({
 داخل مكوّنك، استخدم خطافات SDK للوصول إلى المستخدم الحالي، والسجل، ومثيل المكوّن:
 
 ```tsx src/front-components/record-info.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   useUserId,
   useRecordId,
   useFrontComponentId,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 const RecordInfo = () => {
   const userId = useUserId();
@@ -229,7 +229,7 @@ export default defineFrontComponent({
 
 ## واجهة الاتصال مع المضيف
 
-يمكن للمكوّنات الأمامية تشغيل التنقّل والنوافذ المنبثقة والإشعارات باستخدام دوال من `aegis-sdk`:
+يمكن للمكوّنات الأمامية تشغيل التنقّل والنوافذ المنبثقة والإشعارات باستخدام دوال من `twenty-sdk`:
 
 | دالة                                            | الوصف                          |
 | ----------------------------------------------- | ------------------------------ |
@@ -244,10 +244,10 @@ export default defineFrontComponent({
 فيما يلي مثال يستخدم واجهة برمجة تطبيقات المضيف لعرض Snackbar وإغلاق اللوحة الجانبية بعد اكتمال الإجراء:
 
 ```tsx src/front-components/archive-record.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { enqueueSnackbar, closeSidePanel } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { enqueueSnackbar, closeSidePanel } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const ArchiveRecord = () => {
   const recordId = useRecordId();
@@ -303,17 +303,17 @@ export default defineFrontComponent({
 
 ## تعابير الإتاحة الشرطية
 
-يتيح لك الحقل `conditionalAvailabilityExpression` التحكّم في وقت ظهور الأمر بناءً على سياق الصفحة الحالي. استورد متغيّرات ومشغّلات مضبوطة الأنواع من `aegis-sdk` لبناء التعابير:
+يتيح لك الحقل `conditionalAvailabilityExpression` التحكّم في وقت ظهور الأمر بناءً على سياق الصفحة الحالي. استورد متغيّرات ومشغّلات مضبوطة الأنواع من `twenty-sdk` لبناء التعابير:
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   pageType,
   numberOfSelectedRecords,
   objectPermissions,
   everyEquals,
   isDefined,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 export default defineFrontComponent({
   universalIdentifier: '...',
@@ -373,7 +373,7 @@ export default defineFrontComponent({
 يمكن للمكوّنات الأمامية الوصول إلى ملفات من دليل `public/` للتطبيق باستخدام `getPublicAssetUrl`:
 
 ```tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const Logo = () => <img src={getPublicAssetUrl('logo.png')} alt="Logo" />;
 
@@ -391,15 +391,15 @@ export default defineFrontComponent({
 تدعم المكوّنات الأمامية عدة أساليب للتنسيق. يمكنك استخدام:
 
 * **أنماط مضمنة** — `style={{ color: 'red' }}`
-* **مكوّنات Aegis لواجهة المستخدم** — استورد من `aegis-sdk/ui` (Button وTag وStatus وChip وAvatar وغيرها)
+* **مكوّنات Aegis لواجهة المستخدم** — استورد من `twenty-sdk/ui` (Button وTag وStatus وChip وAvatar وغيرها)
 * **Emotion** — CSS-in-JS مع `@emotion/react`
 * **Styled-components** — أنماط `styled.div`
 * **Tailwind CSS** — أصناف مساعدة
 * **أي مكتبة CSS-in-JS** متوافقة مع React
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { Button, Tag, Status } from 'aegis-sdk/ui';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { Button, Tag, Status } from 'twenty-sdk/ui';
 
 const StyledWidget = () => {
   return (

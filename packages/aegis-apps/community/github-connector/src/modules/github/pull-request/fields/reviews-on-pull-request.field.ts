@@ -1,4 +1,4 @@
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 import { PULL_REQUEST_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request/objects/pull-request.object';
 import { PULL_REQUEST_REVIEW_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request-review/objects/pull-request-review.object';
 import { PULL_REQUEST_ON_REVIEW_FIELD_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request-review/fields/pull-request-on-review.field';

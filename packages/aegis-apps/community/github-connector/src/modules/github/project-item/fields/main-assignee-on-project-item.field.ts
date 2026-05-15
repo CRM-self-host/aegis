@@ -1,4 +1,4 @@
-import { defineField, FieldType, RelationType, OnDeleteAction } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType, OnDeleteAction } from 'twenty-sdk/define';
 import { PROJECT_ITEM_UNIVERSAL_IDENTIFIER } from 'src/modules/github/project-item/objects/project-item.object';
 import { CONTRIBUTOR_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/objects/contributor.object';
 import { ASSIGNED_PROJECT_ITEMS_ON_CONTRIBUTOR_FIELD_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/fields/assigned-project-items-on-contributor.field';

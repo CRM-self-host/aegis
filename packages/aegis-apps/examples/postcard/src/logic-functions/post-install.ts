@@ -1,5 +1,5 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { definePostInstallLogicFunction } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { definePostInstallLogicFunction } from 'twenty-sdk/define';
 
 const SEED_POST_CARDS = [
   {

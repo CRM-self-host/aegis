@@ -1,4 +1,4 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 export const getClient = () => new CoreApiClient();
 

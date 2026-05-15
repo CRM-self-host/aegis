@@ -1,7 +1,7 @@
 import {
   type CommandConfirmationModalResult,
   type OpenCommandConfirmationModalFunction,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 import { type FrontComponentHostCommunicationApi } from '../../../types/FrontComponentHostCommunicationApi';
 
 type CommandConfirmationModalPromiseCallbacks = {

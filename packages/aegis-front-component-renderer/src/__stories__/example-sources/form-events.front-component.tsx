@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { type ChangeEvent, useState } from 'react';
 
 const CARD_STYLE = {

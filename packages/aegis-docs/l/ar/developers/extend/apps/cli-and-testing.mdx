@@ -19,12 +19,12 @@ icon: terminal
 
 ### الوصول إلى الأصول العامة باستخدام `getPublicAssetUrl`
 
-استخدم المساعد `getPublicAssetUrl` من `aegis-sdk` للحصول على العنوان الكامل لملف في دليل `public/` لديك. يعمل ذلك في كلٍ من الدوال المنطقية والمكوّنات الأمامية.
+استخدم المساعد `getPublicAssetUrl` من `twenty-sdk` للحصول على العنوان الكامل لملف في دليل `public/` لديك. يعمل ذلك في كلٍ من الدوال المنطقية والمكوّنات الأمامية.
 
 **في دالة منطقية:**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -49,7 +49,7 @@ export default defineLogicFunction({
 **في مكوّن أمامي:**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -73,7 +73,7 @@ yarn add axios
 ثم استوردها في شيفرتك:
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -94,7 +94,7 @@ export default defineLogicFunction({
 وينطبق الأمر نفسه على المكوّنات الأمامية:
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -116,7 +116,7 @@ export default defineFrontComponent({
 
 **المكوّنات الأمامية** تعمل ضمن Web Worker. وحدات Node المدمجة غير متاحة — المتاح فقط واجهات برمجة المتصفّح وحِزَم npm التي تعمل في بيئة المتصفّح.
 
-كلتا البيئتين تحتويان على `aegis-client-sdk/core` و`aegis-client-sdk/metadata` كوحدات متاحة مُسبقًا — لا تُضمَّن هذه ضمن الحزم بل تُحلّ وقت التشغيل بواسطة الخادم.
+كلتا البيئتين تحتويان على `twenty-client-sdk/core` و`twenty-client-sdk/metadata` كوحدات متاحة مُسبقًا — لا تُضمَّن هذه ضمن الحزم بل تُحلّ وقت التشغيل بواسطة الخادم.
 
 ## اختبار تطبيقك
 
@@ -165,7 +165,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -198,7 +198,7 @@ beforeAll(async () => {
 
 ### واجهات SDK البرمجية
 
-يُصدِّر المسار الفرعي `aegis-sdk/cli` دوالًا يمكنك استدعاؤها مباشرةً من شيفرة الاختبار:
+يُصدِّر المسار الفرعي `twenty-sdk/cli` دوالًا يمكنك استدعاؤها مباشرةً من شيفرة الاختبار:
 
 | دالة           | الوصف                                     |
 | -------------- | ----------------------------------------- |
@@ -215,8 +215,8 @@ beforeAll(async () => {
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

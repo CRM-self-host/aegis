@@ -1,4 +1,4 @@
-import { getClient } from 'src/modules/shared/aegis-client';
+import { getClient } from 'src/modules/shared/twenty-sdk/client';
 import type { PullRequestRow } from 'src/modules/github/pull-request/types/pull-request-row';
 import { buildPrUniqueIdentifier } from 'src/modules/github/pull-request/normalizers';
 

@@ -1,4 +1,4 @@
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from 'src/objects/post-card.object';
 import { CARD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from 'src/components/card.front-component';
 

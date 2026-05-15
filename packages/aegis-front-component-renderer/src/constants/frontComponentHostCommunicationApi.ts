@@ -7,9 +7,9 @@ import {
   type RequestAccessTokenRefreshFunction,
   type UnmountFrontComponentFunction,
   type UpdateProgressFunction,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
-import { FRONT_COMPONENT_HOST_COMMUNICATION_API_KEY } from 'aegis-sdk/front-component-renderer';
+import { FRONT_COMPONENT_HOST_COMMUNICATION_API_KEY } from 'twenty-sdk/front-component-renderer';
 
 type FrontComponentHostCommunicationApiStore = {
   navigate?: NavigateFunction;

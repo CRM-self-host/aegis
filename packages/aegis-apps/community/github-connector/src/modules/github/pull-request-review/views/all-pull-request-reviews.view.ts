@@ -3,7 +3,7 @@ import {
   ViewKey,
   ViewSortDirection,
   ViewType,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import {
   PULL_REQUEST_REVIEW_UNIVERSAL_IDENTIFIER,
   REVIEW_TITLE_FIELD_UNIVERSAL_IDENTIFIER,

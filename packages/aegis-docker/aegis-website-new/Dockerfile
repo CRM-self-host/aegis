@@ -10,7 +10,6 @@ COPY ./tsconfig.base.json .
 COPY ./nx.json .
 COPY ./.yarn/releases /app/.yarn/releases
 COPY ./.yarn/patches /app/.yarn/patches
-COPY ./packages/aegis-oxlint-rules /app/packages/aegis-oxlint-rules
 COPY ./packages/aegis-website-new/package.json /app/packages/aegis-website-new/package.json
 
 RUN yarn

@@ -26,7 +26,7 @@ Le viste, le voci del menu di navigazione e i layout di pagina fanno riferimento
 Le viste sono configurazioni salvate di come vengono visualizzati i record di un oggetto — inclusi quali campi sono visibili, il loro ordine e gli eventuali filtri o raggruppamenti applicati. Usa `defineView()` per fornire viste preconfigurate con la tua app:
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk/define';
+import { defineView, ViewKey } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -62,7 +62,7 @@ Punti chiave:
 Le voci del menu di navigazione aggiungono elementi personalizzati alla barra laterale dello spazio di lavoro. Usa `defineNavigationMenuItem()` per collegarti a viste, URL esterni o oggetti:
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -88,7 +88,7 @@ Punti chiave:
 I layout di pagina ti consentono di personalizzare l'aspetto di una pagina dei dettagli di un record — quali schede compaiono, quali widget sono all'interno di ciascuna scheda e come sono disposti. Usa `definePageLayout()` per fornire layout personalizzati con la tua app:
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -139,7 +139,7 @@ Il layout di pagina di destinazione deve essere o un layout di pagina Aegis **st
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
 const COMPANY_RECORD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =

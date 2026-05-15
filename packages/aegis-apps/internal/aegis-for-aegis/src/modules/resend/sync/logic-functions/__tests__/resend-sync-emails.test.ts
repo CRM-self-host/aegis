@@ -1,4 +1,4 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { INTERMEDIATE_SYNC_EMAILS_MAX_AGE_MS } from '@modules/resend/constants/sync-config';
@@ -6,7 +6,7 @@ import { resendSyncEmailsHandler } from '@modules/resend/sync/logic-functions/re
 
 const mockSyncEmails = vi.fn();
 
-vi.mock('aegis-client-sdk/core', () => ({
+vi.mock('twenty-client-sdk/core', () => ({
   CoreApiClient: vi.fn(),
 }));
 

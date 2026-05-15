@@ -1,5 +1,5 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
 
 import {
   INTERMEDIATE_SYNC_EMAILS_MAX_AGE_MS,

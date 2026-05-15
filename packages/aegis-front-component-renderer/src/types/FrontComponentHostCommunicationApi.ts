@@ -7,7 +7,7 @@ import {
   type RequestAccessTokenRefreshFunction,
   type UnmountFrontComponentFunction,
   type UpdateProgressFunction,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 export type FrontComponentHostCommunicationApi = {
   navigate: NavigateFunction;

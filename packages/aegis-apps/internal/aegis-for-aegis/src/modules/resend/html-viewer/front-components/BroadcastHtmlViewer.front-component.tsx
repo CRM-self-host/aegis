@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 
 import { RecordHtmlViewer } from '@modules/resend/html-viewer/components/RecordHtmlViewer';
 import { BROADCAST_HTML_VIEWER_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';

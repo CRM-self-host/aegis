@@ -5,7 +5,7 @@ import * as fs from 'fs/promises';
 import { printSchema } from 'graphql';
 import path, { join } from 'path';
 
-import { replaceCoreClient } from 'aegis-client-sdk/generate';
+import { replaceCoreClient } from 'twenty-client-sdk/generate';
 import { FileFolder } from 'aegis-shared/types';
 import { Repository } from 'typeorm';
 
@@ -23,7 +23,7 @@ import { fromWorkspaceEntityToFlat } from 'src/engine/core-modules/workspace/uti
 import { WorkspaceEntity } from 'src/engine/core-modules/workspace/workspace.entity';
 import { WorkspaceCacheService } from 'src/engine/workspace-cache/services/workspace-cache.service';
 
-const SDK_CLIENT_ARCHIVE_NAME = 'aegis-client-sdk.zip';
+const SDK_CLIENT_ARCHIVE_NAME = 'twenty-client-sdk.zip';
 
 @Injectable()
 export class SdkClientGenerationService {
@@ -87,7 +87,7 @@ export class SdkClientGenerationService {
     try {
       const { sourceTemporaryDir } = await temporaryDirManager.init();
 
-      const tempPackageRoot = join(sourceTemporaryDir, 'aegis-client-sdk');
+      const tempPackageRoot = join(sourceTemporaryDir, 'twenty-client-sdk');
 
       await fs.cp(SDK_CLIENT_PACKAGE_DIRNAME, tempPackageRoot, {
         recursive: true,

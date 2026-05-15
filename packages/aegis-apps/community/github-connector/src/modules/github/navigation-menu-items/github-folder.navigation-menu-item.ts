@@ -1,4 +1,4 @@
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 
 export const GITHUB_FOLDER_UNIVERSAL_IDENTIFIER =
   'a4f7d8b1-2c93-4e6f-8b1a-9d3e5c7f2a48';

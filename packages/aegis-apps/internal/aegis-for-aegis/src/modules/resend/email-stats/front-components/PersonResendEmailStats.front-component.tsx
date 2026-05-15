@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   Callout,
   H2Title,
@@ -6,7 +6,7 @@ import {
   IconMail,
   IconRefresh,
   themeCssVariables,
-} from 'aegis-sdk/ui';
+} from 'twenty-sdk/ui';
 
 import { isDefined } from '@utils/is-defined';
 

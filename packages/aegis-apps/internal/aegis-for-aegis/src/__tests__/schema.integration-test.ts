@@ -1,5 +1,5 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from '@constants/universal-identifiers';
 import { isDefined } from '@utils/is-defined';
 import { describe, expect, it } from 'vitest';

@@ -1,5 +1,5 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { type RoutePayload } from 'aegis-sdk/logic-function';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { type RoutePayload } from 'twenty-sdk/logic-function';
 import {
   fetchPullRequests,
   type GqlPullRequest,

@@ -1,11 +1,11 @@
 import { isDefined } from '@utils/is-defined';
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   Callout,
   IconAlertCircle,
   IconInfoCircle,
   themeCssVariables,
-} from 'aegis-sdk/ui';
+} from 'twenty-sdk/ui';
 
 import { EMAIL_BROADCAST_HTML_VIEWER_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';
 import { HtmlPreview } from '@modules/resend/html-viewer/components/HtmlPreview';

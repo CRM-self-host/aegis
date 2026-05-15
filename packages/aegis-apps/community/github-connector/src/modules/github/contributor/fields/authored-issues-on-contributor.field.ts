@@ -1,4 +1,4 @@
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 import { CONTRIBUTOR_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/objects/contributor.object';
 import { ISSUE_UNIVERSAL_IDENTIFIER } from 'src/modules/github/issue/objects/issue.object';
 import { ISSUE_AUTHOR_FIELD_UNIVERSAL_IDENTIFIER } from 'src/modules/github/issue/fields/author-on-issue.field';

@@ -1,4 +1,4 @@
-import { defineObject, FieldType, RelationType, OnDeleteAction, STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS } from 'aegis-sdk/define';
+import { defineObject, FieldType, RelationType, OnDeleteAction, STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS } from 'twenty-sdk/define';
 import { UNIVERSAL_IDENTIFIERS } from 'src/constants/universal-identifiers.constant';
 
 import { SELF_HOSTING_USER_ID_UNIVERSAL_IDENTIFIER } from 'src/fields/self-hosting-user-id';

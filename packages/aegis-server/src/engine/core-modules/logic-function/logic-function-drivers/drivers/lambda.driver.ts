@@ -763,7 +763,7 @@ export class LambdaDriver implements LogicFunctionDriver {
 
     const zipBuffer = await this.reprefixZipEntries({
       sourceBuffer: sdkArchiveBuffer,
-      prefix: 'nodejs/node_modules/aegis-client-sdk',
+      prefix: 'nodejs/node_modules/twenty-client-sdk',
     });
 
     const arn = await this.publishLayer({ layerName, zipBuffer });
@@ -1080,7 +1080,7 @@ export class LambdaDriver implements LogicFunctionDriver {
 
       await createZipFile(sourceTemporaryDir, lambdaZipPath);
 
-      // SDK layer listed last so it overwrites the stub aegis-client-sdk
+      // SDK layer listed last so it overwrites the stub twenty-client-sdk
       // from the deps layer (later layers take precedence in /opt merge).
       const params: CreateFunctionCommandInput = {
         Code: {

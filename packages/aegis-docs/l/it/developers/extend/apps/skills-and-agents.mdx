@@ -16,7 +16,7 @@ Le app possono definire capacità di IA che risiedono all'interno dello spazio d
 Le skill definiscono istruzioni e capacità riutilizzabili che gli agenti IA possono utilizzare all'interno del tuo spazio di lavoro. Usa `defineSkill()` per definire skill con convalida integrata:
 
 ```ts src/skills/example-skill.ts
-import { defineSkill } from 'aegis-sdk/define';
+import { defineSkill } from 'twenty-sdk/define';
 
 export default defineSkill({
   universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
@@ -45,7 +45,7 @@ Punti chiave:
 Gli agenti sono assistenti IA che vivono all'interno del tuo spazio di lavoro. Usa `defineAgent()` per creare agenti con un prompt di sistema personalizzato:
 
 ```ts src/agents/example-agent.ts
-import { defineAgent } from 'aegis-sdk/define';
+import { defineAgent } from 'twenty-sdk/define';
 
 export default defineAgent({
   universalIdentifier: 'b3c4d5e6-f7a8-9012-bcde-f34567890123',

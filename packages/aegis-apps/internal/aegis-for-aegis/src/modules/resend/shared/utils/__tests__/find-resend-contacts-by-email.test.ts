@@ -1,4 +1,4 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { findResendContactsByEmail } from '@modules/resend/shared/utils/find-resend-contacts-by-email';

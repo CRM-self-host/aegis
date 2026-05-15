@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 
-import { appDevOnce, appUninstall } from 'aegis-sdk/cli';
+import { appDevOnce, appUninstall } from 'twenty-sdk/cli';
 
 const APP_PATH = process.cwd();
 const CONFIG_DIR = path.join(os.homedir(), '.aegis');

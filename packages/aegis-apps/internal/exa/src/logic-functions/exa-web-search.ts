@@ -1,6 +1,6 @@
 import Exa from 'exa-js';
-import { chargeCredits } from 'aegis-sdk/billing';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { chargeCredits } from 'twenty-sdk/billing';
+import { defineLogicFunction } from 'twenty-sdk/define';
 
 import { DEFAULT_NUM_RESULTS } from './constants/default-num-results.constant';
 import { exaWebSearchInputSchema } from './schemas/exa-web-search-input.schema';

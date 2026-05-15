@@ -16,7 +16,7 @@ Uygulamalar, çalışma alanı içinde yer alan yapay zekâ yeteneklerini — ye
 Yetenekler, yapay zekâ ajanlarının çalışma alanınızda kullanabileceği yeniden kullanılabilir yönergeleri ve kabiliyetleri tanımlar. Yerleşik doğrulamayla yetenekleri tanımlamak için `defineSkill()` kullanın:
 
 ```ts src/skills/example-skill.ts
-import { defineSkill } from 'aegis-sdk/define';
+import { defineSkill } from 'twenty-sdk/define';
 
 export default defineSkill({
   universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
@@ -45,7 +45,7 @@ export default defineSkill({
 Ajanlar, çalışma alanınız içinde bulunan yapay zekâ asistanlarıdır. Özel bir sistem istemiyle ajanlar oluşturmak için `defineAgent()` kullanın:
 
 ```ts src/agents/example-agent.ts
-import { defineAgent } from 'aegis-sdk/define';
+import { defineAgent } from 'twenty-sdk/define';
 
 export default defineAgent({
   universalIdentifier: 'b3c4d5e6-f7a8-9012-bcde-f34567890123',

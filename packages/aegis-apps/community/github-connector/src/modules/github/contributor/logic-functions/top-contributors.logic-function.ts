@@ -1,7 +1,7 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { type RoutePayload } from 'aegis-sdk/logic-function';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { type RoutePayload } from 'twenty-sdk/logic-function';
 import { isBotLogin } from 'src/modules/github/contributor/utils/is-bot-login';
-import { getClient } from 'src/modules/shared/aegis-client';
+import { getClient } from 'src/modules/shared/twenty-sdk/client';
 
 type ContributorRef = {
   id: string;

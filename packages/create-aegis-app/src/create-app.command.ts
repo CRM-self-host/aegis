@@ -15,7 +15,7 @@ import {
   detectLocalServer,
   serverStart,
   type ServerStartResult,
-} from 'aegis-sdk/cli';
+} from 'twenty-sdk/cli';
 import { isDefined } from 'aegis-shared/utils';
 
 const CURRENT_EXECUTION_DIRECTORY = process.env.INIT_CWD || process.cwd();

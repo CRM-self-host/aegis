@@ -1,4 +1,4 @@
-import type { EmailsField, FullNameField } from 'aegis-sdk/define';
+import type { EmailsField, FullNameField } from 'twenty-sdk/define';
 
 export type ResendContactRecord = {
   id: string;

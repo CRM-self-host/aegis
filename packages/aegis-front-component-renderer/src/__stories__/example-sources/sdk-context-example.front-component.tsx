@@ -1,8 +1,8 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   useFrontComponentExecutionContext,
   useUserId,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 import { useState } from 'react';
 
 const CARD_STYLE = {

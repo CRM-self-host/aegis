@@ -65,14 +65,14 @@ yarn app:uninstall
 yarn help
 ```
 
-Voir aussi : les pages de référence CLI pour [create-aegis-app](https://www.npmjs.com/package/create-aegis-app) et [aegis-sdk CLI](https://www.npmjs.com/package/aegis-sdk).
+Voir aussi : les pages de référence CLI pour [create-aegis-app](https://www.npmjs.com/package/create-aegis-app) et [twenty-sdk CLI](https://www.npmjs.com/package/twenty-sdk).
 
 ## Structure du projet (générée)
 
 Lorsque vous exécutez `npx create-aegis-app@latest my-aegis-app`, l’outil de scaffolding :
 
 * Copie une application de base minimale dans `my-aegis-app/`
-* Ajoute une dépendance locale à `aegis-sdk` et la configuration Yarn 4
+* Ajoute une dépendance locale à `twenty-sdk` et la configuration Yarn 4
 * Crée des fichiers de configuration et des scripts reliés à la CLI `aegis`
 * Génère une configuration d’application par défaut et un rôle de fonction par défaut
 
@@ -154,7 +154,7 @@ src/
 
 Dans les grandes lignes :
 
-* **package.json** : Déclare le nom de l’application, la version, les moteurs (Node 24+, Yarn 4), et ajoute `aegis-sdk` ainsi que des scripts comme `app:dev`, `entity:add`, `function:logs`, `function:execute`, `app:uninstall` et `auth:login` qui délèguent à la CLI locale `aegis`.
+* **package.json** : Déclare le nom de l’application, la version, les moteurs (Node 24+, Yarn 4), et ajoute `twenty-sdk` ainsi que des scripts comme `app:dev`, `entity:add`, `function:logs`, `function:execute`, `app:uninstall` et `auth:login` qui délèguent à la CLI locale `aegis`.
 * **.gitignore** : Ignore les artefacts courants tels que `node_modules`, `.yarn`, `generated/` (client typé), `dist/`, `build/`, les dossiers de couverture, les fichiers journaux et les fichiers `.env*`.
 * **yarn.lock**, **.yarnrc.yml**, **.yarn/** : Verrouillent et configurent la chaîne d’outils Yarn 4 utilisée par le projet.
 * **.nvmrc** : Fige la version de Node.js attendue par le projet.
@@ -170,7 +170,7 @@ Dans les grandes lignes :
 
 Des commandes ultérieures ajouteront d’autres fichiers et dossiers :
 
-* `yarn app:dev` génère automatiquement le client Aegis typé dans `node_modules/aegis-sdk/generated`.
+* `yarn app:dev` génère automatiquement le client Aegis typé dans `node_modules/twenty-sdk/generated`.
 * `yarn entity:add` ajoutera des fichiers de définition d’entité sous `src/` pour vos objets, fonctions, composants front-end ou rôles personnalisés.
 
 ## Authentification
@@ -208,7 +208,7 @@ Une fois que vous avez changé d'espace de travail avec `auth:switch`, toutes le
 
 ## Utiliser les ressources du SDK (types et configuration)
 
-Le paquet aegis-sdk fournit des blocs de construction typés et des fonctions utilitaires que vous utilisez dans votre application. Voici les éléments clés que vous manipulerez le plus souvent.
+Le paquet twenty-sdk fournit des blocs de construction typés et des fonctions utilitaires que vous utilisez dans votre application. Voici les éléments clés que vous manipulerez le plus souvent.
 
 ### Fonctions utilitaires
 
@@ -229,7 +229,7 @@ Les objets personnalisés décrivent à la fois le schéma et le comportement de
 
 ```typescript
 // src/app/postCard.object.ts
-import { defineObject, FieldType } from 'aegis-sdk';
+import { defineObject, FieldType } from 'twenty-sdk';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',
@@ -320,7 +320,7 @@ Utilisez `defineApplication()` pour définir la configuration de votre applicati
 
 ```typescript
 // src/app/application.config.ts
-import { defineApplication } from 'aegis-sdk';
+import { defineApplication } from 'twenty-sdk';
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from './default-function.role';
 
 export default defineApplication({
@@ -360,7 +360,7 @@ Lorsque vous générez une nouvelle application, la CLI crée également un fich
 
 ```typescript
 // src/app/default-function.role.ts
-import { defineRole, PermissionFlag } from 'aegis-sdk';
+import { defineRole, PermissionFlag } from 'twenty-sdk';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   'b648f87b-1d26-4961-b974-0908fd991061';
@@ -416,8 +416,8 @@ Chaque fichier de fonction utilise `defineFunction()` pour exporter une configur
 
 ```typescript
 // src/app/createPostCard.function.ts
-import { defineFunction } from 'aegis-sdk';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk';
+import { defineFunction } from 'twenty-sdk';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk';
 import Aegis, { type Person } from '~/generated';
 
 const handler = async (params: RoutePayload) => {
@@ -509,10 +509,10 @@ Notes :
   **Pour migrer les fonctions existantes :** Mettez à jour votre gestionnaire pour déstructurer à partir de `event.body`, `event.queryStringParameters` ou `event.pathParameters` plutôt que directement à partir de l'objet params.
 </Warning>
 
-Lorsqu’un déclencheur de route appelle votre fonction logique, elle reçoit un objet `RoutePayload` qui suit le format AWS HTTP API v2. Importez le type depuis `aegis-sdk` :
+Lorsqu’un déclencheur de route appelle votre fonction logique, elle reçoit un objet `RoutePayload` qui suit le format AWS HTTP API v2. Importez le type depuis `twenty-sdk` :
 
 ```typescript
-import { defineFunction, type RoutePayload } from 'aegis-sdk';
+import { defineFunction, type RoutePayload } from 'twenty-sdk';
 
 const handler = async (event: RoutePayload) => {
   // Access request data
@@ -582,7 +582,7 @@ Vous pouvez créer de nouvelles fonctions de deux façons :
 
 ### Client typé généré
 
-`yarn app:dev` génère automatiquement le client Aegis typé dans `node_modules/aegis-sdk/generated`. Utilisez-le dans vos fonctions :
+`yarn app:dev` génère automatiquement le client Aegis typé dans `node_modules/twenty-sdk/generated`. Utilisez-le dans vos fonctions :
 
 ```typescript
 import Aegis from '~/generated';
@@ -612,10 +612,10 @@ Découvrez un exemple minimal de bout en bout qui démontre des objets, des fonc
 
 ## Configuration manuelle (sans l’outil de scaffolding)
 
-Même si nous recommandons d’utiliser `create-aegis-app` pour une expérience de démarrage optimale, vous pouvez également configurer un projet manuellement. N’installez pas la CLI globalement. Ajoutez plutôt `aegis-sdk` comme dépendance locale et reliez des scripts dans votre package.json :
+Même si nous recommandons d’utiliser `create-aegis-app` pour une expérience de démarrage optimale, vous pouvez également configurer un projet manuellement. N’installez pas la CLI globalement. Ajoutez plutôt `twenty-sdk` comme dépendance locale et reliez des scripts dans votre package.json :
 
 ```bash filename="Terminal"
-yarn add -D aegis-sdk
+yarn add -D twenty-sdk
 ```
 
 Ajoutez ensuite des scripts comme ceux-ci :

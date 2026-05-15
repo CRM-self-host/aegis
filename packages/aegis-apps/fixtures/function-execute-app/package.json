@@ -16,8 +16,8 @@
     "lint:fix": "oxlint --fix -c .oxlintrc.json ."
   },
   "dependencies": {
-    "aegis-sdk": "latest",
-    "aegis-client-sdk": "latest"
+    "twenty-sdk": "latest",
+    "twenty-client-sdk": "latest"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

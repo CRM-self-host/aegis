@@ -19,12 +19,12 @@ Uygulamanızın kökündeki `public/` klasörü, statik dosyaları barındırır
 
 ### `getPublicAssetUrl` ile genel varlıklara erişme
 
-`aegis-sdk` içindeki `getPublicAssetUrl` yardımcı işlevini kullanarak `public/` dizininizdeki bir dosyanın tam URL'sini alın. Hem **mantık işlevlerinde** hem de **ön uç bileşenlerinde** çalışır.
+`twenty-sdk` içindeki `getPublicAssetUrl` yardımcı işlevini kullanarak `public/` dizininizdeki bir dosyanın tam URL'sini alın. Hem **mantık işlevlerinde** hem de **ön uç bileşenlerinde** çalışır.
 
 **Bir mantık işlevinde:**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -49,7 +49,7 @@ export default defineLogicFunction({
 **Bir ön uç bileşeninde:**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -73,7 +73,7 @@ yarn add axios
 Ardından kodunuza içe aktarın:
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -94,7 +94,7 @@ export default defineLogicFunction({
 Aynısı ön uç bileşenleri için de geçerlidir:
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -116,7 +116,7 @@ Derleme adımı, her mantık işlevi ve her ön uç bileşeni için tek bir bağ
 
 **Ön uç bileşenleri**, bir Web Worker içinde çalışır. Node'un yerleşik modülleri **kullanılamaz** — yalnızca tarayıcı ortamında çalışan tarayıcı API'leri ve npm paketleri kullanılabilir.
 
-Her iki ortamda da `aegis-client-sdk/core` ve `aegis-client-sdk/metadata` önceden sağlanmış modüller olarak mevcuttur — bunlar paketlenmez, ancak çalışma zamanında sunucu tarafından çözülür.
+Her iki ortamda da `twenty-client-sdk/core` ve `twenty-client-sdk/metadata` önceden sağlanmış modüller olarak mevcuttur — bunlar paketlenmez, ancak çalışma zamanında sunucu tarafından çözülür.
 
 ## Uygulamanızı test etme
 
@@ -165,7 +165,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -198,7 +198,7 @@ beforeAll(async () => {
 
 ### Programatik SDK API'leri
 
-`aegis-sdk/cli` alt yolu, test kodundan doğrudan çağırabileceğiniz fonksiyonları dışa aktarır:
+`twenty-sdk/cli` alt yolu, test kodundan doğrudan çağırabileceğiniz fonksiyonları dışa aktarır:
 
 | Fonksiyon      | Açıklama                                                          |
 | -------------- | ----------------------------------------------------------------- |
@@ -215,8 +215,8 @@ Her fonksiyon, `success: boolean` ile birlikte `data` veya `error` içeren bir s
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

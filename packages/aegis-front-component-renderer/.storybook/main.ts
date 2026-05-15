@@ -40,7 +40,7 @@ const config: StorybookConfig = {
         alias: {
           ...viteConfig.resolve?.alias,
           '@': path.resolve(dirname, '../src'),
-          // aegis-sdk has React 19 locally (for Ink 6 CLI), but
+          // twenty-sdk has React 19 locally (for Ink 6 CLI), but
           // aegis-ui's dist uses React 18 internals. Force React 18
           // from the workspace root for storybook builds.
           react: path.resolve(dirname, '../../../node_modules/react'),

@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   enqueueSnackbar,
   objectMetadataItem,
   useRecordId,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 import { THEME } from 'src/modules/github/contributor/components/theme';
 import { callAppRoute } from 'src/modules/shared/call-app-route';

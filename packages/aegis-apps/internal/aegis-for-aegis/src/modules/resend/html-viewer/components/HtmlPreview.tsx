@@ -1,13 +1,13 @@
 import { isNonEmptyString } from '@sniptt/guards';
 import { isDefined } from '@utils/is-defined';
-import { themeCssVariables } from 'aegis-sdk/ui';
+import { themeCssVariables } from 'twenty-sdk/ui';
 
 type HtmlPreviewProps = {
   html: string | null | undefined;
 };
 
 // Styles are computed lazily inside the component body because the SDK
-// mocks `aegis-sdk/ui` at manifest-build time, which leaves
+// mocks `twenty-sdk/ui` at manifest-build time, which leaves
 // `themeCssVariables` undefined during static module evaluation.
 const getStyles = (): Record<string, React.CSSProperties> => ({
   emptyState: {

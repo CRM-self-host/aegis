@@ -1,4 +1,4 @@
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadata = () =>
   new MetadataApiClient({

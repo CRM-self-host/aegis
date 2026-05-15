@@ -12,9 +12,9 @@ Mantık işlevleri, Aegis platformunda çalışan sunucu tarafı TypeScript işl
 Her fonksiyon dosyası, bir işleyici ve isteğe bağlı tetikleyiciler içeren bir yapılandırmayı dışa aktarmak için `defineLogicFunction()` kullanır.
 
 ```ts src/logic-functions/createPostCard.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk/define';
-import { CoreApiClient, type Person } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk/define';
+import { CoreApiClient, type Person } from 'twenty-client-sdk/core';
 
 const handler = async (params: RoutePayload) => {
   const client = new CoreApiClient();
@@ -80,10 +80,10 @@ yarn aegis logs
 
 Bir rota tetikleyicisi mantık fonksiyonunuzu çağırdığında,
 [AWS HTTP API v2 formatını](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html) izleyen bir `RoutePayload` nesnesi alır.
-`RoutePayload` türünü `aegis-sdk` içinden içe aktarın:
+`RoutePayload` türünü `twenty-sdk` içinden içe aktarın:
 
 ```ts
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk/define';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk/define';
 
 const handler = async (event: RoutePayload) => {
   const { headers, queryStringParameters, pathParameters, body } = event;
@@ -148,8 +148,8 @@ Mantık işlevleri, yapay zeka ajanları ve iş akışları için **araçlar** o
 Bir mantık fonksiyonunu araç olarak işaretlemek için `isTool: true` olarak ayarlayın:
 
 ```ts src/logic-functions/enrich-company.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const handler = async (params: { companyName: string; domain?: string }) => {
   const client = new CoreApiClient();
@@ -214,7 +214,7 @@ export default defineLogicFunction({
 Kurulum sonrası işlev, uygulamanız bir çalışma alanına yüklendikten sonra otomatik olarak çalışan bir mantık işlevidir. Sunucu, uygulamanın meta verileri senkronize edildikten ve SDK istemcisi oluşturulduktan **sonra** bunu yürütür; böylece çalışma alanı tamamen kullanıma hazırdır ve yeni şema kullanıma alınmıştır. Tipik kullanım örnekleri arasında varsayılan verilerin tohumlanması, başlangıç kayıtlarının oluşturulması, çalışma alanı ayarlarının yapılandırılması veya üçüncü taraf hizmetlerde kaynak sağlanması yer alır.
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Post install logic function executed successfully!', payload.previousVersion);
@@ -257,7 +257,7 @@ yarn aegis exec --postInstall
 Kurulum öncesi işlev, kurulum sırasında otomatik olarak çalışan ve **çalışma alanı üstveri (metadata) geçişi uygulanmadan önce** yürütülen bir mantık işlevidir. Kurulum sonrası ile (`InstallPayload`) aynı yük (payload) biçimini paylaşır, ancak kurulum akışında daha erken konumlandığından yaklaşan geçişin bağlı olduğu durumu hazırlayabilir — tipik kullanımlar arasında verileri yedeklemek, yeni şemayla uyumluluğu doğrulamak veya yeniden yapılandırılacak ya da kaldırılacak kayıtları arşivlemek yer alır.
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Pre install logic function executed successfully!', payload.previousVersion);
@@ -315,7 +315,7 @@ Kurulum öncesi her zaman **senkron**dur (kurulumu bloke eder ve iptal edebilir)
 Örnek — kurulumdan sonra varsayılan bir `PostCard` kaydı tohumlama:
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion }: InstallPayload): Promise<void> => {
@@ -347,7 +347,7 @@ export default definePostInstallLogicFunction({
 Örnek — yıkıcı bir geçişten önce kayıtları arşivleme:
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion, newVersion }: InstallPayload): Promise<void> => {
@@ -405,14 +405,14 @@ Emin değilseniz, varsayılan olarak **kurulum sonrası**nı tercih edin. Yalnı
 </Accordion>
 </AccordionGroup>
 
-## Tipli API istemcileri (aegis-client-sdk)
+## Tipli API istemcileri (twenty-client-sdk)
 
-`aegis-client-sdk` paketi, mantık fonksiyonlarınızdan ve ön uç bileşenlerinizden Aegis API ile etkileşim kurmak için tip tanımlı iki GraphQL istemcisi sağlar.
+`twenty-client-sdk` paketi, mantık fonksiyonlarınızdan ve ön uç bileşenlerinizden Aegis API ile etkileşim kurmak için tip tanımlı iki GraphQL istemcisi sağlar.
 
 | İstemci             | İçe Aktar                    | Uç nokta                                                      | Oluşturuldu mu?                         |
 | ------------------- | ---------------------------- | ------------------------------------------------------------- | --------------------------------------- |
-| `CoreApiClient`     | `aegis-client-sdk/core`     | `/graphql` — çalışma alanı verileri (kayıtlar, nesneler)      | Evet, geliştirme/derleme zamanında      |
-| `MetadataApiClient` | `aegis-client-sdk/metadata` | `/metadata` — çalışma alanı yapılandırması, dosya yüklemeleri | Hayır, önceden hazırlanmış olarak gelir |
+| `CoreApiClient`     | `twenty-client-sdk/core`     | `/graphql` — çalışma alanı verileri (kayıtlar, nesneler)      | Evet, geliştirme/derleme zamanında      |
+| `MetadataApiClient` | `twenty-client-sdk/metadata` | `/metadata` — çalışma alanı yapılandırması, dosya yüklemeleri | Hayır, önceden hazırlanmış olarak gelir |
 
 <AccordionGroup>
 <Accordion title="CoreApiClient" description="Çalışma alanı verilerini sorgulayın ve değiştirin (kayıtlar, nesneler)">
@@ -420,7 +420,7 @@ Emin değilseniz, varsayılan olarak **kurulum sonrası**nı tercih edin. Yalnı
 `CoreApiClient`, çalışma alanı verilerini sorgulamak ve değiştirmek için ana istemcidir. `yarn aegis dev` veya `yarn aegis build` sırasında **çalışma alanı şemanızdan oluşturulur**, bu nedenle nesnelerinize ve alanlarınıza uyacak şekilde tamamen tiplenmiştir.
 
 ```ts
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const client = new CoreApiClient();
 
@@ -465,7 +465,7 @@ const { createCompany } = await client.mutation({
 `CoreSchema`, çalışma alanı nesnelerinize uyan TypeScript türleri sağlar — bileşen durumunu veya işlev parametrelerini tiplemek için kullanışlıdır:
 
 ```ts
-import { CoreApiClient, CoreSchema } from 'aegis-client-sdk/core';
+import { CoreApiClient, CoreSchema } from 'twenty-client-sdk/core';
 import { useState } from 'react';
 
 const [company, setCompany] = useState<
@@ -489,7 +489,7 @@ setCompany(result.company);
 `MetadataApiClient`, SDK ile birlikte önceden hazırlanmış olarak gelir (oluşturma gerektirmez). Çalışma alanı yapılandırması, uygulamalar ve dosya yüklemeleri için `/metadata` uç noktasını sorgular.
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadataClient = new MetadataApiClient();
 
@@ -518,7 +518,7 @@ const { objects } = await metadataClient.query({
 `MetadataApiClient`, dosya türündeki alanlara dosya eklemek için bir `uploadFile` yöntemi içerir:
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import * as fs from 'fs';
 
 const metadataClient = new MetadataApiClient();

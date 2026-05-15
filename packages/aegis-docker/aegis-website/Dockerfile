@@ -8,7 +8,6 @@ COPY ./yarn.lock .
 COPY ./.yarnrc.yml .
 COPY ./.yarn/releases /app/.yarn/releases
 COPY ./.yarn/patches /app/.yarn/patches
-COPY ./packages/aegis-oxlint-rules /app/packages/aegis-oxlint-rules
 COPY ./packages/aegis-ui/package.json /app/packages/aegis-ui/
 COPY ./packages/aegis-shared/package.json /app/packages/aegis-shared/
 COPY ./packages/aegis-website/package.json /app/packages/aegis-website/package.json

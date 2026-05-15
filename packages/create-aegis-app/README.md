@@ -12,7 +12,7 @@
 
 </div>
 
-The official scaffolding CLI for building apps on top of [Aegis CRM](https://aegis.com). Sets up a ready-to-run project with [aegis-sdk](https://www.npmjs.com/package/aegis-sdk).
+The official scaffolding CLI for building apps on top of [Aegis CRM](https://aegis.com). Sets up a ready-to-run project with [twenty-sdk](https://www.npmjs.com/package/twenty-sdk).
 
 ## Quick start
 

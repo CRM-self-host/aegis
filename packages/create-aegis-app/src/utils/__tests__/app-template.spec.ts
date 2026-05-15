@@ -32,8 +32,8 @@ const TEMPLATE_PACKAGE_JSON = {
   license: 'MIT',
   scripts: { aegis: 'aegis' },
   dependencies: {
-    'aegis-sdk': '0.0.0',
-    'aegis-client-sdk': '0.0.0',
+    'twenty-sdk': '0.0.0',
+    'twenty-client-sdk': '0.0.0',
   },
 };
 
@@ -141,10 +141,10 @@ describe('copyBaseApplicationProject', () => {
       join(testAppDirectory, 'package.json'),
     );
     expect(packageJson.name).toBe('my-test-app');
-    expect(packageJson.dependencies['aegis-sdk']).toBe(
+    expect(packageJson.dependencies['twenty-sdk']).toBe(
       createAegisAppPackageJson.version,
     );
-    expect(packageJson.dependencies['aegis-client-sdk']).toBe(
+    expect(packageJson.dependencies['twenty-client-sdk']).toBe(
       createAegisAppPackageJson.version,
     );
   });

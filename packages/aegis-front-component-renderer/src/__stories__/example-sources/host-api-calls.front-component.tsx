@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   AppPath,
   closeSidePanel,
@@ -8,7 +8,7 @@ import {
   SidePanelPages,
   unmountFrontComponent,
   updateProgress,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 import { useState } from 'react';
 
 const CARD_STYLE = {

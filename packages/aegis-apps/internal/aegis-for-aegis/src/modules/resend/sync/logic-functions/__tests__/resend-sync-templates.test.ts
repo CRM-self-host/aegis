@@ -1,11 +1,11 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { resendSyncTemplatesHandler } from '@modules/resend/sync/logic-functions/resend-sync-templates';
 
 const mockSyncTemplates = vi.fn();
 
-vi.mock('aegis-client-sdk/core', () => ({
+vi.mock('twenty-client-sdk/core', () => ({
   CoreApiClient: vi.fn(),
 }));
 

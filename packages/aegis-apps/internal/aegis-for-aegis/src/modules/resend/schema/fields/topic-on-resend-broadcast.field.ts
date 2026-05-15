@@ -4,7 +4,7 @@ import {
   RESEND_TOPIC_OBJECT_UNIVERSAL_IDENTIFIER,
   TOPIC_ON_RESEND_BROADCAST_FIELD_UNIVERSAL_IDENTIFIER,
 } from '@modules/resend/constants/universal-identifiers';
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 
 export default defineField({
   universalIdentifier: TOPIC_ON_RESEND_BROADCAST_FIELD_UNIVERSAL_IDENTIFIER,

@@ -29,8 +29,6 @@
       "path": "../packages/aegis-server"
     },
     {
-      "name": "packages/aegis-utils",
-      "path": "../packages/aegis-utils"
     },
     {
       "name": "packages/aegis-zapier",
@@ -107,7 +105,6 @@
       "ROOT",
       "packages/aegis-zapier",
       "packages/aegis-docker",
-      "packages/aegis-utils",
       "packages/aegis-postgres"
     ]
   }

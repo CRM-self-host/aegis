@@ -1,9 +1,9 @@
 import { isNonEmptyString } from '@sniptt/guards';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import {
   type DatabaseEventPayload,
   type ObjectRecordDestroyEvent,
-} from 'aegis-sdk/logic-function';
+} from 'twenty-sdk/logic-function';
 import { isDefined } from '@utils/is-defined';
 
 import { ON_RESEND_CONTACT_DESTROYED_LOGIC_FUNCTION_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';

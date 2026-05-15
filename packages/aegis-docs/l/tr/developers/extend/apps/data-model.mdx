@@ -4,7 +4,7 @@ description: Aegis SDK ile nesneleri, alanları, rolleri ve uygulama meta verile
 icon: database
 ---
 
-`aegis-sdk` paketi, uygulamanızın veri modelini tanımlamak için `defineEntity` işlevlerini sağlar. SDK'nin varlıklarınızı algılayabilmesi için `export default defineEntity({...})` kullanmanız gerekir. Bu fonksiyonlar, derleme zamanında yapılandırmanızı doğrular ve IDE otomatik tamamlama ile tür güvenliği sağlar.
+`twenty-sdk` paketi, uygulamanızın veri modelini tanımlamak için `defineEntity` işlevlerini sağlar. SDK'nin varlıklarınızı algılayabilmesi için `export default defineEntity({...})` kullanmanız gerekir. Bu fonksiyonlar, derleme zamanında yapılandırmanızı doğrular ve IDE otomatik tamamlama ile tür güvenliği sağlar.
 
 <Note>
   **Dosya organizasyonu size kalmış.**
@@ -21,7 +21,7 @@ import {
   defineRole,
   PermissionFlag,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 
 export default defineRole({
   universalIdentifier: '2c80f640-2083-4803-bb49-003e38279de6',
@@ -70,7 +70,7 @@ Her uygulamanın, şunları tanımlayan tam olarak bir adet `defineApplication` 
 * **(İsteğe bağlı) Kurulum öncesi / kurulum sonrası fonksiyonlar**: kurulumdan önce veya sonra çalışan mantık fonksiyonları.
 
 ```ts src/application-config.ts
-import { defineApplication } from 'aegis-sdk/define';
+import { defineApplication } from 'twenty-sdk/define';
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from 'src/roles/default-role';
 
 export default defineApplication({
@@ -125,7 +125,7 @@ Eğer [uygulamanızı yayımlamayı](/l/tr/developers/extend/apps/publishing) pl
 Yeni bir uygulama iskeleti oluşturduğunuzda, CLI varsayılan bir rol dosyası oluşturur:
 
 ```ts src/roles/default-role.ts
-import { defineRole, PermissionFlag } from 'aegis-sdk/define';
+import { defineRole, PermissionFlag } from 'twenty-sdk/define';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   'b648f87b-1d26-4961-b974-0908fd991061';
@@ -165,7 +165,7 @@ Notlar:
 Özel nesneler, çalışma alanınızdaki kayıtlar için hem şemayı hem de davranışı tanımlar. Yerleşik doğrulamayla nesneler tanımlamak için `defineObject()` kullanın:
 
 ```ts postCard.object.ts
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',
@@ -254,7 +254,7 @@ ancak bu önerilmez.
 Sahibi olmadığınız nesnelere alan eklemek için `defineField()` kullanın — standart Aegis nesneleri (Person, Company, vb.) gibi. veya diğer uygulamalardaki nesneler. `defineObject()` içindeki satır içi alanların aksine, bağımsız alanlar hangi nesneyi genişlettiklerini belirtmek için bir `objectUniversalIdentifier` gerektirir:
 
 ```ts src/fields/company-loyalty-tier.field.ts
-import { defineField, FieldType } from 'aegis-sdk/define';
+import { defineField, FieldType } from 'twenty-sdk/define';
 
 export default defineField({
   universalIdentifier: 'f2a1b3c4-d5e6-7890-abcd-ef1234567890',
@@ -272,7 +272,7 @@ export default defineField({
 ```
 
 Önemli noktalar:
-* `objectUniversalIdentifier` hedef nesneyi tanımlar. Standart nesneler için, `aegis-sdk`'den dışa aktarılan `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS`'ı kullanın.
+* `objectUniversalIdentifier` hedef nesneyi tanımlar. Standart nesneler için, `twenty-sdk`'den dışa aktarılan `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS`'ı kullanın.
 * Alanları `defineObject()` içinde satır içi tanımlarken, `objectUniversalIdentifier`'a ihtiyacınız yoktur — üst nesneden devralınır.
 * `defineField()`, `defineObject()` ile oluşturmadığınız nesnelere alan eklemenin tek yoludur.
 
@@ -304,7 +304,7 @@ Bir `PostCard`'ın birçok `PostCardRecipient` kaydına gönderilebildiğini var
 **Adım 1: PostCard üzerinde ONE_TO_MANY tarafını tanımlayın** ("bir" taraf):
 
 ```ts src/fields/post-card-recipients-on-post-card.field.ts
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -331,7 +331,7 @@ export default defineField({
 **Adım 2: PostCardRecipient üzerinde MANY_TO_ONE tarafını tanımlayın** ("çok" taraf — yabancı anahtarı tutar):
 
 ```ts src/fields/post-card-on-post-card-recipient.field.ts
-import { defineField, FieldType, RelationType, OnDeleteAction } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType, OnDeleteAction } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -372,7 +372,7 @@ import {
   RelationType,
   OnDeleteAction,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { SELF_HOSTING_USER_UNIVERSAL_IDENTIFIER } from '../objects/self-hosting-user.object';
 
 export const PERSON_FIELD_ID = 'c3333333-3333-3333-3333-333333333333';

@@ -99,9 +99,8 @@ const updatePackageJson = async ({
   const packageJson = await fs.readJson(join(appDirectory, 'package.json'));
 
   packageJson.name = appName;
-  packageJson.dependencies['aegis-sdk'] = createAegisAppPackageJson.version;
-  packageJson.dependencies['aegis-client-sdk'] =
-    createAegisAppPackageJson.version;
+  packageJson.dependencies['twenty-sdk'] = '^2.5.0';
+  packageJson.dependencies['twenty-client-sdk'] = '^2.5.0';
 
   await fs.writeFile(
     join(appDirectory, 'package.json'),

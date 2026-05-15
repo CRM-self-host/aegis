@@ -1,5 +1,5 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { type RoutePayload } from 'aegis-sdk/logic-function';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { type RoutePayload } from 'twenty-sdk/logic-function';
 import type { GitHubWebhookPayload } from 'src/modules/github/connector/webhook-payload';
 import type { ProjectV2Item } from 'src/modules/github/project-item/types/project-v2-item';
 import { fetchProjectItemByNodeId } from 'src/modules/github/project-item/graphql/github/fetch-project-item-by-node-id';

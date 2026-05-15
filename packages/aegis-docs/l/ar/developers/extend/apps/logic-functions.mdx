@@ -12,9 +12,9 @@ icon: bolt
 كل ملف وظيفة يستخدم `defineLogicFunction()` لتصدير تكوين مع معالج ومشغّلات اختيارية.
 
 ```ts src/logic-functions/createPostCard.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk/define';
-import { CoreApiClient, type Person } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk/define';
+import { CoreApiClient, type Person } from 'twenty-client-sdk/core';
 
 const handler = async (params: RoutePayload) => {
   const client = new CoreApiClient();
@@ -79,10 +79,10 @@ yarn aegis logs
 #### حمولة مشغل المسار
 
 عندما يستدعي مُشغِّل المسار وظيفتك المنطقية، فإنها تتلقّى كائن `RoutePayload` الذي يتبع [صيغة AWS HTTP API v2](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html).
-استورد نوع `RoutePayload` من `aegis-sdk`:
+استورد نوع `RoutePayload` من `twenty-sdk`:
 
 ```ts
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk/define';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk/define';
 
 const handler = async (event: RoutePayload) => {
   const { headers, queryStringParameters, pathParameters, body } = event;
@@ -147,8 +147,8 @@ const handler = async (event: RoutePayload) => {
 لتمييز دالة منطقية كأداة، عيِّن `isTool: true`:
 
 ```ts src/logic-functions/enrich-company.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const handler = async (params: { companyName: string; domain?: string }) => {
   const client = new CoreApiClient();
@@ -213,7 +213,7 @@ export default defineLogicFunction({
 دالة ما بعد التثبيت هي دالة منطقية تعمل تلقائيًا بعد تثبيت تطبيقك على مساحة عمل. ينفّذه الخادم **بعد** مزامنة البيانات الوصفية للتطبيق وإنشاء عميل SDK، بحيث تكون مساحة العمل جاهزة تمامًا للاستخدام ويكون المخطط الجديد مطبَّقًا. تشمل حالات الاستخدام النموذجية تهيئة البيانات الافتراضية، وإنشاء السجلات الأولية، وتكوين إعدادات مساحة العمل، أو توفير الموارد على خدمات جهات خارجية.
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Post install logic function executed successfully!', payload.previousVersion);
@@ -256,7 +256,7 @@ yarn aegis exec --postInstall
 دالة ما قبل التثبيت هي دالة منطقية تعمل تلقائيًا أثناء التثبيت، **قبل تطبيق ترحيل البيانات الوصفية لمساحة العمل**. تتشارك نفس بنية الحمولة مع ما بعد التثبيت (`InstallPayload`)، لكنها موضوعة أبكر في تدفّق التثبيت كي تجهّز حالة يعتمد عليها الترحيل القادم — ومن الاستخدامات الشائعة: نسخ البيانات احتياطيًا، التحقق من التوافق مع المخطط الجديد، أو أرشفة السجلات التي ستُعاد هيكلتها أو ستُحذف.
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Pre install logic function executed successfully!', payload.previousVersion);
@@ -314,7 +314,7 @@ yarn aegis exec --preInstall
 مثال — بَذر سجل `PostCard` افتراضي بعد التثبيت:
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion }: InstallPayload): Promise<void> => {
@@ -346,7 +346,7 @@ export default definePostInstallLogicFunction({
 مثال — أرشف السجلات قبل ترحيل هدّام:
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion, newVersion }: InstallPayload): Promise<void> => {
@@ -404,14 +404,14 @@ export default definePreInstallLogicFunction({
 </Accordion>
 </AccordionGroup>
 
-## عملاء واجهة برمجة تطبيقات مضبوطة الأنواع (`aegis-client-sdk`)
+## عملاء واجهة برمجة تطبيقات مضبوطة الأنواع (`twenty-client-sdk`)
 
-توفر حزمة `aegis-client-sdk` عميلين لـ GraphQL ذوي أنواع ثابتة للتفاعل مع واجهة Aegis البرمجية من وظائفك المنطقية ومكوّنات الواجهة الأمامية.
+توفر حزمة `twenty-client-sdk` عميلين لـ GraphQL ذوي أنواع ثابتة للتفاعل مع واجهة Aegis البرمجية من وظائفك المنطقية ومكوّنات الواجهة الأمامية.
 
 | العميل              | استيراد                      | نقطة النهاية                                        | مُولَّد؟                   |
 | ------------------- | ---------------------------- | --------------------------------------------------- | -------------------------- |
-| `CoreApiClient`     | `aegis-client-sdk/core`     | `/graphql` — بيانات مساحة العمل (السجلات، الكائنات) | نعم، في وقت التطوير/البناء |
-| `MetadataApiClient` | `aegis-client-sdk/metadata` | `/metadata` — تكوين مساحة العمل، رفع الملفات        | لا، يأتي مُجهزًا مسبقًا    |
+| `CoreApiClient`     | `twenty-client-sdk/core`     | `/graphql` — بيانات مساحة العمل (السجلات، الكائنات) | نعم، في وقت التطوير/البناء |
+| `MetadataApiClient` | `twenty-client-sdk/metadata` | `/metadata` — تكوين مساحة العمل، رفع الملفات        | لا، يأتي مُجهزًا مسبقًا    |
 
 <AccordionGroup>
 <Accordion title="CoreApiClient" description="استعلام وتعديل بيانات مساحة العمل (السجلات، الكائنات)">
@@ -419,7 +419,7 @@ export default definePreInstallLogicFunction({
 `CoreApiClient` هو العميل الرئيسي للاستعلام وتعديل بيانات مساحة العمل. يُولَّد من مخطط مساحة العمل لديك أثناء `yarn aegis dev` أو `yarn aegis build`، لذا فهو مضبوط الأنواع بالكامل ليتوافق مع كائناتك وحقولك.
 
 ```ts
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const client = new CoreApiClient();
 
@@ -464,7 +464,7 @@ const { createCompany } = await client.mutation({
 `CoreSchema` يوفّر أنواع TypeScript المطابقة لكائنات مساحة العمل لديك — مفيد لتعيين أنواع حالة المكوّن أو معاملات الدوال:
 
 ```ts
-import { CoreApiClient, CoreSchema } from 'aegis-client-sdk/core';
+import { CoreApiClient, CoreSchema } from 'twenty-client-sdk/core';
 import { useState } from 'react';
 
 const [company, setCompany] = useState<
@@ -488,7 +488,7 @@ setCompany(result.company);
 يأتي `MetadataApiClient` مُجهّزًا مسبقًا مع SDK (لا حاجة للتوليد). يستعلم عن نقطة النهاية `/metadata` للحصول على تكوين مساحة العمل والتطبيقات ورفع الملفات.
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadataClient = new MetadataApiClient();
 
@@ -517,7 +517,7 @@ const { objects } = await metadataClient.query({
 يتضمن `MetadataApiClient` طريقة `uploadFile` لإرفاق الملفات بالحقول من نوع الملف:
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import * as fs from 'fs';
 
 const metadataClient = new MetadataApiClient();

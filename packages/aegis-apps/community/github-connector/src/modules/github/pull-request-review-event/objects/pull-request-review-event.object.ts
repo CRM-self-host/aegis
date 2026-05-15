@@ -1,4 +1,4 @@
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 export const PULL_REQUEST_REVIEW_EVENT_UNIVERSAL_IDENTIFIER =
   '7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d';

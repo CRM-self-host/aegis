@@ -12,9 +12,9 @@ Logické funkce jsou serverové funkce v TypeScriptu, které běží na platform
 Každý soubor funkce používá `defineLogicFunction()` k exportu konfigurace s obslužnou funkcí (handlerem) a volitelnými spouštěči.
 
 ```ts src/logic-functions/createPostCard.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk/define';
-import { CoreApiClient, type Person } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk/define';
+import { CoreApiClient, type Person } from 'twenty-client-sdk/core';
 
 const handler = async (params: RoutePayload) => {
   const client = new CoreApiClient();
@@ -80,10 +80,10 @@ yarn aegis logs
 
 Když spouštěč typu route vyvolá vaši logickou funkci, ta obdrží objekt `RoutePayload`, který odpovídá
 [AWS HTTP API v2 formátu](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html).
-Importujte typ `RoutePayload` z `aegis-sdk`:
+Importujte typ `RoutePayload` z `twenty-sdk`:
 
 ```ts
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk/define';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk/define';
 
 const handler = async (event: RoutePayload) => {
   const { headers, queryStringParameters, pathParameters, body } = event;
@@ -148,8 +148,8 @@ Logické funkce lze zpřístupnit jako **nástroje** pro agenty AI a pracovní p
 Chcete-li označit logickou funkci jako nástroj, nastavte `isTool: true`:
 
 ```ts src/logic-functions/enrich-company.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const handler = async (params: { companyName: string; domain?: string }) => {
   const client = new CoreApiClient();
@@ -214,7 +214,7 @@ export default defineLogicFunction({
 Postinstalační funkce je logická funkce, která se spustí automaticky, jakmile je instalace vaší aplikace v pracovním prostoru dokončena. Server ji provede **poté**, co byla synchronizována metadata aplikace a vygenerován klient SDK, takže je pracovní prostor plně připraven k použití a nové schéma je zavedeno. Mezi typické případy použití patří naplnění výchozími daty, vytvoření počátečních záznamů, konfigurace nastavení pracovního prostoru nebo zřizování prostředků ve službách třetích stran.
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Post install logic function executed successfully!', payload.previousVersion);
@@ -257,7 +257,7 @@ Hlavní body:
 Funkce pre-install je logická funkce, která se během instalace spouští automaticky, **před aplikováním migrace metadat pracovního prostoru**. Má stejný tvar payloadu jako post-install (`InstallPayload`), ale je zařazena dříve v instalačním toku, aby mohla připravit stav, na němž nadcházející migrace závisí — typické použití zahrnuje zálohování dat, ověření kompatibility s novým schématem nebo archivaci záznamů, které se chystají přeuspořádat nebo odstranit.
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Pre install logic function executed successfully!', payload.previousVersion);
@@ -315,7 +315,7 @@ Pre-install je vždy **synchronní** (blokuje instalaci a může ji přerušit).
 Příklad — po instalaci naplňte výchozí záznam `PostCard`:
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion }: InstallPayload): Promise<void> => {
@@ -347,7 +347,7 @@ export default definePostInstallLogicFunction({
 Příklad — archivujte záznamy před destruktivní migrací:
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion, newVersion }: InstallPayload): Promise<void> => {
@@ -405,14 +405,14 @@ Pokud si nejste jisti, výchozí volbou je **post-install**. Po pre-install sáh
 </Accordion>
 </AccordionGroup>
 
-## Typovaní klienti API (aegis-client-sdk)
+## Typovaní klienti API (twenty-client-sdk)
 
-Balíček `aegis-client-sdk` poskytuje dva typované klienty GraphQL pro práci s Aegis API z vašich logických funkcí a frontendových komponent.
+Balíček `twenty-client-sdk` poskytuje dva typované klienty GraphQL pro práci s Aegis API z vašich logických funkcí a frontendových komponent.
 
 | Klient              | Importovat                   | Koncový bod                                                      | Generováno?                    |
 | ------------------- | ---------------------------- | ---------------------------------------------------------------- | ------------------------------ |
-| `CoreApiClient`     | `aegis-client-sdk/core`     | `/graphql` — data pracovního prostoru (záznamy, objekty)         | Ano, při vývoji/sestavení      |
-| `MetadataApiClient` | `aegis-client-sdk/metadata` | `/metadata` — konfigurace pracovního prostoru, nahrávání souborů | Ne, dodává se předem sestavený |
+| `CoreApiClient`     | `twenty-client-sdk/core`     | `/graphql` — data pracovního prostoru (záznamy, objekty)         | Ano, při vývoji/sestavení      |
+| `MetadataApiClient` | `twenty-client-sdk/metadata` | `/metadata` — konfigurace pracovního prostoru, nahrávání souborů | Ne, dodává se předem sestavený |
 
 <AccordionGroup>
 <Accordion title="CoreApiClient" description="Dotazování a změny dat pracovního prostoru (záznamy, objekty)">
@@ -420,7 +420,7 @@ Balíček `aegis-client-sdk` poskytuje dva typované klienty GraphQL pro práci 
 `CoreApiClient` je hlavní klient pro dotazování a mutace dat pracovního prostoru. Generuje se z vašeho schématu pracovního prostoru během `yarn aegis dev` nebo `yarn aegis build`, takže je plně typovaný tak, aby odpovídal vašim objektům a polím.
 
 ```ts
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const client = new CoreApiClient();
 
@@ -465,7 +465,7 @@ Klient používá syntaxi výběrové sady (selection-set): předáním `true` z
 `CoreSchema` poskytuje typy TypeScriptu odpovídající objektům vašeho pracovního prostoru — hodí se pro typování stavu komponent nebo parametrů funkcí:
 
 ```ts
-import { CoreApiClient, CoreSchema } from 'aegis-client-sdk/core';
+import { CoreApiClient, CoreSchema } from 'twenty-client-sdk/core';
 import { useState } from 'react';
 
 const [company, setCompany] = useState<
@@ -489,7 +489,7 @@ setCompany(result.company);
 `MetadataApiClient` je dodáván předem sestavený v rámci SDK (není vyžadováno žádné generování). Odesílá dotazy na endpoint `/metadata` pro konfiguraci pracovního prostoru, aplikace a nahrávání souborů.
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadataClient = new MetadataApiClient();
 
@@ -518,7 +518,7 @@ const { objects } = await metadataClient.query({
 `MetadataApiClient` obsahuje metodu `uploadFile` pro připojování souborů k polím typu souboru:
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import * as fs from 'fs';
 
 const metadataClient = new MetadataApiClient();

@@ -1,4 +1,4 @@
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 export const CONTRIBUTOR_UNIVERSAL_IDENTIFIER =
   '8e9464f0-fdc9-487a-9963-c7accac0d4bb';

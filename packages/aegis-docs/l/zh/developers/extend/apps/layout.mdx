@@ -26,7 +26,7 @@ icon: table-columns
 视图是关于对象记录如何显示的已保存配置——包括哪些字段可见、它们的顺序，以及应用的任何筛选器或分组。 使用 `defineView()` 随你的应用一起提供预配置的视图：
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk/define';
+import { defineView, ViewKey } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -62,7 +62,7 @@ export default defineView({
 导航菜单项会在工作区侧边栏中添加自定义条目。 使用 `defineNavigationMenuItem()` 链接到视图、外部 URL 或对象：
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -88,7 +88,7 @@ export default defineNavigationMenuItem({
 页面布局使你可以自定义记录详情页的外观——显示哪些选项卡、每个选项卡内有哪些小部件，以及它们如何排列。 使用 `definePageLayout()` 随你的应用一起提供自定义布局：
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -139,7 +139,7 @@ export default definePageLayout({
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
 const COMPANY_RECORD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =

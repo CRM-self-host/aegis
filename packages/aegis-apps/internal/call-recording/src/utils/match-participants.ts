@@ -1,4 +1,4 @@
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 export interface Participant {
   id: string;

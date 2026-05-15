@@ -1,6 +1,6 @@
 import { isNonEmptyString } from '@sniptt/guards';
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk/define';
 import { isDefined } from '@utils/is-defined';
 
 import { RESEND_WEBHOOK_LOGIC_FUNCTION_UNIVERSAL_IDENTIFIER } from '@modules/resend/constants/universal-identifiers';

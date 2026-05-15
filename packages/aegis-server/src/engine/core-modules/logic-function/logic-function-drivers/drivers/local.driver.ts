@@ -115,7 +115,7 @@ export class LocalDriver implements LogicFunctionDriver {
 
     await fs.rm(sdkLayerPath, { recursive: true, force: true });
 
-    const sdkPackagePath = join(sdkNodeModulesPath, 'aegis-client-sdk');
+    const sdkPackagePath = join(sdkNodeModulesPath, 'twenty-client-sdk');
 
     await this.sdkClientArchiveService.downloadAndExtractToPackage({
       workspaceId: flatApplication.workspaceId,
@@ -168,7 +168,7 @@ export class LocalDriver implements LogicFunctionDriver {
 
   async delete() {}
 
-  // Symlinks everything from the deps layer except aegis-client-sdk,
+  // Symlinks everything from the deps layer except twenty-client-sdk,
   // which comes from the SDK layer (workspace-specific generated client).
   private async assembleNodeModules({
     sourceTemporaryDir,
@@ -199,7 +199,7 @@ export class LocalDriver implements LogicFunctionDriver {
     });
 
     const symlinkPromises = entries
-      .filter((entry) => entry.name !== 'aegis-client-sdk')
+      .filter((entry) => entry.name !== 'twenty-client-sdk')
       .map((entry) =>
         fs.symlink(
           join(depsNodeModules, entry.name),
@@ -211,8 +211,8 @@ export class LocalDriver implements LogicFunctionDriver {
     await Promise.all(symlinkPromises);
 
     await fs.symlink(
-      join(sdkNodeModules, 'aegis-client-sdk'),
-      join(execNodeModules, 'aegis-client-sdk'),
+      join(sdkNodeModules, 'twenty-client-sdk'),
+      join(execNodeModules, 'twenty-client-sdk'),
       'dir',
     );
   }

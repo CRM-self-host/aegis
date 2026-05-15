@@ -45,7 +45,7 @@ npx create-aegis-app my-app
 Define objects, fields, and views as code:
 
 ```ts
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 export default defineObject({
   nameSingular: 'deal',

@@ -19,8 +19,6 @@ COPY ./packages/aegis-ui/package.json /app/packages/aegis-ui/
 COPY ./packages/aegis-shared/package.json /app/packages/aegis-shared/
 COPY ./packages/aegis-front/package.json /app/packages/aegis-front/
 COPY ./packages/aegis-front-component-renderer/package.json /app/packages/aegis-front-component-renderer/
-COPY ./packages/aegis-sdk/package.json /app/packages/aegis-sdk/
-COPY ./packages/aegis-client-sdk/package.json /app/packages/aegis-client-sdk/
 
 RUN yarn && yarn cache clean && npx nx reset
 
@@ -30,14 +28,12 @@ FROM common-deps AS aegis-server-build
 COPY ./packages/aegis-emails /app/packages/aegis-emails
 COPY ./packages/aegis-shared /app/packages/aegis-shared
 COPY ./packages/aegis-ui /app/packages/aegis-ui
-COPY ./packages/aegis-sdk /app/packages/aegis-sdk
-COPY ./packages/aegis-client-sdk /app/packages/aegis-client-sdk
 COPY ./packages/aegis-server /app/packages/aegis-server
 
 RUN npx nx run aegis-server:lingui:extract && \
-    npx nx run aegis-server:lingui:compile && \
-    npx nx run aegis-emails:lingui:extract && \
-    npx nx run aegis-emails:lingui:compile
+  npx nx run aegis-server:lingui:compile && \
+  npx nx run aegis-emails:lingui:extract && \
+  npx nx run aegis-emails:lingui:compile
 
 RUN npx nx run aegis-server:build
 
@@ -46,7 +42,7 @@ RUN npx nx run aegis-server:build
 RUN find /app/packages/aegis-server/dist -name '*.d.ts' -delete \
  && rm -rf /app/packages/aegis-server/dist/packages/aegis-server/test
 
-RUN yarn workspaces focus --production aegis-emails aegis-shared aegis-sdk aegis-client-sdk aegis-server
+RUN yarn workspaces focus --production aegis-emails aegis-shared aegis-server
 
 
 FROM common-deps AS aegis-front-build
@@ -57,23 +53,21 @@ COPY ./packages/aegis-front /app/packages/aegis-front
 COPY ./packages/aegis-front-component-renderer /app/packages/aegis-front-component-renderer
 COPY ./packages/aegis-ui /app/packages/aegis-ui
 COPY ./packages/aegis-shared /app/packages/aegis-shared
-COPY ./packages/aegis-sdk /app/packages/aegis-sdk
-COPY ./packages/aegis-client-sdk /app/packages/aegis-client-sdk
 RUN npx nx run aegis-front:lingui:extract && \
-    npx nx run aegis-front:lingui:compile
+  npx nx run aegis-front:lingui:compile
 # To skip the memory-intensive frontend build, pre-build on the host:
-#   npx nx build aegis-front
+#  npx nx build aegis-front
 # The check below will use packages/aegis-front/build/ if it already exists.
 RUN if [ -d /app/packages/aegis-front/build ]; then \
-      echo "Using pre-built frontend from host"; \
-    else \
-      NODE_OPTIONS="--max-old-space-size=8192" npx nx build aegis-front; \
-    fi
+   echo "Using pre-built frontend from host"; \
+  else \
+   NODE_OPTIONS="--max-old-space-size=8192" npx nx build aegis-front; \
+  fi
 
 
 # ===========================================================================
 # Target: aegis-server (server only, no frontend)
-#   docker build --target aegis-server -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-server -f packages/aegis-docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM node:24-alpine AS aegis-server
@@ -103,9 +97,6 @@ COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-shared/package.j
 COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-shared/dist /app/packages/aegis-shared/dist
 COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-emails/package.json /app/packages/aegis-emails/
 COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-emails/dist /app/packages/aegis-emails/dist
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-sdk/package.json /app/packages/aegis-sdk/
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-client-sdk/package.json /app/packages/aegis-client-sdk/
-COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-client-sdk/dist /app/packages/aegis-client-sdk/dist
 COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-ui/package.json /app/packages/aegis-ui/
 COPY --chown=1000 --from=aegis-server-build /app/packages/aegis-front/package.json /app/packages/aegis-front/
 
@@ -113,7 +104,7 @@ LABEL org.opencontainers.image.source=https://github.com/u84u/aegis
 LABEL org.opencontainers.image.description="Aegis server image (no frontend)."
 
 RUN mkdir -p /app/.local-storage /app/packages/aegis-server/.local-storage && \
-    chown 1000:1000 /app/.local-storage /app/packages/aegis-server/.local-storage
+  chown 1000:1000 /app/.local-storage /app/packages/aegis-server/.local-storage
 
 USER 1000
 
@@ -123,7 +114,7 @@ ENTRYPOINT ["/app/entrypoint.sh"]
 
 # ===========================================================================
 # Target: aegis-server-aws (server only + aws-cli, no frontend)
-#   docker build --target aegis-server-aws -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-server-aws -f packages/aegis-docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM aegis-server AS aegis-server-aws
@@ -135,7 +126,7 @@ USER 1000
 
 # ===========================================================================
 # Target: aegis (server + frontend)
-#   docker build --target aegis -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis -f packages/aegis-docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM aegis-server AS aegis
@@ -150,7 +141,7 @@ LABEL org.opencontainers.image.description="Aegis image with backend and fronten
 
 # ===========================================================================
 # Target: aegis-aws (server + frontend + aws-cli)
-#   docker build --target aegis-aws -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-aws -f packages/aegis-docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM aegis AS aegis-aws
@@ -162,28 +153,28 @@ USER 1000
 
 # ===========================================================================
 # Target: aegis-app-dev (all-in-one with Postgres + Redis)
-#   docker build --target aegis-app-dev -f packages/aegis-docker/aegis/Dockerfile .
+#  docker build --target aegis-app-dev -f packages/aegis-docker/aegis/Dockerfile .
 # ===========================================================================
 
 FROM alpine:3.20 AS s6-fetch
 ARG S6_OVERLAY_VERSION=3.2.0.2
 ARG TARGETARCH
 RUN if [ "$TARGETARCH" = "arm64" ]; then echo "aarch64" > /tmp/s6arch; \
-    else echo "x86_64" > /tmp/s6arch; fi
+  else echo "x86_64" > /tmp/s6arch; fi
 RUN S6_ARCH=$(cat /tmp/s6arch) && \
-    wget -O /tmp/s6-overlay-noarch.tar.xz \
-      "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz" && \
-    wget -O /tmp/s6-overlay-noarch.tar.xz.sha256 \
-      "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz.sha256" && \
-    wget -O /tmp/s6-overlay-arch.tar.xz \
-      "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz" && \
-    wget -O /tmp/s6-overlay-arch.tar.xz.sha256 \
-      "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz.sha256" && \
-    cd /tmp && \
-    NOARCH_SUM=$(awk '{print $1}' s6-overlay-noarch.tar.xz.sha256) && \
-    ARCH_SUM=$(awk '{print $1}' s6-overlay-arch.tar.xz.sha256) && \
-    echo "$NOARCH_SUM  s6-overlay-noarch.tar.xz" | sha256sum -c - && \
-    echo "$ARCH_SUM  s6-overlay-arch.tar.xz" | sha256sum -c -
+  wget -O /tmp/s6-overlay-noarch.tar.xz \
+   "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz" && \
+  wget -O /tmp/s6-overlay-noarch.tar.xz.sha256 \
+   "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-noarch.tar.xz.sha256" && \
+  wget -O /tmp/s6-overlay-arch.tar.xz \
+   "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz" && \
+  wget -O /tmp/s6-overlay-arch.tar.xz.sha256 \
+   "https://github.com/just-containers/s6-overlay/releases/download/v${S6_OVERLAY_VERSION}/s6-overlay-${S6_ARCH}.tar.xz.sha256" && \
+  cd /tmp && \
+  NOARCH_SUM=$(awk '{print $1}' s6-overlay-noarch.tar.xz.sha256) && \
+  ARCH_SUM=$(awk '{print $1}' s6-overlay-arch.tar.xz.sha256) && \
+  echo "$NOARCH_SUM s6-overlay-noarch.tar.xz" | sha256sum -c - && \
+  echo "$ARCH_SUM s6-overlay-arch.tar.xz" | sha256sum -c -
 
 FROM node:24-alpine AS aegis-app-dev
 
@@ -195,9 +186,9 @@ RUN tar -C / -Jxpf /tmp/s6-overlay-noarch.tar.xz \
  && rm /tmp/s6-overlay-*.tar.xz
 
 RUN apk add --no-cache \
-    postgresql16 postgresql16-contrib \
-    redis \
-    curl jq su-exec
+  postgresql16 postgresql16-contrib \
+  redis \
+  curl jq su-exec
 
 # Workspace root config
 COPY --from=aegis-server-build /app/package.json /app/yarn.lock /app/.yarnrc.yml /app/
@@ -215,9 +206,6 @@ COPY --from=aegis-server-build /app/packages/aegis-shared/package.json /app/pack
 COPY --from=aegis-server-build /app/packages/aegis-shared/dist /app/packages/aegis-shared/dist
 COPY --from=aegis-server-build /app/packages/aegis-emails/package.json /app/packages/aegis-emails/
 COPY --from=aegis-server-build /app/packages/aegis-emails/dist /app/packages/aegis-emails/dist
-COPY --from=aegis-server-build /app/packages/aegis-sdk/package.json /app/packages/aegis-sdk/
-COPY --from=aegis-server-build /app/packages/aegis-client-sdk/package.json /app/packages/aegis-client-sdk/
-COPY --from=aegis-server-build /app/packages/aegis-client-sdk/dist /app/packages/aegis-client-sdk/dist
 COPY --from=aegis-server-build /app/packages/aegis-ui/package.json /app/packages/aegis-ui/
 COPY --from=aegis-server-build /app/packages/aegis-front/package.json /app/packages/aegis-front/
 
@@ -239,19 +227,19 @@ ARG APP_VERSION=0.0.0
 
 ENV S6_KEEP_ENV=1
 ENV PG_DATABASE_URL=postgres://aegis:aegis@localhost:5432/default \
-    SERVER_URL=http://localhost:2020 \
-    REDIS_URL=redis://localhost:6379 \
-    STORAGE_TYPE=local \
-    APP_SECRET=aegis-app-dev-secret-not-for-production \
-    REACT_APP_SERVER_BASE_URL=$REACT_APP_SERVER_BASE_URL \
-    APP_VERSION=$APP_VERSION \
-    NODE_ENV=development \
-    NODE_PORT=2020 \
-    DISABLE_DB_MIGRATIONS=true \
-    DISABLE_CRON_JOBS_REGISTRATION=true \
-    IS_BILLING_ENABLED=false \
-    SIGN_IN_PREFILLED=true \
-    APPLICATION_LOG_DRIVER=CONSOLE
+  SERVER_URL=http://localhost:2020 \
+  REDIS_URL=redis://localhost:6379 \
+  STORAGE_TYPE=local \
+  APP_SECRET=aegis-app-dev-secret-not-for-production \
+  REACT_APP_SERVER_BASE_URL=$REACT_APP_SERVER_BASE_URL \
+  APP_VERSION=$APP_VERSION \
+  NODE_ENV=development \
+  NODE_PORT=2020 \
+  DISABLE_DB_MIGRATIONS=true \
+  DISABLE_CRON_JOBS_REGISTRATION=true \
+  IS_BILLING_ENABLED=false \
+  SIGN_IN_PREFILLED=true \
+  APPLICATION_LOG_DRIVER=CONSOLE
 
 EXPOSE 2020
 VOLUME ["/data/postgres", "/app/packages/aegis-server/.local-storage"]

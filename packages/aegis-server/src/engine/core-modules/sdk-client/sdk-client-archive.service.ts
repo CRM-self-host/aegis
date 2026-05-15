@@ -21,7 +21,7 @@ import { SdkClientGenerationService } from 'src/engine/core-modules/sdk-client/s
 import { WorkspaceCacheService } from 'src/engine/workspace-cache/services/workspace-cache.service';
 import { streamToBuffer } from 'src/utils/stream-to-buffer';
 
-const SDK_CLIENT_ARCHIVE_NAME = 'aegis-client-sdk.zip';
+const SDK_CLIENT_ARCHIVE_NAME = 'twenty-client-sdk.zip';
 
 @Injectable()
 export class SdkClientArchiveService {

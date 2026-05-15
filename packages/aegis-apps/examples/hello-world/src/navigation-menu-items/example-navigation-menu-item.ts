@@ -1,4 +1,4 @@
-import { defineNavigationMenuItem } from 'aegis-sdk/define';
+import { defineNavigationMenuItem } from 'twenty-sdk/define';
 import { NavigationMenuItemType } from 'aegis-shared/types';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from 'src/views/example-view';
 

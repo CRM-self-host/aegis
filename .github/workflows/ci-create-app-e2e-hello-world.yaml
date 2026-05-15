@@ -22,12 +22,12 @@ jobs:
     with:
       files: |
         packages/create-aegis-app/**
-        packages/aegis-sdk/**
-        packages/aegis-client-sdk/**
+        packages/twenty-sdk/**
+        packages/twenty-client-sdk/**
         packages/aegis-shared/**
         !packages/create-aegis-app/package.json
-        !packages/aegis-sdk/package.json
-        !packages/aegis-client-sdk/package.json
+        !packages/twenty-sdk/package.json
+        !packages/twenty-client-sdk/package.json
         !packages/aegis-shared/package.json
   create-app-e2e-hello-world:
     needs: changed-files-check
@@ -52,7 +52,7 @@ jobs:
         ports:
           - 6379:6379
     env:
-      PUBLISHABLE_PACKAGES: aegis-client-sdk aegis-sdk create-aegis-app
+      PUBLISHABLE_PACKAGES: twenty-client-sdk twenty-sdk create-aegis-app
       AEGIS_API_URL: http://localhost:3000
       AEGIS_API_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyMDIwMjAyMC1lNmI1LTQ2ODAtOGEzMi1iODIwOTczNzE1NmIiLCJ1c2VySWQiOiIyMDIwMjAyMC1lNmI1LTQ2ODAtOGEzMi1iODIwOTczNzE1NmIiLCJ3b3Jrc3BhY2VJZCI6IjIwMjAyMDIwLTFjMjUtNGQwMi1iZjI1LTZhZWNjZjdlYTQxOSIsIndvcmtzcGFjZU1lbWJlcklkIjoiMjAyMDIwMjAtNDYzZi00MzViLTgyOGMtMTA3ZTAwN2EyNzExIiwidXNlcldvcmtzcGFjZUlkIjoiMjAyMDIwMjAtMWU3Yy00M2Q5LWE1ZGItNjg1YjUwNjlkODE2IiwidHlwZSI6IkFDQ0VTUyIsImF1dGhQcm92aWRlciI6InBhc3N3b3JkIiwiaWF0IjoxNzUxMjgxNzA0LCJleHAiOjIwNjY4NTc3MDR9.HMGqCsVlOAPVUBhKSGlD1X86VoHKt4LIUtET3CGIdik
     steps:
@@ -118,7 +118,7 @@ jobs:
           echo 'unsafeHttpWhitelist: ["localhost"]' >> .yarnrc.yml
           YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn install --no-immutable
           echo "--- Installing last SDK versions ---"
-          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn add aegis-sdk aegis-client-sdk
+          YARN_ENABLE_IMMUTABLE_INSTALLS=false yarn add twenty-sdk twenty-client-sdk
 
       - name: Verify installed app versions
         run: |
@@ -126,9 +126,9 @@ jobs:
           echo "--- Checking package.json references correct SDK version ---"
           node -e "
             const pkg = require('./package.json');
-            const sdkVersion = pkg.dependencies['aegis-sdk'];
+            const sdkVersion = pkg.dependencies['twenty-sdk'];
             if (!sdkVersion.startsWith('0.0.0-ci.')) {
-              console.error('Expected aegis-sdk version to start with 0.0.0-ci., got:', sdkVersion);
+              console.error('Expected twenty-sdk version to start with 0.0.0-ci., got:', sdkVersion);
               process.exit(1);
             }
             console.log('SDK version in scaffolded app:', sdkVersion);

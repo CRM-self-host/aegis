@@ -12,7 +12,7 @@ import {
   SUBJECT_FIELD_UNIVERSAL_IDENTIFIER,
   TO_ADDRESSES_FIELD_UNIVERSAL_IDENTIFIER,
 } from '@modules/resend/constants/universal-identifiers';
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 export default defineObject({
   universalIdentifier: RESEND_EMAIL_OBJECT_UNIVERSAL_IDENTIFIER,

@@ -1,4 +1,4 @@
-import type { CoreApiClient } from 'aegis-client-sdk/core';
+import type { CoreApiClient } from 'twenty-client-sdk/core';
 import { describe, expect, it, vi } from 'vitest';
 
 import { areAllSyncCursorsEmpty } from '@modules/resend/sync/utils/are-all-sync-cursors-empty';

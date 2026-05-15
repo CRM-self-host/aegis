@@ -19,12 +19,12 @@ icon: terminal
 
 ### Доступ к публичным ресурсам с помощью `getPublicAssetUrl`
 
-Используйте хелпер `getPublicAssetUrl` из `aegis-sdk`, чтобы получить полный URL файла в каталоге `public/` вашего приложения. Он работает как в **логических функциях**, так и в **компонентах фронтенда**.
+Используйте хелпер `getPublicAssetUrl` из `twenty-sdk`, чтобы получить полный URL файла в каталоге `public/` вашего приложения. Он работает как в **логических функциях**, так и в **компонентах фронтенда**.
 
 **В логической функции:**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -49,7 +49,7 @@ export default defineLogicFunction({
 **В компоненте фронтенда:**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -73,7 +73,7 @@ yarn add axios
 Затем импортируйте его в своём коде:
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -94,7 +94,7 @@ export default defineLogicFunction({
 То же самое работает для компонентов фронтенда:
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -116,7 +116,7 @@ export default defineFrontComponent({
 
 **Компоненты фронтенда** выполняются в Web Worker. Встроенные модули Node недоступны — доступны только браузерные API и пакеты npm, работающие в браузерной среде.
 
-В обеих средах доступны как предварительно предоставленные модули `aegis-client-sdk/core` и `aegis-client-sdk/metadata` — они не включаются в бандл, а подставляются сервером во время выполнения.
+В обеих средах доступны как предварительно предоставленные модули `twenty-client-sdk/core` и `twenty-client-sdk/metadata` — они не включаются в бандл, а подставляются сервером во время выполнения.
 
 ## Тестирование вашего приложения
 
@@ -165,7 +165,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -198,7 +198,7 @@ beforeAll(async () => {
 
 ### Программные API SDK
 
-Подпуть `aegis-sdk/cli` экспортирует функции, которые можно вызывать напрямую из тестового кода:
+Подпуть `twenty-sdk/cli` экспортирует функции, которые можно вызывать напрямую из тестового кода:
 
 | Функция        | Описание                                                   |
 | -------------- | ---------------------------------------------------------- |
@@ -215,8 +215,8 @@ beforeAll(async () => {
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

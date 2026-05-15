@@ -1,11 +1,11 @@
 // Script to build seed front component .tsx files into .mjs using the same
-// esbuild pipeline as the aegis-sdk CLI (Remote DOM + JSX wrapping).
+// esbuild pipeline as the twenty-sdk CLI (Remote DOM + JSX wrapping).
 //
 // Usage: npx tsx scripts/build-seed-front-components.ts
 
 import * as esbuild from 'esbuild';
 import { join, resolve } from 'path';
-import { getFrontComponentBuildPlugins } from 'aegis-sdk/front-component-renderer/build';
+import { getFrontComponentBuildPlugins } from 'twenty-sdk/front-component-renderer/build';
 
 const ROOT_DIR = resolve(__dirname, '../../..');
 const ROOT_NODE_MODULES = resolve(ROOT_DIR, 'node_modules');
@@ -34,8 +34,8 @@ const build = async () => {
       format: 'esm',
       outExtension: { '.js': '.mjs' },
       external: [
-        'aegis-client-sdk/core',
-        'aegis-client-sdk/metadata',
+        'twenty-client-sdk/core',
+        'twenty-client-sdk/metadata',
         'aegis-shared/*',
       ],
       jsx: 'automatic',

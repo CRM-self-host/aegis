@@ -6,7 +6,7 @@ const RecallAiSdk = require('@recallai/desktop-sdk');
 const axios = require('axios');
 const OpenAI = require('openai');
 const sdkLogger = require('./sdk-logger');
-const aegisClient = require('./aegis-client');
+const aegisClient = require('./twenty-sdk/client');
 require('dotenv').config();
 
 const aegisIconDataUrl = require('./assets/aegis-logo-256.png');

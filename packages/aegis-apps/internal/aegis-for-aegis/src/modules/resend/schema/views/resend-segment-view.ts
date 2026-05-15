@@ -10,7 +10,7 @@ import {
   SEGMENT_CREATED_AT_FIELD_UNIVERSAL_IDENTIFIER,
   SEGMENT_NAME_FIELD_UNIVERSAL_IDENTIFIER,
 } from '@modules/resend/constants/universal-identifiers';
-import { defineView } from 'aegis-sdk/define';
+import { defineView } from 'twenty-sdk/define';
 
 export default defineView({
   universalIdentifier: RESEND_SEGMENT_VIEW_UNIVERSAL_IDENTIFIER,

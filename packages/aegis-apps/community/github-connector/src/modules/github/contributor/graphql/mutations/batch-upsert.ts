@@ -1,5 +1,5 @@
 import type { ContributorRow } from 'src/modules/github/contributor/types/contributor-row';
-import { chunkedBatchCreate } from 'src/modules/shared/aegis-client';
+import { chunkedBatchCreate } from 'src/modules/shared/twenty-sdk/client';
 
 export async function batchUpsertContributors(
   items: Array<{

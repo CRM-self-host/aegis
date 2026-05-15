@@ -19,12 +19,12 @@ icon: terminal
 
 ### 使用 `getPublicAssetUrl` 访问公共资源
 
-使用来自 `aegis-sdk` 的 `getPublicAssetUrl` 辅助函数获取 `public/` 目录中文件的完整 URL。 它可在 **逻辑函数** 和 **前端组件** 中使用。
+使用来自 `twenty-sdk` 的 `getPublicAssetUrl` 辅助函数获取 `public/` 目录中文件的完整 URL。 它可在 **逻辑函数** 和 **前端组件** 中使用。
 
 **在逻辑函数中：**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -49,7 +49,7 @@ export default defineLogicFunction({
 **在前端组件中：**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -73,7 +73,7 @@ yarn add axios
 然后在代码中导入它：
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -94,7 +94,7 @@ export default defineLogicFunction({
 前端组件同样适用：
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -116,7 +116,7 @@ export default defineFrontComponent({
 
 **前端组件** 运行在 Web Worker 中。 Node 内置模块不可用——仅可使用浏览器 API 以及可在浏览器环境中运行的 npm 包。
 
-两个环境都将 `aegis-client-sdk/core` 和 `aegis-client-sdk/metadata` 作为预置模块提供 — 这些模块不会被打包，而是在运行时由服务器解析。
+两个环境都将 `twenty-client-sdk/core` 和 `twenty-client-sdk/metadata` 作为预置模块提供 — 这些模块不会被打包，而是在运行时由服务器解析。
 
 ## 测试你的应用
 
@@ -165,7 +165,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -198,7 +198,7 @@ beforeAll(async () => {
 
 ### 可编程的 SDK API
 
-子路径 `aegis-sdk/cli` 导出了可直接在测试代码中调用的函数：
+子路径 `twenty-sdk/cli` 导出了可直接在测试代码中调用的函数：
 
 | 函数             | 描述                 |
 | -------------- | ------------------ |
@@ -215,8 +215,8 @@ beforeAll(async () => {
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

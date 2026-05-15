@@ -4,7 +4,7 @@ description: Defina objetos, campos, papéis e metadados da aplicação com o Ae
 icon: database
 ---
 
-O pacote `aegis-sdk` fornece funções `defineEntity` para declarar o modelo de dados da sua aplicação. Você deve usar `export default defineEntity({...})` para que o SDK detecte suas entidades. Essas funções validam sua configuração em tempo de compilação e oferecem autocompletar na IDE e segurança de tipos.
+O pacote `twenty-sdk` fornece funções `defineEntity` para declarar o modelo de dados da sua aplicação. Você deve usar `export default defineEntity({...})` para que o SDK detecte suas entidades. Essas funções validam sua configuração em tempo de compilação e oferecem autocompletar na IDE e segurança de tipos.
 
 <Note>
   **A organização de arquivos fica a seu critério.**
@@ -21,7 +21,7 @@ import {
   defineRole,
   PermissionFlag,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 
 export default defineRole({
   universalIdentifier: '2c80f640-2083-4803-bb49-003e38279de6',
@@ -70,7 +70,7 @@ Todo app deve ter exatamente uma chamada a `defineApplication` que descreve:
 * **(Opcional) Funções de pré-instalação/pós-instalação**: funções de lógica que são executadas antes ou depois da instalação.
 
 ```ts src/application-config.ts
-import { defineApplication } from 'aegis-sdk/define';
+import { defineApplication } from 'twenty-sdk/define';
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from 'src/roles/default-role';
 
 export default defineApplication({
@@ -125,7 +125,7 @@ O campo `defaultRoleUniversalIdentifier` em `application-config.ts` designa o pa
 Ao criar um novo app com o scaffold, a CLI cria um arquivo de papel padrão:
 
 ```ts src/roles/default-role.ts
-import { defineRole, PermissionFlag } from 'aegis-sdk/define';
+import { defineRole, PermissionFlag } from 'twenty-sdk/define';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   'b648f87b-1d26-4961-b974-0908fd991061';
@@ -165,7 +165,7 @@ Notas:
 Objetos personalizados descrevem tanto o esquema quanto o comportamento de registros no seu espaço de trabalho. Use `defineObject()` para definir objetos com validação integrada:
 
 ```ts postCard.object.ts
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',
@@ -254,7 +254,7 @@ mas isso não é recomendado.
 Use `defineField()` para adicionar campos a objetos que não são seus — como objetos padrão do Aegis (Person, Company, etc.). ou a objetos de outros apps. Ao contrário dos campos inline em `defineObject()`, os campos independentes exigem um `objectUniversalIdentifier` para especificar qual objeto eles estendem:
 
 ```ts src/fields/company-loyalty-tier.field.ts
-import { defineField, FieldType } from 'aegis-sdk/define';
+import { defineField, FieldType } from 'twenty-sdk/define';
 
 export default defineField({
   universalIdentifier: 'f2a1b3c4-d5e6-7890-abcd-ef1234567890',
@@ -272,7 +272,7 @@ export default defineField({
 ```
 
 Pontos-chave:
-* `objectUniversalIdentifier` identifica o objeto de destino. Para objetos padrão, use `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS` exportado de `aegis-sdk`.
+* `objectUniversalIdentifier` identifica o objeto de destino. Para objetos padrão, use `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS` exportado de `twenty-sdk`.
 * Ao definir campos inline em `defineObject()`, você não precisa de `objectUniversalIdentifier` — ele é herdado do objeto pai.
 * `defineField()` é a única forma de adicionar campos a objetos que você não criou com `defineObject()`.
 
@@ -304,7 +304,7 @@ Suponha que um `PostCard` possa ser enviado para muitos registros `PostCardRecip
 **Etapa 1: Defina o lado ONE_TO_MANY em PostCard** (o lado "um"):
 
 ```ts src/fields/post-card-recipients-on-post-card.field.ts
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -331,7 +331,7 @@ export default defineField({
 **Etapa 2: Defina o lado MANY_TO_ONE em PostCardRecipient** (o lado "muitos" — contém a chave estrangeira):
 
 ```ts src/fields/post-card-on-post-card-recipient.field.ts
-import { defineField, FieldType, RelationType, OnDeleteAction } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType, OnDeleteAction } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -372,7 +372,7 @@ import {
   RelationType,
   OnDeleteAction,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { SELF_HOSTING_USER_UNIVERSAL_IDENTIFIER } from '../objects/self-hosting-user.object';
 
 export const PERSON_FIELD_ID = 'c3333333-3333-3333-3333-333333333333';

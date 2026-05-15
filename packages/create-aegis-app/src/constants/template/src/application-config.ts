@@ -1,4 +1,4 @@
-import { defineApplication } from 'aegis-sdk/define';
+import { defineApplication } from 'twenty-sdk/define';
 
 import {
   APP_DESCRIPTION,

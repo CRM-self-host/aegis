@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { isDefined } from 'aegis-shared/utils';
 
 export const CARD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER =

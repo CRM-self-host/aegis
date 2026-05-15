@@ -11,7 +11,7 @@ import { v4 } from 'uuid';
 
 import { ALL_OAUTH_SCOPES } from 'src/engine/core-modules/application/application-oauth/constants/oauth-scopes';
 import { ApplicationRegistrationEntity } from 'src/engine/core-modules/application/application-registration/application-registration.entity';
-import { AEGIS_CLI_APPLICATION_REGISTRATION } from 'src/engine/workspace-manager/aegis-standard-application/constants/aegis-cli-application-registration.constant';
+import { AEGIS_CLI_APPLICATION_REGISTRATION } from 'src/engine/workspace-manager/aegis-standard-application/constants/twenty-sdk/cli-application-registration.constant';
 import {
   ApplicationRegistrationException,
   ApplicationRegistrationExceptionCode,

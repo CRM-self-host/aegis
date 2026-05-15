@@ -1,7 +1,7 @@
 import {
   defineNavigationMenuItem,
   NavigationMenuItemType,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { CONTRIBUTOR_UNIVERSAL_IDENTIFIER } from 'src/modules/github/contributor/objects/contributor.object';
 import { GITHUB_FOLDER_UNIVERSAL_IDENTIFIER } from 'src/modules/github/navigation-menu-items/github-folder.navigation-menu-item';
 

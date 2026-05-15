@@ -1,4 +1,4 @@
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application.config';
 import { describe, expect, it } from 'vitest';
 

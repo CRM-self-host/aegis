@@ -2423,8 +2423,8 @@ __metadata:
     "@types/react": "npm:^18.2.0"
     oxlint: "npm:^0.16.0"
     react: "npm:^18.2.0"
-    aegis-client-sdk: "npm:0.9.0"
-    aegis-sdk: "npm:0.9.0"
+    twenty-client-sdk: "npm:0.9.0"
+    twenty-sdk: "npm:0.9.0"
     typescript: "npm:^5.9.3"
     vite-tsconfig-paths: "npm:^4.2.1"
     vitest: "npm:^3.1.1"
@@ -4102,9 +4102,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aegis-client-sdk@npm:0.9.0":
+"twenty-client-sdk@npm:0.9.0":
   version: 0.9.0
-  resolution: "aegis-client-sdk@npm:0.9.0"
+  resolution: "twenty-client-sdk@npm:0.9.0"
   dependencies:
     "@genql/cli": "npm:^3.0.3"
     "@genql/runtime": "npm:^2.10.0"
@@ -4114,9 +4114,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"aegis-sdk@npm:0.9.0":
+"twenty-sdk@npm:0.9.0":
   version: 0.9.0
-  resolution: "aegis-sdk@npm:0.9.0"
+  resolution: "twenty-sdk@npm:0.9.0"
   dependencies:
     "@genql/cli": "npm:^3.0.3"
     "@genql/runtime": "npm:^2.10.0"
@@ -4136,7 +4136,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     tinyglobby: "npm:^0.2.15"
-    aegis-client-sdk: "npm:0.9.0"
+    twenty-client-sdk: "npm:0.9.0"
     typescript: "npm:^5.9.2"
     uuid: "npm:^13.0.0"
     vite: "npm:^7.0.0"

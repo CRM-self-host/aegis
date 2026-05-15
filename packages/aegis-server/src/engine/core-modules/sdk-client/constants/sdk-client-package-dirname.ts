@@ -7,7 +7,7 @@ const IS_BUILT =
 
 // In built mode the package is copied into dist/assets/ by the build step.
 // In dev mode it lives in node_modules via the monorepo workspace — resolve
-// from the aegis-client-sdk/core entry point and navigate up to the package root.
+// from the twenty-client-sdk/core entry point and navigate up to the package root.
 export const SDK_CLIENT_PACKAGE_DIRNAME = IS_BUILT
-  ? path.join(ASSET_PATH, 'aegis-client-sdk')
-  : path.resolve(require.resolve('aegis-client-sdk/core'), '..', '..');
+  ? path.join(ASSET_PATH, 'twenty-client-sdk')
+  : path.resolve(require.resolve('twenty-client-sdk/core'), '..', '..');

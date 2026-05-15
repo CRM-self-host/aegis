@@ -1,13 +1,13 @@
 import { isDefined } from '@utils/is-defined';
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   AppPath,
   Command,
   enqueueSnackbar,
   navigate,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from '@constants/universal-identifiers';
 import { INITIAL_SYNC_MODE_ENV_VAR_NAME } from '@modules/resend/constants/sync-config';

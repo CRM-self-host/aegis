@@ -7,8 +7,8 @@ import {
   type Participant,
 } from 'src/utils/match-participants';
 import { summarizeTranscript } from 'src/utils/summarize-transcript';
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { CoreApiClient, MetadataApiClient } from 'aegis-sdk/clients';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { CoreApiClient, MetadataApiClient } from 'twenty-sdk/clients';
 import { z } from 'zod';
 
 interface LocalTranscriptWord {

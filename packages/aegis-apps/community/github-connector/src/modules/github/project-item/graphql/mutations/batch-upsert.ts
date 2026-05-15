@@ -1,4 +1,4 @@
-import { chunkedBatchCreate } from 'src/modules/shared/aegis-client';
+import { chunkedBatchCreate } from 'src/modules/shared/twenty-sdk/client';
 import type { ProjectItemRow } from 'src/modules/github/project-item/types/project-item-row';
 
 export async function batchUpsertProjectItems(

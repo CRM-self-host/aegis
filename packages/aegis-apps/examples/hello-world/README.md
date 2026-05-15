@@ -55,7 +55,7 @@ Main docs and pitfalls are available in LLMS.md file.
 
 To learn more about Aegis applications, take a look at the following resources:
 
-- [aegis-sdk](https://www.npmjs.com/package/aegis-sdk) - learn about `aegis-sdk` tool.
+- [twenty-sdk](https://www.npmjs.com/package/twenty-sdk) - learn about `twenty-sdk` tool.
 - [Aegis doc](https://docs.aegis.com/) - Aegis's documentation.
 - Join our [Discord](https://discord.gg/cx5n4Jzs57)
 

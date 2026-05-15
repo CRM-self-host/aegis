@@ -103,7 +103,7 @@ jobs:
 
       # Fix encoding issues (escaped Unicode like \u62db -> 招) and push fixes back to Crowdin
       - name: Fix translation encoding and sync to Crowdin
-        run: npx ts-node packages/aegis-utils/fix-crowdin-translations.ts
+        run: npx ts-node scripts/fix-crowdin-translations.ts
         env:
           CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
 

@@ -1,4 +1,4 @@
-import { chunkedBatchCreate } from 'src/modules/shared/aegis-client';
+import { chunkedBatchCreate } from 'src/modules/shared/twenty-sdk/client';
 import type { PullRequestReviewEventRow } from 'src/modules/github/pull-request-review-event/types/pull-request-review-event-row';
 
 export async function batchUpsertReviewEvents(

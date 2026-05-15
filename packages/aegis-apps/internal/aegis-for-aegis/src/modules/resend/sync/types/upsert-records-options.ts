@@ -1,4 +1,4 @@
-import type { CoreApiClient } from 'aegis-client-sdk/core';
+import type { CoreApiClient } from 'twenty-client-sdk/core';
 
 export type UpsertRecordsOptions<
   TListItem,

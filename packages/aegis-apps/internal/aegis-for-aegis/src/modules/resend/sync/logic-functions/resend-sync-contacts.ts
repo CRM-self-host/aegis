@@ -1,5 +1,5 @@
-import { CoreApiClient } from 'aegis-client-sdk/core';
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
 
 import {
   RESEND_SYNC_CRON_PATTERNS,

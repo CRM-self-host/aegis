@@ -20,11 +20,11 @@ jobs:
     with:
       files: |
         packages/aegis-apps/examples/hello-world/**
-        packages/aegis-sdk/**
-        packages/aegis-client-sdk/**
+        packages/twenty-sdk/**
+        packages/twenty-client-sdk/**
         packages/aegis-shared/**
-        !packages/aegis-sdk/package.json
-        !packages/aegis-client-sdk/package.json
+        !packages/twenty-sdk/package.json
+        !packages/twenty-client-sdk/package.json
         !packages/aegis-shared/package.json
 
   example-app-hello-world:
@@ -60,7 +60,7 @@ jobs:
         uses: ./.github/actions/yarn-install
 
       - name: Build SDK packages
-        run: npx nx build aegis-sdk
+        run: npx nx build twenty-sdk
 
       - name: Setup server environment
         run: npx nx reset:env:e2e-testing-server aegis-server

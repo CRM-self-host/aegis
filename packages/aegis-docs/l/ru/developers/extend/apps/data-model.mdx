@@ -4,7 +4,7 @@ description: Определяйте объекты, поля, роли и мет
 icon: database
 ---
 
-Пакет `aegis-sdk` предоставляет функции `defineEntity` для определения модели данных вашего приложения. Вы должны использовать `export default defineEntity({...})`, чтобы SDK обнаруживал ваши сущности. Эти функции проверяют вашу конфигурацию на этапе сборки и обеспечивают автодополнение в IDE и безопасность типов.
+Пакет `twenty-sdk` предоставляет функции `defineEntity` для определения модели данных вашего приложения. Вы должны использовать `export default defineEntity({...})`, чтобы SDK обнаруживал ваши сущности. Эти функции проверяют вашу конфигурацию на этапе сборки и обеспечивают автодополнение в IDE и безопасность типов.
 
 <Note>
   **Организация файлов — на ваше усмотрение.**
@@ -21,7 +21,7 @@ import {
   defineRole,
   PermissionFlag,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 
 export default defineRole({
   universalIdentifier: '2c80f640-2083-4803-bb49-003e38279de6',
@@ -70,7 +70,7 @@ export default defineRole({
 * **(Необязательно) Предустановочные / постустановочные функции**: логические функции, которые запускаются до или после установки.
 
 ```ts src/application-config.ts
-import { defineApplication } from 'aegis-sdk/define';
+import { defineApplication } from 'twenty-sdk/define';
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from 'src/roles/default-role';
 
 export default defineApplication({
@@ -125,7 +125,7 @@ export default defineApplication({
 Когда вы генерируете новое приложение, CLI создаёт файл роли по умолчанию:
 
 ```ts src/roles/default-role.ts
-import { defineRole, PermissionFlag } from 'aegis-sdk/define';
+import { defineRole, PermissionFlag } from 'twenty-sdk/define';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   'b648f87b-1d26-4961-b974-0908fd991061';
@@ -165,7 +165,7 @@ export default defineRole({
 Пользовательские объекты описывают как схему, так и поведение записей в вашем рабочем пространстве. Используйте `defineObject()` для определения объектов со встроенной валидацией:
 
 ```ts postCard.object.ts
-import { defineObject, FieldType } from 'aegis-sdk/define';
+import { defineObject, FieldType } from 'twenty-sdk/define';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',
@@ -254,7 +254,7 @@ export default defineObject({
 Используйте `defineField()` для добавления полей к объектам, которые вам не принадлежат — например, к стандартным объектам Aegis (Person, Company и т. д.). или к объектам из других приложений. В отличие от встроенных полей в `defineObject()`, отдельные поля требуют `objectUniversalIdentifier`, чтобы указать, какой объект они расширяют:
 
 ```ts src/fields/company-loyalty-tier.field.ts
-import { defineField, FieldType } from 'aegis-sdk/define';
+import { defineField, FieldType } from 'twenty-sdk/define';
 
 export default defineField({
   universalIdentifier: 'f2a1b3c4-d5e6-7890-abcd-ef1234567890',
@@ -272,7 +272,7 @@ export default defineField({
 ```
 
 Основные моменты:
-* `objectUniversalIdentifier` определяет целевой объект. Для стандартных объектов используйте `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS`, экспортируемые из `aegis-sdk`.
+* `objectUniversalIdentifier` определяет целевой объект. Для стандартных объектов используйте `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS`, экспортируемые из `twenty-sdk`.
 * При определении полей непосредственно в `defineObject()` вам не нужен `objectUniversalIdentifier` — он наследуется от родительского объекта.
 * `defineField()` — единственный способ добавить поля к объектам, которые вы не создавали с помощью `defineObject()`.
 
@@ -304,7 +304,7 @@ export default defineField({
 **Шаг 1: Определите сторону ONE_TO_MANY на PostCard** (сторона "one"):
 
 ```ts src/fields/post-card-recipients-on-post-card.field.ts
-import { defineField, FieldType, RelationType } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -331,7 +331,7 @@ export default defineField({
 **Шаг 2: Определите сторону MANY_TO_ONE на PostCardRecipient** (сторона "many" — содержит внешний ключ):
 
 ```ts src/fields/post-card-on-post-card-recipient.field.ts
-import { defineField, FieldType, RelationType, OnDeleteAction } from 'aegis-sdk/define';
+import { defineField, FieldType, RelationType, OnDeleteAction } from 'twenty-sdk/define';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -372,7 +372,7 @@ import {
   RelationType,
   OnDeleteAction,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { SELF_HOSTING_USER_UNIVERSAL_IDENTIFIER } from '../objects/self-hosting-user.object';
 
 export const PERSON_FIELD_ID = 'c3333333-3333-3333-3333-333333333333';

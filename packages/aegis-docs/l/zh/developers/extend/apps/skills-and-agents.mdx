@@ -16,7 +16,7 @@ icon: robot
 技能定义了可复用的指令和能力，AI 智能体可在你的工作区中使用。 使用 `defineSkill()` 定义带内置校验的技能：
 
 ```ts src/skills/example-skill.ts
-import { defineSkill } from 'aegis-sdk/define';
+import { defineSkill } from 'twenty-sdk/define';
 
 export default defineSkill({
   universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
@@ -45,7 +45,7 @@ export default defineSkill({
 智能体是在你的工作区内驻留的 AI 助手。 使用 `defineAgent()` 来创建带有自定义系统提示词的智能体：
 
 ```ts src/agents/example-agent.ts
-import { defineAgent } from 'aegis-sdk/define';
+import { defineAgent } from 'twenty-sdk/define';
 
 export default defineAgent({
   universalIdentifier: 'b3c4d5e6-f7a8-9012-bcde-f34567890123',

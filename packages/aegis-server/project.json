@@ -13,7 +13,7 @@
         "commands": [
           "rimraf dist",
           "nest build --path ./tsconfig.build.json",
-          "mkdir -p dist/assets/aegis-client-sdk && cp ../aegis-client-sdk/package.json dist/assets/aegis-client-sdk/ && cp -r ../aegis-client-sdk/dist dist/assets/aegis-client-sdk/dist"
+          "mkdir -p dist/assets/twenty-client-sdk && cp ../twenty-client-sdk/package.json dist/assets/twenty-client-sdk/ && cp -r ../twenty-client-sdk/dist dist/assets/twenty-client-sdk/dist"
         ]
       },
       "dependsOn": ["^build"]
@@ -154,7 +154,7 @@
         "{projectRoot}/tsconfig*.json",
         "{workspaceRoot}/tsconfig.base.json",
         "{projectRoot}/.oxlintrc.json",
-        "{workspaceRoot}/packages/aegis-oxlint-rules/dist/oxlint-plugin.mjs"
+        
       ],
       "options": {
         "cwd": "{projectRoot}",

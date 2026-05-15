@@ -1,6 +1,6 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { type RoutePayload } from 'aegis-sdk/logic-function';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { type RoutePayload } from 'twenty-sdk/logic-function';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 import { type TelemetryEvent } from 'src/logic-functions/types/telemetry-event.type';
 
 export const main = async (

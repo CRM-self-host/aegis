@@ -1,7 +1,7 @@
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 
 export default definePageLayoutTab({
   universalIdentifier: 'b0b1b2b3-b4b5-4000-8000-000000000010',

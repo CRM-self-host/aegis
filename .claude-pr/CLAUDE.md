@@ -204,7 +204,7 @@ IMPORTANT: Use Context7 for code generation, setup or configuration steps, or li
 All dev environments (Claude Code web, Cursor, local) use one script:
 
 ```bash
-bash packages/aegis-utils/setup-dev-env.sh
+bash scripts/setup-dev-env.sh
 ```
 
 This handles everything: starts Postgres + Redis (auto-detects local services vs Docker), creates databases, and copies `.env` files. Idempotent — safe to run multiple times.

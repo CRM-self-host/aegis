@@ -20,7 +20,7 @@ import {
   SEGMENT_ON_RESEND_BROADCAST_FIELD_UNIVERSAL_IDENTIFIER,
   TOPIC_ON_RESEND_BROADCAST_FIELD_UNIVERSAL_IDENTIFIER,
 } from '@modules/resend/constants/universal-identifiers';
-import { defineView } from 'aegis-sdk/define';
+import { defineView } from 'twenty-sdk/define';
 
 export default defineView({
   universalIdentifier: RESEND_BROADCAST_VIEW_UNIVERSAL_IDENTIFIER,

@@ -1,4 +1,4 @@
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { DEFAULT_NAME, formatGreeting } from '../utils/greeting.util';
 
 const GreetingComponent = () => {

@@ -19,12 +19,12 @@ Soubory umístěné v `public/` jsou:
 
 ### Přístup k veřejným prostředkům pomocí `getPublicAssetUrl`
 
-K získání plné URL souboru ve vaší složce `public/` použijte pomocnou funkci `getPublicAssetUrl` z `aegis-sdk`. Funguje jak v logických funkcích, tak ve frontendových komponentách.
+K získání plné URL souboru ve vaší složce `public/` použijte pomocnou funkci `getPublicAssetUrl` z `twenty-sdk`. Funguje jak v logických funkcích, tak ve frontendových komponentách.
 
 **V logické funkci:**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -49,7 +49,7 @@ export default defineLogicFunction({
 **Ve frontendové komponentě:**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -73,7 +73,7 @@ yarn add axios
 Poté jej importujte ve svém kódu:
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -94,7 +94,7 @@ export default defineLogicFunction({
 Stejně to funguje i pro frontendové komponenty:
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -116,7 +116,7 @@ Krok sestavení používá esbuild k vytvoření jediného samostatného souboru
 
 **Frontendové komponenty** běží ve Web Workeru. Vestavěné moduly Node nejsou k dispozici — pouze prohlížečová API a balíčky npm, které fungují v prohlížečovém prostředí.
 
-V obou prostředích jsou jako předpřipravené moduly k dispozici `aegis-client-sdk/core` a `aegis-client-sdk/metadata` — nejsou součástí bundlu, ale server je za běhu načítá.
+V obou prostředích jsou jako předpřipravené moduly k dispozici `twenty-client-sdk/core` a `twenty-client-sdk/metadata` — nejsou součástí bundlu, ale server je za běhu načítá.
 
 ## Testování vaší aplikace
 
@@ -165,7 +165,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -198,7 +198,7 @@ beforeAll(async () => {
 
 ### Programová rozhraní SDK
 
-Subcesta `aegis-sdk/cli` exportuje funkce, které můžete volat přímo z testovacího kódu:
+Subcesta `twenty-sdk/cli` exportuje funkce, které můžete volat přímo z testovacího kódu:
 
 | Funkce         | Popis                                                 |
 | -------------- | ----------------------------------------------------- |
@@ -215,8 +215,8 @@ Zde je kompletní příklad, který aplikaci sestaví, nasadí a nainstaluje a p
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

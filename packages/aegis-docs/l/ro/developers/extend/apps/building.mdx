@@ -7,7 +7,7 @@ description: Definiți obiecte, funcții logice, componente front-end și multe 
   Aplicațiile sunt în prezent în testare alfa. Caracteristica funcționează, dar este încă în dezvoltare.
 </Warning>
 
-Pachetul `aegis-sdk` oferă blocuri de construcție tipizate pentru a crea aplicația. Această pagină acoperă toate tipurile de entități și clienții API disponibili în SDK.
+Pachetul `twenty-sdk` oferă blocuri de construcție tipizate pentru a crea aplicația. Această pagină acoperă toate tipurile de entități și clienții API disponibili în SDK.
 
 ## Funcții DefineEntity
 
@@ -28,7 +28,7 @@ import {
   defineRole,
   PermissionFlag,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk';
+} from 'twenty-sdk';
 
 export default defineRole({
   universalIdentifier: '2c80f640-2083-4803-bb49-003e38279de6',
@@ -77,7 +77,7 @@ Fiecare aplicație trebuie să aibă exact un apel `defineApplication` care desc
 * **(Opțional) funcții de pre-instalare / post-instalare**: funcții logice care rulează înainte sau după instalare.
 
 ```ts src/application-config.ts
-import { defineApplication } from 'aegis-sdk';
+import { defineApplication } from 'twenty-sdk';
 import { DEFAULT_ROLE_UNIVERSAL_IDENTIFIER } from 'src/roles/default-role';
 
 export default defineApplication({
@@ -132,7 +132,7 @@ Câmpul `defaultRoleUniversalIdentifier` din `application-config.ts` desemnează
 Când generați o aplicație nouă, CLI creează un fișier de rol implicit:
 
 ```ts src/roles/default-role.ts
-import { defineRole, PermissionFlag } from 'aegis-sdk';
+import { defineRole, PermissionFlag } from 'twenty-sdk';
 
 export const DEFAULT_ROLE_UNIVERSAL_IDENTIFIER =
   'b648f87b-1d26-4961-b974-0908fd991061';
@@ -172,7 +172,7 @@ Notițe:
 Obiectele personalizate descriu atât schema, cât și comportamentul înregistrărilor din spațiul dvs. de lucru. Utilizați `defineObject()` pentru a defini obiecte cu validare încorporată:
 
 ```ts postCard.object.ts
-import { defineObject, FieldType } from 'aegis-sdk';
+import { defineObject, FieldType } from 'twenty-sdk';
 
 enum PostCardStatus {
   DRAFT = 'DRAFT',
@@ -261,7 +261,7 @@ dar acest lucru nu este recomandat.
 Utilizați `defineField()` pentru a adăuga câmpuri la obiecte pe care nu le dețineți — cum ar fi obiectele standard Aegis (Person, Company etc.). sau obiecte din alte aplicații. Spre deosebire de câmpurile inline din `defineObject()`, câmpurile independente necesită un `objectUniversalIdentifier` pentru a specifica obiectul pe care îl extind:
 
 ```ts src/fields/company-loyalty-tier.field.ts
-import { defineField, FieldType } from 'aegis-sdk';
+import { defineField, FieldType } from 'twenty-sdk';
 
 export default defineField({
   universalIdentifier: 'f2a1b3c4-d5e6-7890-abcd-ef1234567890',
@@ -279,7 +279,7 @@ export default defineField({
 ```
 
 Puncte cheie:
-* `objectUniversalIdentifier` identifică obiectul țintă. Pentru obiectele standard, utilizați `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS` exportați din `aegis-sdk`.
+* `objectUniversalIdentifier` identifică obiectul țintă. Pentru obiectele standard, utilizați `STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS` exportați din `twenty-sdk`.
 * Atunci când definiți câmpuri inline în `defineObject()`, nu aveți nevoie de `objectUniversalIdentifier` — este moștenit de la obiectul părinte.
 * `defineField()` este singura modalitate de a adăuga câmpuri la obiecte pe care nu le-ați creat cu `defineObject()`.
 
@@ -311,7 +311,7 @@ Presupuneți că un `PostCard` poate fi trimis către multe înregistrări `Post
 **Pasul 1: Definiți partea ONE_TO_MANY pe PostCard** (partea "one"):
 
 ```ts src/fields/post-card-recipients-on-post-card.field.ts
-import { defineField, FieldType, RelationType } from 'aegis-sdk';
+import { defineField, FieldType, RelationType } from 'twenty-sdk';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -338,7 +338,7 @@ export default defineField({
 **Pasul 2: Definiți partea MANY_TO_ONE pe PostCardRecipient** (partea "many" — deține cheia străină):
 
 ```ts src/fields/post-card-on-post-card-recipient.field.ts
-import { defineField, FieldType, RelationType, OnDeleteAction } from 'aegis-sdk';
+import { defineField, FieldType, RelationType, OnDeleteAction } from 'twenty-sdk';
 import { POST_CARD_UNIVERSAL_IDENTIFIER } from '../objects/post-card.object';
 import { POST_CARD_RECIPIENT_UNIVERSAL_IDENTIFIER } from '../objects/post-card-recipient.object';
 
@@ -379,7 +379,7 @@ import {
   RelationType,
   OnDeleteAction,
   STANDARD_OBJECT_UNIVERSAL_IDENTIFIERS,
-} from 'aegis-sdk';
+} from 'twenty-sdk';
 import { SELF_HOSTING_USER_UNIVERSAL_IDENTIFIER } from '../objects/self-hosting-user.object';
 
 export const PERSON_FIELD_ID = 'c3333333-3333-3333-3333-333333333333';
@@ -448,9 +448,9 @@ export default defineObject({
 Fiecare fișier de funcție folosește `defineLogicFunction()` pentru a exporta o configurație cu un handler și declanșatoare opționale.
 
 ```ts src/logic-functions/createPostCard.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk';
-import { CoreApiClient, type Person } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk';
+import { CoreApiClient, type Person } from 'twenty-client-sdk/core';
 
 const handler = async (params: RoutePayload) => {
   const client = new CoreApiClient();
@@ -516,10 +516,10 @@ yarn aegis logs
 
 Când un declanșator de rută invocă funcția logică, aceasta primește un obiect `RoutePayload` care urmează
 [AWS HTTP API v2 format](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html).
-Importați tipul `RoutePayload` din `aegis-sdk`:
+Importați tipul `RoutePayload` din `twenty-sdk`:
 
 ```ts
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk';
 
 const handler = async (event: RoutePayload) => {
   const { headers, queryStringParameters, pathParameters, body } = event;
@@ -584,8 +584,8 @@ Funcțiile logice pot fi expuse ca **instrumente** pentru agenți de IA și flux
 Pentru a marca o funcție logică drept instrument, setați `isTool: true`:
 
 ```ts src/logic-functions/enrich-company.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const handler = async (params: { companyName: string; domain?: string }) => {
   const client = new CoreApiClient();
@@ -650,7 +650,7 @@ export default defineLogicFunction({
 O funcție de pre-instalare este o funcție logică ce rulează automat înainte ca aplicația ta să fie instalată într-un spațiu de lucru. Aceasta este utilă pentru sarcini de validare, verificări ale condițiilor prealabile sau pregătirea stării spațiului de lucru înainte ca instalarea principală să continue.
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallLogicFunctionPayload } from 'aegis-sdk';
+import { definePreInstallLogicFunction, type InstallLogicFunctionPayload } from 'twenty-sdk';
 
 const handler = async (payload: InstallLogicFunctionPayload): Promise<void> => {
   console.log('Pre install logic function executed successfully!', payload.previousVersion);
@@ -684,7 +684,7 @@ Puncte cheie:
 O funcție post-instalare este o funcție logică care rulează automat după instalarea aplicației într-un spațiu de lucru. Aceasta este utilă pentru sarcini de configurare unice, cum ar fi popularea cu date implicite, crearea înregistrărilor inițiale sau configurarea setărilor spațiului de lucru.
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallLogicFunctionPayload } from 'aegis-sdk';
+import { definePostInstallLogicFunction, type InstallLogicFunctionPayload } from 'twenty-sdk';
 
 const handler = async (payload: InstallLogicFunctionPayload): Promise<void> => {
   console.log('Post install logic function executed successfully!', payload.previousVersion);
@@ -729,7 +729,7 @@ Componentele frontale pot fi afișate în două locații în cadrul Aegis:
 Cel mai rapid mod de a vedea o componentă front-end în acțiune este să o înregistrați ca o **comandă**. Adăugarea unui câmp `command` cu `isPinned: true` o face să apară ca un buton de acțiune rapidă în colțul din dreapta sus al paginii — nu este nevoie de layout de pagină:
 
 ```tsx src/front-components/hello-world.tsx
-import { defineFrontComponent } from 'aegis-sdk';
+import { defineFrontComponent } from 'twenty-sdk';
 
 const HelloWorld = () => {
   return (
@@ -790,7 +790,7 @@ Componentele frontale au două moduri de randare controlate de opțiunea `isHead
 **Headless (`isHeadless: true`)** — Componenta se montează invizibil în fundal. Nu deschide panoul lateral. Componentele headless sunt concepute pentru acțiuni care execută logică și apoi se demontează — de exemplu, rularea unei sarcini asincrone, navigarea la o pagină sau afișarea unui modal de confirmare. Se potrivesc în mod natural cu componentele Command din SDK descrise mai jos.
 
 ```tsx src/front-components/sync-tracker.tsx
-import { defineFrontComponent, useRecordId, enqueueSnackbar } from 'aegis-sdk';
+import { defineFrontComponent, useRecordId, enqueueSnackbar } from 'twenty-sdk';
 import { useEffect } from 'react';
 
 const SyncTracker = () => {
@@ -816,9 +816,9 @@ Deoarece componenta returnează `null`, Aegis omite redarea unui container pentr
 
 #### Componentele Command din SDK
 
-Pachetul `aegis-sdk` oferă patru componente ajutătoare Command, concepute pentru componente front-end headless. Fiecare componentă execută o acțiune la montare, gestionează erorile afișând o notificare snackbar și demontează automat componenta de interfață la final.
+Pachetul `twenty-sdk` oferă patru componente ajutătoare Command, concepute pentru componente front-end headless. Fiecare componentă execută o acțiune la montare, gestionează erorile afișând o notificare snackbar și demontează automat componenta de interfață la final.
 
-Importă-le din `aegis-sdk/command`:
+Importă-le din `twenty-sdk/command`:
 
 * **`Command`** — Rulează un callback asincron prin prop-ul `execute`.
 * **`CommandLink`** — Navighează către o rută a aplicației. Props: `to`, `params`, `queryParams`, `options`.
@@ -828,9 +828,9 @@ Importă-le din `aegis-sdk/command`:
 Iată un exemplu complet de componentă front-end headless care folosește `Command` pentru a rula o acțiune din meniul de comenzi:
 
 ```tsx src/front-components/run-action.tsx
-import { defineFrontComponent } from 'aegis-sdk';
-import { Command } from 'aegis-sdk/command';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk';
+import { Command } from 'twenty-sdk/command';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const RunAction = () => {
   const execute = async () => {
@@ -864,8 +864,8 @@ export default defineFrontComponent({
 Și un exemplu care folosește `CommandModal` pentru a cere confirmarea înainte de execuție:
 
 ```tsx src/front-components/delete-draft.tsx
-import { defineFrontComponent } from 'aegis-sdk';
-import { CommandModal } from 'aegis-sdk/command';
+import { defineFrontComponent } from 'twenty-sdk';
+import { CommandModal } from 'twenty-sdk/command';
 
 const DeleteDraft = () => {
   const execute = async () => {
@@ -907,7 +907,7 @@ import {
   useUserId,
   useRecordId,
   useFrontComponentId,
-} from 'aegis-sdk';
+} from 'twenty-sdk';
 
 const RecordInfo = () => {
   const userId = useUserId();
@@ -941,7 +941,7 @@ Hook-uri disponibile:
 
 #### API-ul de comunicare cu gazda
 
-Componentele front-end pot declanșa navigare, ferestre modale și notificări folosind funcții din `aegis-sdk`:
+Componentele front-end pot declanșa navigare, ferestre modale și notificări folosind funcții din `twenty-sdk`:
 
 | Funcție                                         | Descriere                           |
 | ----------------------------------------------- | ----------------------------------- |
@@ -956,9 +956,9 @@ Componentele front-end pot declanșa navigare, ferestre modale și notificări f
 Iată un exemplu care folosește API-ul gazdă pentru a afișa un snackbar și a închide panoul lateral după finalizarea unei acțiuni:
 
 ```tsx src/front-components/archive-record.tsx
-import { defineFrontComponent, useRecordId } from 'aegis-sdk';
-import { enqueueSnackbar, closeSidePanel } from 'aegis-sdk';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent, useRecordId } from 'twenty-sdk';
+import { enqueueSnackbar, closeSidePanel } from 'twenty-sdk';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const ArchiveRecord = () => {
   const recordId = useRecordId();
@@ -1014,7 +1014,7 @@ Adăugarea unui câmp `command` la `defineFrontComponent` înregistrează compon
 
 #### Expresii de disponibilitate condițională
 
-Câmpul `conditionalAvailabilityExpression` vă permite să controlați când este vizibilă o comandă în funcție de contextul paginii curente. Importați variabile tipizate și operatori din `aegis-sdk` pentru a construi expresii:
+Câmpul `conditionalAvailabilityExpression` vă permite să controlați când este vizibilă o comandă în funcție de contextul paginii curente. Importați variabile tipizate și operatori din `twenty-sdk` pentru a construi expresii:
 
 ```tsx
 import {
@@ -1024,7 +1024,7 @@ import {
   objectPermissions,
   everyEquals,
   isDefined,
-} from 'aegis-sdk';
+} from 'twenty-sdk';
 
 export default defineFrontComponent({
   universalIdentifier: '...',
@@ -1084,7 +1084,7 @@ export default defineFrontComponent({
 Componentele front-end pot accesa fișiere din directorul `public/` al aplicației folosind `getPublicAssetUrl`:
 
 ```tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk';
 
 const Logo = () => <img src={getPublicAssetUrl('logo.png')} alt="Logo" />;
 
@@ -1102,15 +1102,15 @@ Consultați [secțiunea despre resurse publice](#accessing-public-assets-with-ge
 Componentele front-end acceptă mai multe abordări de stilizare. Puteți folosi:
 
 * **Stiluri inline** — `style={{ color: 'red' }}`
-* **Componente Aegis UI** — import din `aegis-sdk/ui` (Button, Tag, Status, Chip, Avatar și altele)
+* **Componente Aegis UI** — import din `twenty-sdk/ui` (Button, Tag, Status, Chip, Avatar și altele)
 * **Emotion** — CSS-in-JS cu `@emotion/react`
 * **Styled-components** — pattern-uri `styled.div`
 * **Tailwind CSS** — clase utilitare
 * **Orice bibliotecă CSS-in-JS** compatibilă cu React
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk';
-import { Button, Tag, Status } from 'aegis-sdk/ui';
+import { defineFrontComponent } from 'twenty-sdk';
+import { Button, Tag, Status } from 'twenty-sdk/ui';
 
 const StyledWidget = () => {
   return (
@@ -1136,7 +1136,7 @@ export default defineFrontComponent({
 Abilitățile definesc instrucțiuni și capabilități reutilizabile pe care agenții AI le pot folosi în spațiul dvs. de lucru. Folosiți `defineSkill()` pentru a defini abilități cu validare încorporată:
 
 ```ts src/skills/example-skill.ts
-import { defineSkill } from 'aegis-sdk';
+import { defineSkill } from 'twenty-sdk';
 
 export default defineSkill({
   universalIdentifier: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
@@ -1165,7 +1165,7 @@ Puncte cheie:
 Agenții sunt asistenți AI care există în interiorul spațiului dvs. de lucru. Utilizați `defineAgent()` pentru a crea agenți cu un prompt de sistem personalizat:
 
 ```ts src/agents/example-agent.ts
-import { defineAgent } from 'aegis-sdk';
+import { defineAgent } from 'twenty-sdk';
 
 export default defineAgent({
   universalIdentifier: 'b3c4d5e6-f7a8-9012-bcde-f34567890123',
@@ -1191,7 +1191,7 @@ Puncte cheie:
 Vizualizările sunt configurații salvate despre cum sunt afișate înregistrările unui obiect — inclusiv ce câmpuri sunt vizibile, ordinea lor și orice filtre sau grupuri aplicate. Utilizați `defineView()` pentru a livra vizualizări preconfigurate împreună cu aplicația:
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk';
+import { defineView, ViewKey } from 'twenty-sdk';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -1227,7 +1227,7 @@ Puncte cheie:
 Elementele de meniu de navigare adaugă intrări personalizate în bara laterală a spațiului de lucru. Utilizați `defineNavigationMenuItem()` pentru a lega la vizualizări, URL-uri externe sau obiecte:
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -1253,7 +1253,7 @@ Puncte cheie:
 Machetele de pagină vă permit să personalizați aspectul unei pagini de detalii a unei înregistrări — ce file apar, ce widgeturi sunt în fiecare filă și cum sunt aranjate. Utilizați `definePageLayout()` pentru a livra machete personalizate împreună cu aplicația:
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -1311,12 +1311,12 @@ Fișierele plasate în `public/` sunt:
 
 ### Accesarea resurselor publice cu `getPublicAssetUrl`
 
-Utilizați helperul `getPublicAssetUrl` din `aegis-sdk` pentru a obține URL-ul complet al unui fișier din directorul `public/`. Funcționează atât în funcții logice, cât și în componente frontend.
+Utilizați helperul `getPublicAssetUrl` din `twenty-sdk` pentru a obține URL-ul complet al unui fișier din directorul `public/`. Funcționează atât în funcții logice, cât și în componente frontend.
 
 **Într-o funcție logică:**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -1341,7 +1341,7 @@ export default defineLogicFunction({
 **Într-o componentă frontend:**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -1365,7 +1365,7 @@ yarn add axios
 Apoi importați-l în codul dvs.:
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk';
+import { defineLogicFunction } from 'twenty-sdk';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -1386,7 +1386,7 @@ export default defineLogicFunction({
 Același lucru funcționează și pentru componentele frontend:
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk';
+import { defineFrontComponent } from 'twenty-sdk';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -1408,7 +1408,7 @@ Pasul de build folosește esbuild pentru a produce un singur fișier autonom pen
 
 **Componentele frontend** rulează într-un Web Worker. Modulele built-in Node nu sunt disponibile — doar API-urile de browser și pachetele npm care funcționează într-un mediu de browser.
 
-Ambele medii au `aegis-client-sdk/core` și `aegis-client-sdk/metadata` disponibile ca module pre-furnizate — acestea nu sunt incluse în bundle, ci sunt rezolvate la rulare de către server.
+Ambele medii au `twenty-client-sdk/core` și `twenty-client-sdk/metadata` disponibile ca module pre-furnizate — acestea nu sunt incluse în bundle, ci sunt rezolvate la rulare de către server.
 
 ## Generarea scheletului entităților cu `yarn aegis add`
 
@@ -1465,14 +1465,14 @@ Utilizați opțiunea `--path` pentru a plasa fișierul generat într-o locație 
 yarn aegis add logicFunction --path src/custom-folder
 ```
 
-## Clienți API tipizați (aegis-client-sdk)
+## Clienți API tipizați (twenty-client-sdk)
 
-Pachetul `aegis-client-sdk` oferă doi clienți GraphQL tipați pentru a interacționa cu API-ul Aegis din funcțiile de logică și componentele Front.
+Pachetul `twenty-client-sdk` oferă doi clienți GraphQL tipați pentru a interacționa cu API-ul Aegis din funcțiile de logică și componentele Front.
 
 | Client              | Importați                    | Endpoint                                                            | Generat?                     |
 | ------------------- | ---------------------------- | ------------------------------------------------------------------- | ---------------------------- |
-| `CoreApiClient`     | `aegis-client-sdk/core`     | `/graphql` — date ale spațiului de lucru (înregistrări, obiecte)    | Da, în timpul dev/build      |
-| `MetadataApiClient` | `aegis-client-sdk/metadata` | `/metadata` — configurarea spațiului de lucru, încărcări de fișiere | Nu, este livrat preconstruit |
+| `CoreApiClient`     | `twenty-client-sdk/core`     | `/graphql` — date ale spațiului de lucru (înregistrări, obiecte)    | Da, în timpul dev/build      |
+| `MetadataApiClient` | `twenty-client-sdk/metadata` | `/metadata` — configurarea spațiului de lucru, încărcări de fișiere | Nu, este livrat preconstruit |
 
 <AccordionGroup>
 <Accordion title="CoreApiClient" description="Interogați și modificați datele spațiului de lucru (înregistrări, obiecte)">
@@ -1480,7 +1480,7 @@ Pachetul `aegis-client-sdk` oferă doi clienți GraphQL tipați pentru a interac
 `CoreApiClient` este clientul principal pentru interogarea și modificarea datelor din spațiul de lucru. Este generat din schema spațiului de lucru în timpul `yarn aegis dev` sau `yarn aegis build`, astfel încât este complet tipizat pentru a corespunde obiectelor și câmpurilor dvs.
 
 ```ts
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const client = new CoreApiClient();
 
@@ -1525,7 +1525,7 @@ Clientul folosește o sintaxă de tip selection-set: transmiteți `true` pentru 
 `CoreSchema` oferă tipuri TypeScript care corespund obiectelor din spațiul dvs. de lucru — utile pentru tiparea stării componentelor sau a parametrilor funcțiilor:
 
 ```ts
-import { CoreApiClient, CoreSchema } from 'aegis-client-sdk/core';
+import { CoreApiClient, CoreSchema } from 'twenty-client-sdk/core';
 import { useState } from 'react';
 
 const [company, setCompany] = useState<
@@ -1549,7 +1549,7 @@ setCompany(result.company);
 `MetadataApiClient` este livrat preconstruit împreună cu SDK-ul (nu este necesară generarea). Interoghează endpointul `/metadata` pentru configurarea spațiului de lucru, aplicații și încărcări de fișiere.
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadataClient = new MetadataApiClient();
 
@@ -1578,7 +1578,7 @@ const { objects } = await metadataClient.query({
 `MetadataApiClient` include o metodă `uploadFile` pentru atașarea fișierelor la câmpuri de tip fișier:
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import * as fs from 'fs';
 
 const metadataClient = new MetadataApiClient();
@@ -1666,7 +1666,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -1699,7 +1699,7 @@ beforeAll(async () => {
 
 ### API-uri SDK programatice
 
-Subruta `aegis-sdk/cli` exportă funcții pe care le puteți apela direct din codul de test:
+Subruta `twenty-sdk/cli` exportă funcții pe care le puteți apela direct din codul de test:
 
 | Funcție        | Descriere                                                 |
 | -------------- | --------------------------------------------------------- |
@@ -1716,8 +1716,8 @@ Iată un exemplu complet care construiește, distribuie și instalează aplicaț
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

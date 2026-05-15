@@ -1,5 +1,5 @@
 import { CALL_RECORDING_VIEW_UNIVERSAL_IDENTIFIER } from 'src/views/call-recording-view';
-import { defineNavigationMenuItem } from 'aegis-sdk/define';
+import { defineNavigationMenuItem } from 'twenty-sdk/define';
 import { NavigationMenuItemType } from 'aegis-shared/types';
 
 export default defineNavigationMenuItem({

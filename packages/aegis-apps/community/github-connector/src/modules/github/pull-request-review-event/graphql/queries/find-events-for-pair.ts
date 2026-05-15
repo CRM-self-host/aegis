@@ -1,4 +1,4 @@
-import { getClient } from 'src/modules/shared/aegis-client';
+import { getClient } from 'src/modules/shared/twenty-sdk/client';
 
 export type ReviewEventForPair = {
   id: string;

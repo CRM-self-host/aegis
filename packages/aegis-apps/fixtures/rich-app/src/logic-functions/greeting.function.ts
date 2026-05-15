@@ -1,4 +1,4 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import { DEFAULT_NAME, formatGreeting } from '../utils/greeting.util';
 
 const greetingHandler = () => {

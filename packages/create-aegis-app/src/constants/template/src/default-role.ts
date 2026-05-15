@@ -1,4 +1,4 @@
-import { defineRole } from 'aegis-sdk/define';
+import { defineRole } from 'twenty-sdk/define';
 
 import {
   APP_DISPLAY_NAME,

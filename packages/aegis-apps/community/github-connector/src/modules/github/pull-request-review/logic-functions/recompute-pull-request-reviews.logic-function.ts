@@ -1,6 +1,6 @@
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { type RoutePayload } from 'aegis-sdk/logic-function';
-import { getClient } from 'src/modules/shared/aegis-client';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { type RoutePayload } from 'twenty-sdk/logic-function';
+import { getClient } from 'src/modules/shared/twenty-sdk/client';
 import { timed } from 'src/modules/shared/timing';
 import { batchUpsertConsolidatedReviews } from 'src/modules/github/pull-request-review/graphql/mutations/batch-upsert';
 import {

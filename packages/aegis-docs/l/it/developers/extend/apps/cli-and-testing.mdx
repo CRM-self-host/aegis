@@ -19,12 +19,12 @@ I file posizionati in `public/` sono:
 
 ### Accedere agli asset pubblici con `getPublicAssetUrl`
 
-Usa l'helper `getPublicAssetUrl` da `aegis-sdk` per ottenere l'URL completo di un file nella tua directory `public/`. Funziona sia nelle funzioni logiche che nei componenti front-end.
+Usa l'helper `getPublicAssetUrl` da `twenty-sdk` per ottenere l'URL completo di un file nella tua directory `public/`. Funziona sia nelle funzioni logiche che nei componenti front-end.
 
 **In una funzione logica:**
 
 ```ts src/logic-functions/send-invoice.ts
-import { defineLogicFunction, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineLogicFunction, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const handler = async (): Promise<any> => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -49,7 +49,7 @@ export default defineLogicFunction({
 **In un componente front-end:**
 
 ```tsx src/front-components/company-card.tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 export default defineFrontComponent(() => {
   const logoUrl = getPublicAssetUrl('logo.png');
@@ -73,7 +73,7 @@ yarn add axios
 Quindi importalo nel tuo codice:
 
 ```ts src/logic-functions/fetch-data.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
+import { defineLogicFunction } from 'twenty-sdk/define';
 import axios from 'axios';
 
 const handler = async (): Promise<any> => {
@@ -94,7 +94,7 @@ export default defineLogicFunction({
 Lo stesso vale per i componenti front-end:
 
 ```tsx src/front-components/chart.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import { format } from 'date-fns';
 
 const DateWidget = () => {
@@ -116,7 +116,7 @@ La fase di build usa esbuild per produrre un singolo file autonomo per ogni funz
 
 **I componenti front-end** vengono eseguiti in un Web Worker. I moduli integrati di Node non sono disponibili — solo le API del browser e i pacchetti npm che funzionano in un ambiente browser.
 
-Entrambi gli ambienti hanno `aegis-client-sdk/core` e `aegis-client-sdk/metadata` disponibili come moduli preforniti — questi non vengono inclusi nel bundle ma vengono risolti a runtime dal server.
+Entrambi gli ambienti hanno `twenty-client-sdk/core` e `twenty-client-sdk/metadata` disponibili come moduli preforniti — questi non vengono inclusi nel bundle ma vengono risolti a runtime dal server.
 
 ## Testare la tua app
 
@@ -165,7 +165,7 @@ import * as path from 'path';
 import { beforeAll } from 'vitest';
 
 const AEGIS_API_URL = process.env.AEGIS_API_URL ?? 'http://localhost:2020';
-const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.aegis-sdk-test');
+const TEST_CONFIG_DIR = path.join(os.tmpdir(), '.twenty-sdk-test');
 
 beforeAll(async () => {
   // Verify the server is running
@@ -198,7 +198,7 @@ beforeAll(async () => {
 
 ### API programmatiche dell'SDK
 
-Il sottopercorso `aegis-sdk/cli` esporta funzioni che puoi chiamare direttamente dal codice di test:
+Il sottopercorso `twenty-sdk/cli` esporta funzioni che puoi chiamare direttamente dal codice di test:
 
 | Funzione       | Descrizione                                     |
 | -------------- | ----------------------------------------------- |
@@ -215,8 +215,8 @@ Ecco un esempio completo che compila, distribuisce e installa l'app, quindi veri
 
 ```ts src/__tests__/app-install.integration-test.ts
 import { APPLICATION_UNIVERSAL_IDENTIFIER } from 'src/application-config';
-import { appBuild, appDeploy, appInstall, appUninstall } from 'aegis-sdk/cli';
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { appBuild, appDeploy, appInstall, appUninstall } from 'twenty-sdk/cli';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const APP_PATH = process.cwd();

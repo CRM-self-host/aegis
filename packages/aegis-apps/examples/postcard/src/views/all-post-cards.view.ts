@@ -1,4 +1,4 @@
-import { defineView } from 'aegis-sdk/define';
+import { defineView } from 'twenty-sdk/define';
 import {
   CONTENT_FIELD_UNIVERSAL_IDENTIFIER,
   NAME_FIELD_UNIVERSAL_IDENTIFIER,

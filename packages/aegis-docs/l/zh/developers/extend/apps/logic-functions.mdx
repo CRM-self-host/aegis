@@ -12,9 +12,9 @@ icon: bolt
 每个函数文件都使用 `defineLogicFunction()` 导出包含处理程序和可选触发器的配置。
 
 ```ts src/logic-functions/createPostCard.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'aegis-sdk/define';
-import { CoreApiClient, type Person } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import type { DatabaseEventPayload, ObjectRecordCreateEvent, CronPayload, RoutePayload } from 'twenty-sdk/define';
+import { CoreApiClient, type Person } from 'twenty-client-sdk/core';
 
 const handler = async (params: RoutePayload) => {
   const client = new CoreApiClient();
@@ -80,10 +80,10 @@ yarn aegis logs
 
 当路由触发器调用你的逻辑函数时，它会接收一个遵循
 [AWS HTTP API v2 格式](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html)的 `RoutePayload` 对象。
-从 `aegis-sdk` 导入 `RoutePayload` 类型：
+从 `twenty-sdk` 导入 `RoutePayload` 类型：
 
 ```ts
-import { defineLogicFunction, type RoutePayload } from 'aegis-sdk/define';
+import { defineLogicFunction, type RoutePayload } from 'twenty-sdk/define';
 
 const handler = async (event: RoutePayload) => {
   const { headers, queryStringParameters, pathParameters, body } = event;
@@ -148,8 +148,8 @@ const handler = async (event: RoutePayload) => {
 要将逻辑函数标记为工具，请设置 `isTool: true`：
 
 ```ts src/logic-functions/enrich-company.logic-function.ts
-import { defineLogicFunction } from 'aegis-sdk/define';
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { defineLogicFunction } from 'twenty-sdk/define';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const handler = async (params: { companyName: string; domain?: string }) => {
   const client = new CoreApiClient();
@@ -214,7 +214,7 @@ export default defineLogicFunction({
 安装后函数是在你的应用安装到工作区后自动运行的逻辑函数。 服务器会在应用的元数据已同步并已生成 SDK 客户端**之后**执行它，因此工作区已完全可用，且新架构已就绪。 常见用例包括预置默认数据、创建初始记录、配置工作区设置，或在第三方服务上预配资源。
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Post install logic function executed successfully!', payload.previousVersion);
@@ -257,7 +257,7 @@ yarn aegis exec --postInstall
 安装前函数是在安装期间自动运行的逻辑函数，**在应用工作区元数据迁移之前**。 它与安装后共享相同的负载结构（`InstallPayload`），但在安装流程中位置更早，因此可以准备即将到来的迁移所依赖的状态——典型用例如备份数据、验证与新架构的兼容性，或归档即将被重构或删除的记录。
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 
 const handler = async (payload: InstallPayload): Promise<void> => {
   console.log('Pre install logic function executed successfully!', payload.previousVersion);
@@ -315,7 +315,7 @@ yarn aegis exec --preInstall
 示例——在安装后预填充一个默认的 `PostCard` 记录：
 
 ```ts src/logic-functions/post-install.ts
-import { definePostInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePostInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion }: InstallPayload): Promise<void> => {
@@ -347,7 +347,7 @@ export default definePostInstallLogicFunction({
 示例——在破坏性迁移之前归档记录：
 
 ```ts src/logic-functions/pre-install.ts
-import { definePreInstallLogicFunction, type InstallPayload } from 'aegis-sdk/define';
+import { definePreInstallLogicFunction, type InstallPayload } from 'twenty-sdk/define';
 import { createClient } from './generated/client';
 
 const handler = async ({ previousVersion, newVersion }: InstallPayload): Promise<void> => {
@@ -405,14 +405,14 @@ export default definePreInstallLogicFunction({
 </Accordion>
 </AccordionGroup>
 
-## 类型化 API 客户端（`aegis-client-sdk`）
+## 类型化 API 客户端（`twenty-client-sdk`）
 
-`aegis-client-sdk` 包提供了两个类型化的 GraphQL 客户端，供你的逻辑函数和前端组件与 Aegis API 交互。
+`twenty-client-sdk` 包提供了两个类型化的 GraphQL 客户端，供你的逻辑函数和前端组件与 Aegis API 交互。
 
 | 客户端                 | 导入                           | 端点                       | 是否生成？     |
 | ------------------- | ---------------------------- | ------------------------ | --------- |
-| `CoreApiClient`     | `aegis-client-sdk/core`     | `/graphql`——工作区数据（记录、对象） | 是，在开发/构建时 |
-| `MetadataApiClient` | `aegis-client-sdk/metadata` | `/metadata`——工作区配置、文件上传  | 否，已预构建提供  |
+| `CoreApiClient`     | `twenty-client-sdk/core`     | `/graphql`——工作区数据（记录、对象） | 是，在开发/构建时 |
+| `MetadataApiClient` | `twenty-client-sdk/metadata` | `/metadata`——工作区配置、文件上传  | 否，已预构建提供  |
 
 <AccordionGroup>
 <Accordion title="CoreApiClient" description="查询和变更工作区数据（记录、对象）">
@@ -420,7 +420,7 @@ export default definePreInstallLogicFunction({
 `CoreApiClient` 是用于查询和变更工作区数据的主要客户端。 它会在执行 `yarn aegis dev` 或 `yarn aegis build` 时**根据你的工作区架构生成**，因此完全类型化以匹配你的对象和字段。
 
 ```ts
-import { CoreApiClient } from 'aegis-client-sdk/core';
+import { CoreApiClient } from 'twenty-client-sdk/core';
 
 const client = new CoreApiClient();
 
@@ -465,7 +465,7 @@ const { createCompany } = await client.mutation({
 `CoreSchema` 提供与工作区对象相匹配的 TypeScript 类型，可用于为组件状态或函数参数进行类型标注：
 
 ```ts
-import { CoreApiClient, CoreSchema } from 'aegis-client-sdk/core';
+import { CoreApiClient, CoreSchema } from 'twenty-client-sdk/core';
 import { useState } from 'react';
 
 const [company, setCompany] = useState<
@@ -489,7 +489,7 @@ setCompany(result.company);
 `MetadataApiClient` 随 SDK 一并提供，已预构建（无需生成）。 它会查询 `/metadata` 端点以获取工作区配置、应用和文件上传。
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 
 const metadataClient = new MetadataApiClient();
 
@@ -518,7 +518,7 @@ const { objects } = await metadataClient.query({
 `MetadataApiClient` 包含一个 `uploadFile` 方法，用于将文件附加到文件类型字段：
 
 ```ts
-import { MetadataApiClient } from 'aegis-client-sdk/metadata';
+import { MetadataApiClient } from 'twenty-client-sdk/metadata';
 import * as fs from 'fs';
 
 const metadataClient = new MetadataApiClient();

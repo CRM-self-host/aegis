@@ -248,10 +248,10 @@ Die Testinstanz läuft in einem eigenen Docker-Container (`aegis-app-dev-test`) 
 
 Wenn Sie die Einrichtung lieber selbst vornehmen möchten, anstatt `create-aegis-app` zu verwenden, können Sie dies in zwei Schritten tun.
 
-**1. Fügen Sie `aegis-sdk` und `aegis-client-sdk` als Abhängigkeiten hinzu:**
+**1. Fügen Sie `twenty-sdk` und `twenty-client-sdk` als Abhängigkeiten hinzu:**
 
 ```bash filename="Terminal"
-yarn add aegis-sdk aegis-client-sdk
+yarn add twenty-sdk twenty-client-sdk
 ```
 
 **2. Fügen Sie Ihrer `package.json` ein `aegis`-Skript hinzu:**
@@ -267,7 +267,7 @@ yarn add aegis-sdk aegis-client-sdk
 Sie können jetzt `yarn aegis dev`, `yarn aegis help` und alle anderen Befehle ausführen.
 
 <Note>
-Installieren Sie `aegis-sdk` nicht global. Verwenden Sie es immer als lokale Projektabhängigkeit, damit jedes Projekt seine eigene Version festlegen kann.
+Installieren Sie `twenty-sdk` nicht global. Verwenden Sie es immer als lokale Projektabhängigkeit, damit jedes Projekt seine eigene Version festlegen kann.
 </Note>
 
 ## Fehlerbehebung

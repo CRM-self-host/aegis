@@ -3,7 +3,7 @@ import {
   FieldType,
   RelationType,
   OnDeleteAction,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { PULL_REQUEST_REVIEW_EVENT_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request-review-event/objects/pull-request-review-event.object';
 import { PULL_REQUEST_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request/objects/pull-request.object';
 import { REVIEW_EVENTS_ON_PR_FIELD_UNIVERSAL_IDENTIFIER } from 'src/modules/github/pull-request/fields/review-events-on-pull-request.field';

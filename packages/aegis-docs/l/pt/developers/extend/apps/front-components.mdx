@@ -18,7 +18,7 @@ Os componentes de front-end podem ser renderizados em dois locais dentro do Aegi
 A maneira mais rápida de ver um componente de front-end em ação é registrá-lo como um **comando**. Adicionar um campo `command` com `isPinned: true` faz com que ele apareça como um botão de ação rápida no canto superior direito da página — não é necessário layout de página:
 
 ```tsx src/front-components/hello-world.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 
 const HelloWorld = () => {
   return (
@@ -77,8 +77,8 @@ Os componentes de front-end têm dois modos de renderização controlados pela o
 **Headless (`isHeadless: true`)** — O componente é montado de forma invisível em segundo plano. Ele não abre o painel lateral. Componentes headless são projetados para ações que executam lógica e, em seguida, se desmontam — por exemplo, executar uma tarefa assíncrona, navegar para uma página ou exibir um modal de confirmação. Eles se combinam naturalmente com os componentes Command do SDK descritos abaixo.
 
 ```tsx src/front-components/sync-tracker.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId, enqueueSnackbar } from 'aegis-sdk/front-component';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId, enqueueSnackbar } from 'twenty-sdk/front-component';
 import { useEffect } from 'react';
 
 const SyncTracker = () => {
@@ -104,9 +104,9 @@ Como o componente retorna `null`, o Aegis ignora renderizar um contêiner para e
 
 ## Componentes Command do SDK
 
-O pacote `aegis-sdk` fornece quatro componentes auxiliares Command projetados para componentes de front-end headless. Cada componente executa uma ação ao montar, trata erros exibindo uma notificação de snackbar e desmonta automaticamente o componente de front-end ao concluir.
+O pacote `twenty-sdk` fornece quatro componentes auxiliares Command projetados para componentes de front-end headless. Cada componente executa uma ação ao montar, trata erros exibindo uma notificação de snackbar e desmonta automaticamente o componente de front-end ao concluir.
 
-Importe-os de `aegis-sdk/command`:
+Importe-os de `twenty-sdk/command`:
 
 * **`Command`** — Executa um callback assíncrono via a prop `execute`.
 * **`CommandLink`** — Navega para um caminho do app. Props: `to`, `params`, `queryParams`, `options`.
@@ -116,9 +116,9 @@ Importe-os de `aegis-sdk/command`:
 Aqui está um exemplo completo de um componente de front-end headless usando `Command` para executar uma ação a partir do menu de comandos:
 
 ```tsx src/front-components/run-action.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { Command } from 'aegis-sdk/command';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { Command } from 'twenty-sdk/command';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const RunAction = () => {
   const execute = async () => {
@@ -152,8 +152,8 @@ export default defineFrontComponent({
 E um exemplo usando `CommandModal` para solicitar confirmação antes de executar:
 
 ```tsx src/front-components/delete-draft.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { CommandModal } from 'aegis-sdk/command';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { CommandModal } from 'twenty-sdk/command';
 
 const DeleteDraft = () => {
   const execute = async () => {
@@ -190,12 +190,12 @@ export default defineFrontComponent({
 Dentro do seu componente, use hooks do SDK para acessar o usuário atual, o registro e a instância do componente:
 
 ```tsx src/front-components/record-info.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   useUserId,
   useRecordId,
   useFrontComponentId,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 const RecordInfo = () => {
   const userId = useUserId();
@@ -229,7 +229,7 @@ Hooks disponíveis:
 
 ## API de comunicação do host
 
-Componentes de front-end podem acionar navegação, modais e notificações usando funções de `aegis-sdk`:
+Componentes de front-end podem acionar navegação, modais e notificações usando funções de `twenty-sdk`:
 
 | Função                                          | Descrição                             |
 | ----------------------------------------------- | ------------------------------------- |
@@ -244,10 +244,10 @@ Componentes de front-end podem acionar navegação, modais e notificações usan
 Aqui está um exemplo que usa a API do host para exibir um snackbar e fechar o painel lateral após a conclusão de uma ação:
 
 ```tsx src/front-components/archive-record.tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { useRecordId } from 'aegis-sdk/front-component';
-import { enqueueSnackbar, closeSidePanel } from 'aegis-sdk/front-component';
-import { CoreApiClient } from 'aegis-sdk/clients';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { useRecordId } from 'twenty-sdk/front-component';
+import { enqueueSnackbar, closeSidePanel } from 'twenty-sdk/front-component';
+import { CoreApiClient } from 'twenty-sdk/clients';
 
 const ArchiveRecord = () => {
   const recordId = useRecordId();
@@ -303,17 +303,17 @@ Adicionar um campo `command` a `defineFrontComponent` registra o componente no m
 
 ## Expressões de disponibilidade condicional
 
-O campo `conditionalAvailabilityExpression` permite controlar quando um comando é visível com base no contexto da página atual. Importe variáveis tipadas e operadores de `aegis-sdk` para construir expressões:
+O campo `conditionalAvailabilityExpression` permite controlar quando um comando é visível com base no contexto da página atual. Importe variáveis tipadas e operadores de `twenty-sdk` para construir expressões:
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
+import { defineFrontComponent } from 'twenty-sdk/define';
 import {
   pageType,
   numberOfSelectedRecords,
   objectPermissions,
   everyEquals,
   isDefined,
-} from 'aegis-sdk/front-component';
+} from 'twenty-sdk/front-component';
 
 export default defineFrontComponent({
   universalIdentifier: '...',
@@ -373,7 +373,7 @@ export default defineFrontComponent({
 Componentes de front-end podem acessar arquivos do diretório `public/` do app usando `getPublicAssetUrl`:
 
 ```tsx
-import { defineFrontComponent, getPublicAssetUrl } from 'aegis-sdk/define';
+import { defineFrontComponent, getPublicAssetUrl } from 'twenty-sdk/define';
 
 const Logo = () => <img src={getPublicAssetUrl('logo.png')} alt="Logo" />;
 
@@ -391,15 +391,15 @@ Veja a [seção de recursos públicos](/l/pt/developers/extend/apps/cli-and-test
 Componentes de front-end suportam várias abordagens de estilização. Você pode usar:
 
 * **Estilos inline** — `style={{ color: 'red' }}`
-* **Componentes de UI do Aegis** — importe de `aegis-sdk/ui` (Button, Tag, Status, Chip, Avatar e mais)
+* **Componentes de UI do Aegis** — importe de `twenty-sdk/ui` (Button, Tag, Status, Chip, Avatar e mais)
 * **Emotion** — CSS-in-JS com `@emotion/react`
 * **Styled-components** — padrões `styled.div`
 * **Tailwind CSS** — classes utilitárias
 * **Qualquer biblioteca CSS-in-JS** compatível com React
 
 ```tsx
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { Button, Tag, Status } from 'aegis-sdk/ui';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { Button, Tag, Status } from 'twenty-sdk/ui';
 
 const StyledWidget = () => {
   return (

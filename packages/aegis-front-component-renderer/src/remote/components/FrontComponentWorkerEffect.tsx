@@ -1,7 +1,7 @@
 import { ThreadWebWorker, release, retain } from '@quilted/threads';
 import { RemoteReceiver } from '@remote-dom/core/receivers';
 import { useEffect, useRef } from 'react';
-import { type CommandConfirmationModalResult } from 'aegis-sdk/front-component';
+import { type CommandConfirmationModalResult } from 'twenty-sdk/front-component';
 import { type ConfirmationModalCaller } from 'aegis-shared/types';
 import { type FrontComponentHostCommunicationApi } from '../../types/FrontComponentHostCommunicationApi';
 import { type SdkClientUrls } from '../../types/HostToWorkerRenderContext';

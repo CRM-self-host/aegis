@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { defineFrontComponent } from 'aegis-sdk/define';
-import { enqueueSnackbar } from 'aegis-sdk/front-component';
+import { defineFrontComponent } from 'twenty-sdk/define';
+import { enqueueSnackbar } from 'twenty-sdk/front-component';
 import {
   Leaderboard,
   type LeaderboardEntry,

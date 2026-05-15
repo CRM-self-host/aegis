@@ -10,15 +10,15 @@
   "keywords": [],
   "packageManager": "yarn@4.9.2",
   "scripts": {
-    "aegis": "aegis",
+    "aegis": "twenty",
     "lint": "oxlint -c .oxlintrc.json .",
     "lint:fix": "oxlint --fix -c .oxlintrc.json .",
     "test": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
-    "aegis-client-sdk": "TO-BE-GENERATED",
-    "aegis-sdk": "TO-BE-GENERATED"
+    "twenty-client-sdk": "TO-BE-GENERATED",
+    "twenty-sdk": "TO-BE-GENERATED"
   },
   "devDependencies": {
     "@types/node": "^24.7.2",

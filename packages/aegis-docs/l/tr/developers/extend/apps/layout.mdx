@@ -26,7 +26,7 @@ Görünümler, gezinme menüsü öğeleri ve sayfa düzenleri birbirlerine `univ
 Görünümler, bir nesnenin kayıtlarının nasıl görüntüleneceğine ilişkin kaydedilmiş yapılandırmalardır — hangi alanların görünür olacağını, sıralarını ve uygulanan filtreleri veya grupları içerir. Uygulamanızla önceden yapılandırılmış görünümler sunmak için `defineView()` kullanın:
 
 ```ts src/views/example-view.ts
-import { defineView, ViewKey } from 'aegis-sdk/define';
+import { defineView, ViewKey } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { NAME_FIELD_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 
@@ -62,7 +62,7 @@ export default defineView({
 Gezinme menüsü öğeleri, çalışma alanı kenar çubuğuna özel girişler ekler. Görünümlere, harici URL'lere veya nesnelere bağlanmak için `defineNavigationMenuItem()` kullanın:
 
 ```ts src/navigation-menu-items/example-navigation-menu-item.ts
-import { defineNavigationMenuItem, NavigationMenuItemType } from 'aegis-sdk/define';
+import { defineNavigationMenuItem, NavigationMenuItemType } from 'twenty-sdk/define';
 import { EXAMPLE_VIEW_UNIVERSAL_IDENTIFIER } from '../views/example-view';
 
 export default defineNavigationMenuItem({
@@ -88,7 +88,7 @@ export default defineNavigationMenuItem({
 Sayfa düzenleri, bir kayıt ayrıntı sayfasının nasıl görüneceğini özelleştirmenizi sağlar — hangi sekmelerin görüneceği, her sekmenin içinde hangi widget'ların olacağı ve bunların nasıl düzenleneceği. Uygulamanızla özel düzenler sunmak için `definePageLayout()` kullanın:
 
 ```ts src/page-layouts/example-record-page-layout.ts
-import { definePageLayout, PageLayoutTabLayoutMode } from 'aegis-sdk/define';
+import { definePageLayout, PageLayoutTabLayoutMode } from 'twenty-sdk/define';
 import { EXAMPLE_OBJECT_UNIVERSAL_IDENTIFIER } from '../objects/example-object';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
@@ -139,7 +139,7 @@ Hedeflenen sayfa düzeni ya **standart** bir Aegis sayfa düzeni ya da **kendi u
 import {
   definePageLayoutTab,
   PageLayoutTabLayoutMode,
-} from 'aegis-sdk/define';
+} from 'twenty-sdk/define';
 import { HELLO_WORLD_FRONT_COMPONENT_UNIVERSAL_IDENTIFIER } from '../front-components/hello-world';
 
 const COMPANY_RECORD_PAGE_LAYOUT_UNIVERSAL_IDENTIFIER =

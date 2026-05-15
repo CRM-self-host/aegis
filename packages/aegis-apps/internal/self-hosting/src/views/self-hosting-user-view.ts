@@ -1,4 +1,4 @@
-import { defineView } from 'aegis-sdk/define';
+import { defineView } from 'twenty-sdk/define';
 import { UNIVERSAL_IDENTIFIERS } from 'src/constants/universal-identifiers.constant';
 
 export default defineView({
