@@ -38,7 +38,7 @@ RUN npx nx run server:lingui:extract && \
 RUN npx nx run server:build
 
 # Clean server build output (type declarations and compiled tests are not needed at runtime;
-# source maps are kept because aegis-infra extracts them from the image for Sentry uploads)
+# source maps are kept because they might be needed for Sentry uploads)
 RUN find /app/packages/server/dist -name '*.d.ts' -delete \
  && rm -rf /app/packages/server/dist/packages/server/test
 
