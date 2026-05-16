@@ -8,7 +8,7 @@ wait_for_postgres() {
     retry_interval=2
 
     while [ $retry_count -lt $max_retries ]; do
-        if psql -tAc "SELECT 1" ${PG_DATABASE_URL} >/dev/null 2>&1; then
+        if psql -tAc "SELECT 1" "${PG_DATABASE_URL}" >/dev/null 2>&1; then
             echo "PostgreSQL is ready!"
             return 0
         fi
@@ -30,7 +30,7 @@ setup_and_migrate_db() {
     echo "Running database setup and migrations..."
 
     # Run setup and migration scripts
-    has_schema=$(psql -tAc "SELECT EXISTS (SELECT 1 FROM information_schema.schemata WHERE schema_name = 'core')" ${PG_DATABASE_URL})
+    has_schema=$(psql -tAc "SELECT EXISTS (SELECT 1 FROM information_schema.schemata WHERE schema_name = 'core')" "${PG_DATABASE_URL}")
     if [ "$has_schema" = "f" ]; then
         echo "Database appears to be empty, running migrations."
         yarn database:init:prod
