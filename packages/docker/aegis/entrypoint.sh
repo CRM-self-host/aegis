@@ -1,6 +1,26 @@
 #!/bin/sh
 set -e
 
+wait_for_postgres() {
+    echo "Waiting for PostgreSQL to be ready..."
+    max_retries=30
+    retry_count=0
+    retry_interval=2
+
+    while [ $retry_count -lt $max_retries ]; do
+        if psql -tAc "SELECT 1" ${PG_DATABASE_URL} >/dev/null 2>&1; then
+            echo "PostgreSQL is ready!"
+            return 0
+        fi
+        retry_count=$((retry_count + 1))
+        echo "PostgreSQL not ready yet (attempt ${retry_count}/${max_retries}), retrying in ${retry_interval}s..."
+        sleep $retry_interval
+    done
+
+    echo "ERROR: PostgreSQL did not become ready within $((max_retries * retry_interval)) seconds"
+    exit 1
+}
+
 setup_and_migrate_db() {
     if [ "${DISABLE_DB_MIGRATIONS}" = "true" ]; then
         echo "Database setup and migrations are disabled, skipping..."
@@ -37,6 +57,7 @@ register_background_jobs() {
     fi
 }
 
+wait_for_postgres
 setup_and_migrate_db
 register_background_jobs
 
