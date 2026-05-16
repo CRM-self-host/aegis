@@ -53,8 +53,8 @@ variable "u84u_db_replicas" {
 
 variable "u84u_server_data_mount_path" {
   type        = string
-  default     = "/app/packages/aegis-server/.local-storage"
-  description = "u84u mount path for servers application data. Defaults to '/app/packages/aegis-server/.local-storage'."
+  default     = "/app/packages/server/.local-storage"
+  description = "u84u mount path for servers application data. Defaults to '/app/packages/server/.local-storage'."
 }
 
 variable "u84u_db_pv_path" {

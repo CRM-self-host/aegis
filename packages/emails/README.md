@@ -15,7 +15,7 @@ This package contains the email templates used by Aegis.
 To start the local preview server for email development:
 
 ```bash
-npx nx start aegis-emails
+npx nx start emails
 ```
 
 This will run the development server on port 4001. You can then view your email templates at [http://localhost:4001](http://localhost:4001).
@@ -25,7 +25,7 @@ This will run the development server on port 4001. You can then view your email 
 To build the email templates:
 
 ```bash
-npx nx build aegis-emails
+npx nx build emails
 ```
 
 ## Email Structure

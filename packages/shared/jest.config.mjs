@@ -1,6 +1,6 @@
 const jestConfig = {
   silent: true,
-  displayName: 'aegis-shared',
+  displayName: 'shared',
   preset: '../../jest.preset.js',
   testEnvironment: 'jsdom',
   transformIgnorePatterns: ['../../node_modules/'],

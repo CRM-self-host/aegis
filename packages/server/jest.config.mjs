@@ -6,7 +6,7 @@ const jestConfig = {
   silent: true,
   errorOnDeprecated: true,
   clearMocks: true,
-  displayName: 'aegis-server',
+  displayName: 'server',
   rootDir: './',
   testEnvironment: 'node',
   setupFilesAfterEnv: ['./setupTests.ts'],

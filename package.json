@@ -211,7 +211,7 @@
       "packages/shared",
       "packages/front-component-renderer",
       "packages/apps",
-      "packages/create-aegis-app",
+      "packages/create-twenty-app",
       "packages/companion"
     ]
   },

@@ -17,16 +17,16 @@ const jestConfig = {
   // For more information please have a look to official docs https://jestjs.io/docs/configuration/#prettierpath-string
   // Prettier v3 will should be supported in jest v30 https://github.com/jestjs/jest/releases/tag/v30.0.0-alpha.1
   prettierPath: null,
-  displayName: 'aegis-front',
+  displayName: 'front',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['./setupTests.ts'],
   testEnvironment: 'jsdom',
   testEnvironmentOptions: {},
 
   transformIgnorePatterns: [
-    '/node_modules/(?!(aegis-ui|apollo-upload-client|extract-files|is-plain-obj)/.*)',
-    '../../node_modules/(?!(aegis-ui|apollo-upload-client|extract-files|is-plain-obj)/.*)',
-    '../../aegis-ui/',
+    '/node_modules/(?!(ui|apollo-upload-client|extract-files|is-plain-obj)/.*)',
+    '../../node_modules/(?!(ui|apollo-upload-client|extract-files|is-plain-obj)/.*)',
+    '../../ui/',
   ],
   transform: {
     '^.+\\.(ts|js|tsx|jsx|mjs)$': [

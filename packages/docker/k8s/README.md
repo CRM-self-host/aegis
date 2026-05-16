@@ -5,7 +5,7 @@ maintains support for docker deployment.
 
 ## Overview
 
-This repository contains a world-class Helm chart and (legacy) raw Kubernetes manifests plus Terraform files to help you deploy and manage the Aegis CRM application. The chart is located at `packages/aegis-docker/helm/aegis` and supersedes the manifests in `packages/aegis-docker/k8s/manifests`.
+This repository contains a world-class Helm chart and (legacy) raw Kubernetes manifests plus Terraform files to help you deploy and manage the Aegis CRM application. The chart is located at `packages/docker/helm/aegis` and supersedes the manifests in `packages/docker/k8s/manifests`.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ Before using these files, ensure you have the following installed and configured
 **Quick install:**
 ```bash
 export DOMAIN=your-domain.com
-helm install my-aegis packages/aegis-docker/helm/aegis \
+helm install my-aegis packages/docker/helm/aegis \
   --namespace u84u --create-namespace --wait \
   --set server.ingress.hosts[0].host=$DOMAIN \
   --set server.ingress.hosts[0].paths[0].path=/ \
@@ -40,7 +40,7 @@ Clone the repository to your local machine:
 
 ``` bash
 git clone https://github.com/u84u/aegis.git
-cd aegis/packages/aegis-docker/k8s
+cd aegis/packages/docker/k8s
 ```
 
 ### Step 2: Customize the Manifests and Terraform Files

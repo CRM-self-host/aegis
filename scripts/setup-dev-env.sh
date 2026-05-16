@@ -19,7 +19,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
-COMPOSE_FILE="$REPO_ROOT/packages/aegis-docker/docker-compose.dev.yml"
+COMPOSE_FILE="$REPO_ROOT/packages/docker/docker-compose.dev.yml"
 
 info()  { echo "=> $*"; }
 ok()    { echo "   done: $*"; }
@@ -228,10 +228,10 @@ info "Setting up .env files..."
 cd "$REPO_ROOT"
 
 if command -v npx &>/dev/null && [ -d node_modules ]; then
-  npx nx reset:env aegis-front
-  npx nx reset:env aegis-server
+  npx nx reset:env front
+  npx nx reset:env server
 else
-  for pkg in aegis-front aegis-server; do
+  for pkg in front server; do
     src="packages/$pkg/.env.example"
     dst="packages/$pkg/.env"
     if [ -f "$src" ] && [ ! -f "$dst" ]; then
@@ -246,6 +246,6 @@ echo ""
 echo "Dev environment ready."
 echo ""
 echo "  yarn start                         # start everything"
-echo "  npx nx start aegis-front          # frontend  -> http://localhost:3001"
-echo "  npx nx start aegis-server         # backend   -> http://localhost:3000"
+echo "  npx nx start front                # frontend  -> http://localhost:3001"
+echo "  npx nx start server               # backend   -> http://localhost:3000"
 echo ""

@@ -7,7 +7,7 @@ Set your domain and install:
 ```bash
 export DOMAIN=crm.example.com
 
-helm install my-aegis ./packages/aegis-docker/helm/aegis \
+helm install my-aegis ./packages/docker/helm/aegis \
   --namespace u84u --create-namespace --wait \
   --set "server.ingress.hosts[0].host=$DOMAIN" \
   --set "server.ingress.tls[0].hosts[0]=$DOMAIN"

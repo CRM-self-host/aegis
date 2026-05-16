@@ -33,7 +33,7 @@ prod-postgres-run:
 
 # =============================================================================
 # Local Development Services
-# Run these from the repository root: make -C packages/aegis-docker <target>
+# Run these from the repository root: make -C packages/docker <target>
 # =============================================================================
 
 ensure-docker-network:

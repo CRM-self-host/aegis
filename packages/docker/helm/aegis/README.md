@@ -20,13 +20,13 @@ See [QUICKSTART.md](QUICKSTART.md) for a simple 2-line install with your domain.
 
 Internal DB + Redis (default):
 ```bash
-helm install my-aegis ./packages/aegis-docker/helm/aegis \
+helm install my-aegis ./packages/docker/helm/aegis \
   --namespace u84u --create-namespace
 ```
 
 External DB/Redis:
 ```bash
-helm install my-aegis ./packages/aegis-docker/helm/aegis \
+helm install my-aegis ./packages/docker/helm/aegis \
   --namespace u84u --create-namespace \
   --set db.enabled=false \
   --set db.external.host=db.example.com \
@@ -50,10 +50,10 @@ See `values.yaml` for a comprehensive list.
 ## Testing
 
 ```bash
-helm lint ./packages/aegis-docker/helm/aegis
-helm template my-aegis ./packages/aegis-docker/helm/aegis
+helm lint ./packages/docker/helm/aegis
+helm template my-aegis ./packages/docker/helm/aegis
 helm plugin install https://github.com/quintush/helm-unittest
-helm unittest ./packages/aegis-docker/helm/aegis
+helm unittest ./packages/docker/helm/aegis
 ```
 
 ## Storage
@@ -76,7 +76,7 @@ helm unittest ./packages/aegis-docker/helm/aegis
 #     # accessKeyIdKey: accessKeyId
 #     # secretAccessKeyKey: secretAccessKey
 
-helm install my-aegis ./packages/aegis-docker/helm/aegis -f values-secrets.yaml
+helm install my-aegis ./packages/docker/helm/aegis -f values-secrets.yaml
 ```
 
 ## Production Tips

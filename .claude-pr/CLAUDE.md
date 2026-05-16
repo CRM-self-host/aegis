@@ -14,9 +14,9 @@ Aegis is an open-source CRM built with modern technologies in a monorepo structu
 yarn start
 
 # Individual package development
-npx nx start aegis-front     # Start frontend dev server
-npx nx start aegis-server    # Start backend server
-npx nx run aegis-server:worker  # Start background worker
+npx nx start front     # Start frontend dev server
+npx nx start server    # Start backend server
+npx nx run server:worker  # Start background worker
 ```
 
 ### Testing
@@ -25,15 +25,15 @@ npx nx run aegis-server:worker  # Start background worker
 npx jest path/to/test.test.ts --config=packages/PROJECT/jest.config.mjs
 
 # Run all tests for a package
-npx nx test aegis-front      # Frontend unit tests
-npx nx test aegis-server     # Backend unit tests
-npx nx run aegis-server:test:integration:with-db-reset  # Integration tests with DB reset
+npx nx test front      # Frontend unit tests
+npx nx test server     # Backend unit tests
+npx nx run server:test:integration:with-db-reset  # Integration tests with DB reset
 # To run an indivual test or a pattern of tests, use the following command:
 cd packages/{workspace} && npx jest "pattern or filename"
 
 # Storybook
-npx nx storybook:build aegis-front
-npx nx storybook:test aegis-front
+npx nx storybook:build front
+npx nx storybook:test front
 
 # When testing the UI end to end, click on "Continue with Email" and use the prefilled credentials.
 ```
@@ -41,40 +41,40 @@ npx nx storybook:test aegis-front
 ### Code Quality
 ```bash
 # Linting (diff with main - fastest, always prefer this)
-npx nx lint:diff-with-main aegis-front
-npx nx lint:diff-with-main aegis-server
-npx nx lint:diff-with-main aegis-front --configuration=fix  # Auto-fix
+npx nx lint:diff-with-main front
+npx nx lint:diff-with-main server
+npx nx lint:diff-with-main front --configuration=fix  # Auto-fix
 
 # Linting (full project - slower, use only when needed)
-npx nx lint aegis-front
-npx nx lint aegis-server
+npx nx lint front
+npx nx lint server
 
 # Type checking
-npx nx typecheck aegis-front
-npx nx typecheck aegis-server
+npx nx typecheck front
+npx nx typecheck server
 
 # Format code
-npx nx fmt aegis-front
-npx nx fmt aegis-server
+npx nx fmt front
+npx nx fmt server
 ```
 
 ### Build
 ```bash
-# Build packages (aegis-shared must be built first)
-npx nx build aegis-shared
-npx nx build aegis-front
-npx nx build aegis-server
+# Build packages (shared must be built first)
+npx nx build shared
+npx nx build front
+npx nx build server
 ```
 
 ### Database Operations
 ```bash
 # Database management
-npx nx database:reset aegis-server         # Reset database
-npx nx run aegis-server:database:init:prod # Initialize database
-npx nx run aegis-server:database:migrate:prod # Run instance commands (fast only)
+npx nx database:reset server         # Reset database
+npx nx run server:database:init:prod # Initialize database
+npx nx run server:database:migrate:prod # Run instance commands (fast only)
 
 # Generate an instance command (fast or slow)
-npx nx run aegis-server:database:migrate:generate --name <name> --type <fast|slow>
+npx nx run server:database:migrate:generate --name <name> --type <fast|slow>
 ```
 
 ### Database Inspection (Postgres MCP)
@@ -91,8 +91,8 @@ This server is read-only — for write operations (reset, migrations, sync), use
 ### GraphQL
 ```bash
 # Generate GraphQL types (run after schema changes)
-npx nx run aegis-front:graphql:generate
-npx nx run aegis-front:graphql:generate --configuration=metadata
+npx nx run front:graphql:generate
+npx nx run front:graphql:generate --configuration=metadata
 ```
 
 ## Architecture Overview
@@ -105,14 +105,14 @@ npx nx run aegis-front:graphql:generate --configuration=metadata
 ### Package Structure
 ```
 packages/
-├── aegis-front/          # React frontend application
-├── aegis-server/         # NestJS backend API
-├── aegis-ui/             # Shared UI components library
-├── aegis-shared/         # Common types and utilities
-├── aegis-emails/         # Email templates with React Email
-├── aegis-website/        # Next.js documentation website
-├── aegis-zapier/         # Zapier integration
-└── aegis-e2e-testing/    # Playwright E2E tests
+├── front/          # React frontend application
+├── server/         # NestJS backend API
+├── ui/             # Shared UI components library
+├── shared/         # Common types and utilities
+├── emails/         # Email templates with React Email
+├── website/        # Next.js documentation website
+├── zapier/         # Zapier integration
+└── e2e-testing/    # Playwright E2E tests
 ```
 
 ### Key Development Principles
@@ -168,10 +168,10 @@ packages/
 - Commands use `@RegisteredInstanceCommand` and `@RegisteredWorkspaceCommand` decorators for automatic discovery
 - Include both `up` and `down` logic in instance commands
 - Never delete or rewrite committed instance command `up`/`down` logic
-- See `packages/aegis-server/docs/UPGRADE_COMMANDS.md` for full documentation
+- See `packages/server/docs/UPGRADE_COMMANDS.md` for full documentation
 
 ### Utility Helpers
-Use existing helpers from `aegis-shared` instead of manual type guards:
+Use existing helpers from `shared` instead of manual type guards:
 - `isDefined()`, `isNonEmptyString()`, `isNonEmptyArray()`
 
 ## Development Workflow
@@ -209,7 +209,7 @@ bash scripts/setup-dev-env.sh
 
 This handles everything: starts Postgres + Redis (auto-detects local services vs Docker), creates databases, and copies `.env` files. Idempotent — safe to run multiple times.
 
-- `--docker` — force Docker mode (uses `packages/aegis-docker/docker-compose.dev.yml`)
+- `--docker` — force Docker mode (uses `packages/docker/docker-compose.dev.yml`)
 - `--down` — stop services
 - `--reset` — wipe data and restart fresh
 - **Skip the setup script** for tasks that only read code — architecture questions, code review, documentation, etc.

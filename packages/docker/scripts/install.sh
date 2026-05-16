@@ -72,13 +72,13 @@ done
 echo "📁 Creating directory '$dir_name'"
 mkdir -p "$dir_name" && cd "$dir_name" || { echo "❌ Failed to create/access directory '$dir_name'"; exit 1; }
 
-# Copy aegis/packages/aegis-docker/docker-compose.yml in it
+# Copy aegis/packages/docker/docker-compose.yml in it
 echo -e "\t• Copying docker-compose.yml"
-curl -sLo docker-compose.yml https://raw.githubusercontent.com/u84u/aegis/$branch/packages/aegis-docker/docker-compose.yml
+curl -sLo docker-compose.yml https://raw.githubusercontent.com/u84u/aegis/$branch/packages/docker/docker-compose.yml
 
-# Copy aegis/packages/aegis-docker/.env.example to .env
+# Copy aegis/packages/docker/.env.example to .env
 echo -e "\t• Setting up .env file"
-curl -sLo .env https://raw.githubusercontent.com/u84u/aegis/$branch/packages/aegis-docker/.env.example
+curl -sLo .env https://raw.githubusercontent.com/u84u/aegis/$branch/packages/docker/.env.example
 
 # Replace TAG=latest by TAG=<latest_release or version input>
 if [[ $(uname) == "Darwin" ]]; then
