@@ -56,11 +56,6 @@
       "import": "./dist/application.mjs",
       "require": "./dist/application.cjs"
     },
-    "./branding-constants": {
-      "types": "./src/branding-constants/index.ts",
-      "import": "./src/branding-constants/index.ts",
-      "require": "./src/branding-constants/index.ts"
-    },
     "./constants": {
       "types": "./dist/constants/index.d.ts",
       "import": "./dist/constants.mjs",
@@ -115,13 +110,17 @@
       "types": "./dist/workspace/index.d.ts",
       "import": "./dist/workspace.mjs",
       "require": "./dist/workspace.cjs"
+    },
+    "./branding-constants": {
+      "types": "./dist/branding-constants/index.d.ts",
+      "import": "./dist/branding-constants.mjs",
+      "require": "./dist/branding-constants.cjs"
     }
   },
   "files": [
     "dist",
     "ai",
     "application",
-    "branding-constants",
     "constants",
     "database-events",
     "logic-function",
@@ -132,7 +131,8 @@
     "utils",
     "vite",
     "workflow",
-    "workspace"
+    "workspace",
+    "branding-constants"
   ],
   "typesVersions": {
     "*": {
@@ -174,6 +174,9 @@
       ],
       "workspace": [
         "dist/workspace/index.d.ts"
+      ],
+      "branding-constants": [
+        "dist/branding-constants/index.d.ts"
       ]
     }
   }

@@ -221,6 +221,7 @@ const computePackageJsonFilesAndExportsConfig = (
   moduleDirectories: string[],
 ) => {
   const entrypoints = moduleDirectories.map(getLastPathFolder);
+  const manualEntrypoints = MANUAL_EXPORTS.map((e) => e.name);
   const exports = {
     '.': {
       types: './dist/index.d.ts',
@@ -228,9 +229,19 @@ const computePackageJsonFilesAndExportsConfig = (
       require: './dist/index.cjs',
     },
     ...generateModulePackageExports(moduleDirectories),
+    ...MANUAL_EXPORTS.reduce<ExportsConfig>((acc, manual) => {
+      acc[`./${manual.name}`] = {
+        types: manual.types,
+        import: manual.import,
+        require: manual.require,
+      };
+      return acc;
+    }, {}),
   } satisfies ExportsConfig;
 
-  const typesVersionsEntries = entrypoints.reduce<Record<string, string[]>>(
+  const typesVersionsEntries = [...entrypoints, ...manualEntrypoints].reduce<
+    Record<string, string[]>
+  >(
     (acc, moduleName) => ({
       ...acc,
       [`${moduleName}`]: [`dist/${moduleName}/index.d.ts`],
@@ -241,7 +252,7 @@ const computePackageJsonFilesAndExportsConfig = (
   return {
     exports,
     typesVersions: { '*': typesVersionsEntries },
-    files: ['dist', ...entrypoints],
+    files: ['dist', ...entrypoints, ...manualEntrypoints],
   };
 };
 
@@ -270,8 +281,20 @@ const EXCLUDED_DIRECTORIES = [
   '**/__mocks__/**',
   '**/__stories__/**',
   '**/internal/**',
+  '**/branding-constants/**',
 ] as const;
 const EXCLUDED_FILES = ['**/get-function-input-schema.ts'] as const;
+
+// Manual exports for directories excluded from barrel generation
+// These are re-export barrels that contain manual exports from other modules
+const MANUAL_EXPORTS = [
+  {
+    name: 'branding-constants',
+    types: './dist/branding-constants/index.d.ts',
+    import: './dist/branding-constants.mjs',
+    require: './dist/branding-constants.cjs',
+  },
+] as const;
 const getTypeScriptFiles = (
   directoryPath: string,
   includeIndex: boolean = false,
