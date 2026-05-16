@@ -229,8 +229,8 @@
     "@types/unzipper": "^0",
     "@yarnpkg/types": "^4.0.0",
     "emails": "workspace:*",
-    "shared": "workspace:*",
     "rimraf": "^5.0.5",
+    "shared": "workspace:*",
     "twenty-client-sdk": "^2.5.0"
   },
   "engines": {

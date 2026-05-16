@@ -75,9 +75,6 @@
     "@tiptap/react": "3.4.2",
     "@types/marked": "^6.0.0",
     "@xyflow/react": "^12.4.2",
-    "front-component-renderer": "workspace:*",
-    "shared": "workspace:*",
-    "ui": "workspace:*",
     "ai": "6.0.97",
     "apollo-link-rest": "^0.10.0-rc.2",
     "apollo-upload-client": "^19.0.0",
@@ -85,6 +82,7 @@
     "cron-parser": "5.1.1",
     "date-fns": "^2.30.0",
     "file-saver": "^2.0.5",
+    "front-component-renderer": "workspace:*",
     "graphiql": "^3.1.1",
     "graphql": "16.8.1",
     "graphql-sse": "^2.5.4",
@@ -116,7 +114,9 @@
     "react-router-dom": "^6.4.4",
     "react-textarea-autosize": "^8.4.1",
     "remark-gfm": "^4.0.1",
+    "shared": "workspace:*",
     "transliteration": "^2.3.5",
+    "ui": "workspace:*",
     "use-debounce": "^10.0.0"
   },
   "devDependencies": {
